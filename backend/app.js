@@ -14,7 +14,7 @@ mysql.connect(function(err){
     if(err){
         throw err;
     }
-    console.log(`Connected to ${dbName} database`)
+    console.log(`Connected successfully to ${dbName} database`)
 })
 
 /* Creating the express app using the express method */
