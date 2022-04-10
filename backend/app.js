@@ -3,6 +3,10 @@
 /* Importing express */
 const express = require('express');
 
+/* Importing environment variables */
+require('dotenv').config();
+const dbName = process.env.dbName;
+
 /* Importing db connection configuration  */
 const mysql = require('./dbConnection').connection;
 
@@ -10,7 +14,7 @@ mysql.connect(function(err){
     if(err){
         throw err;
     }
-    console.log('Connected to database')
+    console.log(`Connected to ${dbName} database`)
 })
 
 /* Creating the express app using the express method */
