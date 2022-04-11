@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 
 /* Importing user router */
 const userRoutes = require('./routes/user')
-app.use('/api/auth', userRoutes);
+app.use('/api/user', userRoutes);
 
 /* Exporting the express app to be used on other files */
 module.exports = app;
