@@ -10,6 +10,7 @@ const dbName = process.env.dbName;
 /* Importing db connection configuration  */
 const mysql = require('./dbConnection').connection;
 
+/* Logging connection info */
 mysql.connect(function(err){
     if(err){
         throw err;
@@ -30,6 +31,10 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
   });
+
+/* Importing user router */
+const userRoutes = require('./routes/user')
+app.use('/api/auth', userRoutes);
 
 /* Exporting the express app to be used on other files */
 module.exports = app;
