@@ -46,7 +46,6 @@ exports.signup = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
     const passwordConfirm = req.body.passwordConfirm;
-    let role_id = undefined;
     if(!emailValidator.validate(email)){
         return res.status(500).json({message: "adresse email NON valide !"});
     } else if (!schema.validate(password)){
@@ -54,15 +53,10 @@ exports.signup = (req, res, next) => {
     } else if (passwordConfirm !== password){
         return res.status(500).json({message: "les mots de passe ne sont pas identiques !"})
     }
-    if(req.body.email === "administrateur@groupomania.com"){
-        role_id = 1;
-    } else {
-        role_id = 3;
-    }
     const cryptedEmail = cryptoJs.SHA256(email, EMAIL_ENCRYPTION_KEY).toString();
     bcrypt.hash(password, 10)
     .then(hash => {
-        mysql.query(`INSERT INTO user (username, email, password, role_id) VALUES (?,?,?,?)`, [username, cryptedEmail, hash, role_id], (err, result, fields) => {
+        mysql.query(`INSERT INTO user (username, email, password) VALUES (?,?,?)`, [username, cryptedEmail, hash], (err, result, fields) => {
             if(err){
                 return res.status(500).json({err});
             }
