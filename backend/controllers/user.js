@@ -6,6 +6,9 @@ const mysql = require('../dbConnection').connection;
 /* Importing jsonwebtoken */
 const jwt = require('jsonwebtoken');
 
+/* Importing the Node File System package */
+const fs = require('fs');
+
 /* Importing environment variables */
 require('dotenv').config();
 const EMAIL_ENCRYPTION_KEY = process.env.EMAIL_ENCRYPTION_KEY;
@@ -91,7 +94,7 @@ exports.login = (req, res, next) => {
 
 /***** MODIFY USER *****/
 exports.modifyUser = (req, res, next) => {
-
+    
 };
 
 /***** GET ALL USERS *****/
