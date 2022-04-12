@@ -42,19 +42,18 @@ exports.signup = (req, res, next) => {
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
-    const imageUrl = req.body.imageUrl;
-    const bio = req.body.bio;
+    const passwordConfirm = req.body.passwordConfirm;
     if(!emailValidator.validate(email)){
         return res.status(500).json({message: "adresse email NON valide !"});
     } else if (!schema.validate(password)){
         return res.status(500).json({message: "mot de passe NON valide. Utilisez des majuscules, minuscules, chiffres et symboles, aucun espace, pour 8(min) à 16(max) caractères"})
-    } else if (!regexInputs.test(bio)){
-        return res.status(500).json({message: "la bio est renseignée avec des caractères invalides !"})
+    } else if (passwordConfirm !== password){
+        return res.status(500).json({message: "les mots de passe ne sont pas identiques !"})
     }
     const cryptedEmail = cryptoJs.SHA256(email, EMAIL_ENCRYPTION_KEY).toString();
     bcrypt.hash(password, 10)
     .then(hash => {
-        mysql.query(`INSERT INTO user (username, email, password, imageUrl, bio) VALUES (?,?,?,?,?)`, [username, cryptedEmail, hash, imageUrl, bio], (err, result, fields) => {
+        mysql.query(`INSERT INTO user (username, email, password) VALUES (?,?,?)`, [username, cryptedEmail, hash], (err, result, fields) => {
             if(err){
                 return res.status(500).json({err});
             }
