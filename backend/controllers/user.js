@@ -96,11 +96,6 @@ exports.login = (req, res, next) => {
     });
 };
 
-/***** MODIFY USER *****/
-exports.modifyUser = (req, res, next) => {
-    
-};
-
 /***** GET ALL USERS *****/
 exports.getAllUsers = (req, res, next) => {
     mysql.query(`SELECT id, username, email, imageUrl, bio FROM user`, (err, result, fields) => {
@@ -130,14 +125,11 @@ exports.getOneUser = (req, res, next) => {
 
 /***** DELETE ONE USER *****/
 exports.deleteOneUser = (req, res, next) => {
-    let userId = req.params.id;
-    mysql.query(`DELETE FROM user WHERE id = ${userId}`, (err, result, fields) => {
-        if(err){
-            return res.status(500).json({err});
-        } else if (result.affectedRows === 0){
-            return res.status(404).json({message: "utilisateur introuvable !"})
-        }
-        return res.status(200).json({message: "utilisateur supprimé !"});
-    })
+
+};
+
+/***** MODIFY ONE USER *****/
+exports.modifyUser = (req, res, next) => {
+    
 };
 
