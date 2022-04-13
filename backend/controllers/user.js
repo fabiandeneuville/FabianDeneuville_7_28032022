@@ -19,9 +19,6 @@ const JWT_SECRET_TOKEN = process.env.JWT_SECRET_TOKEN;
 /* Importing bcrypt */
 const bcrypt = require('bcrypt');
 
-/* Importing crypto-js */
-const cryptoJs = require('crypto-js')
-
 /* Importing email-validator */
 const emailValidator = require('email-validator');
 
@@ -53,10 +50,14 @@ exports.signup = (req, res, next) => {
     } else if (passwordConfirm !== password){
         return res.status(500).json({message: "les mots de passe ne sont pas identiques !"})
     }
-    const cryptedEmail = cryptoJs.SHA256(email, EMAIL_ENCRYPTION_KEY).toString();
+    if(email === 'administrateur@groupomania.com'){
+        role_id = 1;
+    } else {
+        role_id = 3;
+    }
     bcrypt.hash(password, 10)
     .then(hash => {
-        mysql.query(`INSERT INTO user (username, email, password, role_id) VALUES (?,?,?,?)`, [username, cryptedEmail, hash, 3], (err, result, fields) => {
+        mysql.query(`INSERT INTO user (username, email, password, role_id) VALUES (?,?,?,?)`, [username, email, hash, role_id], (err, result, fields) => {
             if(err){
                 return res.status(500).json({err});
             }
@@ -69,8 +70,7 @@ exports.signup = (req, res, next) => {
 exports.login = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
-    const cryptedEmail = cryptoJs.SHA256(email, EMAIL_ENCRYPTION_KEY).toString();
-    mysql.query(`SELECT * FROM user JOIN role ON user.role_id = role.id WHERE email = '${cryptedEmail}'`, (err, result, fields) => {
+    mysql.query(`SELECT * FROM user JOIN role ON user.role_id = role.id WHERE email = '${email}'`, (err, result, fields) => {
         if(err){
             return res.status(500).json({err});
         }
@@ -103,7 +103,7 @@ exports.modifyUser = (req, res, next) => {
 
 /***** GET ALL USERS *****/
 exports.getAllUsers = (req, res, next) => {
-    mysql.query(`SELECT username, bio, imageUrl, role FROM user JOIN role ON user.role_id = role.id`, (err, result, fields) => {
+    mysql.query(`SELECT id, username, email, imageUrl, bio FROM user`, (err, result, fields) => {
         if(err){
             return res.status(500).json({err});
         }
@@ -117,7 +117,7 @@ exports.getAllUsers = (req, res, next) => {
 /***** GET ONE USER *****/
 exports.getOneUser = (req, res, next) => {
     let userId = req.params.id;
-    mysql.query(`SELECT * FROM user WHERE id = ${userId}`, (err, result, fields) => {
+    mysql.query(`SELECT id, username, email, imageUrl, bio FROM user WHERE id = ${userId}`, (err, result, fields) => {
         if(err){
             return res.status(404).json({err});
         }
@@ -133,7 +133,9 @@ exports.deleteOneUser = (req, res, next) => {
     let userId = req.params.id;
     mysql.query(`DELETE FROM user WHERE id = ${userId}`, (err, result, fields) => {
         if(err){
-            return res.status(404).json({message: "utilisateur introuvable"});
+            return res.status(500).json({err});
+        } else if (result.affectedRows === 0){
+            return res.status(404).json({message: "utilisateur introuvable !"})
         }
         return res.status(200).json({message: "utilisateur supprimé !"});
     })
