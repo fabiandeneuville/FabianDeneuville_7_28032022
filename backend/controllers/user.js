@@ -70,7 +70,7 @@ exports.signup = (req, res, next) => {
 exports.login = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
-    mysql.query(`SELECT * FROM user JOIN role ON user.role_id = role.id WHERE email = '${email}'`, (err, result, fields) => {
+    mysql.query(`SELECT * FROM user WHERE email = '${email}'`, (err, result, fields) => {
         if(err){
             return res.status(500).json({err});
         }
@@ -84,7 +84,7 @@ exports.login = (req, res, next) => {
             }
             res.status(200).json({
                 userId: result[0].id,
-                role: result[0].role,
+                role: result[0].role_id,
                 token: jwt.sign(
                     {userId: result[0].id},
                     JWT_SECRET_TOKEN,
