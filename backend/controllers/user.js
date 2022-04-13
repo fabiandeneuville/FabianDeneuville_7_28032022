@@ -56,11 +56,11 @@ exports.signup = (req, res, next) => {
     const cryptedEmail = cryptoJs.SHA256(email, EMAIL_ENCRYPTION_KEY).toString();
     bcrypt.hash(password, 10)
     .then(hash => {
-        mysql.query(`INSERT INTO user (username, email, password) VALUES (?,?,?)`, [username, cryptedEmail, hash], (err, result, fields) => {
+        mysql.query(`INSERT INTO user (username, email, password, role_id) VALUES (?,?,?,?)`, [username, cryptedEmail, hash, 3], (err, result, fields) => {
             if(err){
                 return res.status(500).json({err});
             }
-            res.status(200).json({message: 'utilisateur créé !'})
+            res.status(200).json({message: 'Bienvenue !'})
         })
     })
 };
@@ -70,9 +70,12 @@ exports.login = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
     const cryptedEmail = cryptoJs.SHA256(email, EMAIL_ENCRYPTION_KEY).toString();
-    mysql.query(`SELECT * FROM user WHERE email = '${cryptedEmail}'`, (err, result, fields) => {
+    mysql.query(`SELECT * FROM user JOIN role ON user.role_id = role.id WHERE email = '${cryptedEmail}'`, (err, result, fields) => {
         if(err){
-            return res.status(404).json({err});
+            return res.status(500).json({err});
+        }
+        if(result.length === 0){
+            return res.status(404).json({message: "utilisateur introuvable !"})
         }
         bcrypt.compare(password, result[0].password)
         .then(valid => {
@@ -81,6 +84,7 @@ exports.login = (req, res, next) => {
             }
             res.status(200).json({
                 userId: result[0].id,
+                role: result[0].role,
                 token: jwt.sign(
                     {userId: result[0].id},
                     JWT_SECRET_TOKEN,
