@@ -1,15 +1,13 @@
-
-   
 /******************** AUTHENTICATION MIDDLEWARE CONFIGURATION ********************/
 
 /* Importing jsonwebtoken */
 const jwt = require('jsonwebtoken');
 
-/* Using dotenv to hide JWT_SECRET_TOKEN */
+/* Importing environment variables */
 require('dotenv').config();
 const JWT_SECRET_TOKEN = process.env.JWT_SECRET_TOKEN;
 
-/* Exporting the authentication middleware */
+/* Authentication middleware */
 module.exports = (req, res, next) => {
     try {
     /* Retrieving of the authorization token from the request headers */
@@ -20,13 +18,16 @@ module.exports = (req, res, next) => {
 
     /* Defining userId as the userId found in the decodedToken */
     const userId = decodedToken.userId;
+
+    /* Defining role as the role found in the decodedToken */
+    const role = decodedToken.role;
     
     /* Adding auth object that contains the userId to the request */
-    req.auth = {userId}
+    req.auth = {userId, role}
 
     /* If the userId in the request is different from the userId returned by the previous operation, throwing an error */
     if (req.body.userId && req.body.userId !== userId) {
-        throw 'User UD non valable';
+        throw 'User ID non valable';
     } else {
     /* If the userId in the request is identical to the userId returned by the previous operation, calling the next() function to execute the next middleware */
         next();
