@@ -141,19 +141,19 @@ exports.deleteOneUser = (req, res, next) => {
             mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
                 return res.status(200).json({message: "utilisateur supprimé !"})
             })
-        } else if (role !== 1 && id === userId) {
-        hash = result[0].password;
-        bcrypt.compare(password, hash)
-        .then(valid => {
-            if(!valid){
-                return res.status(403).json({message: "le mot de passe n'est pas valable !"})
-            }
-            mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
-                return res.status(200).json({message: "utilisateur supprimé !"})
+        } else if (role !== 1 && id == userId) {
+            hash = result[0].password;
+            bcrypt.compare(password, hash)
+            .then(valid => {
+                if(!valid){
+                    return res.status(403).json({message: "le mot de passe n'est pas valable !"})
+                }
+                mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
+                    return res.status(200).json({message: "utilisateur supprimé !"})
+                })
             })
-        })
-        .catch(error => res.status(500).json({error}));
-        } else {
+            .catch(error => res.status(403).json({error}));
+        } else if (role !== 1 && id !== userId){
             return res.status(403).json({message: "requête non autorisée !"})
         }
     })
