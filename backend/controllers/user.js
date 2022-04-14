@@ -164,3 +164,29 @@ exports.modifyUser = (req, res, next) => {
     
 };
 
+
+/***** CHANGE ROLE *****/
+exports.createModerator = (req, res, next) => {
+    const id = req.params.id;
+    const role = req.auth.role;
+    const newRole = req.body.role;
+    mysql.query(`SELECT * FROM user WHERE id = ${id}`, (err, result, fields) => {
+        if(err){
+            return res.status(500).json({err});
+        }
+        if(result.length === 0){
+            return res.status(404).json({message: "utilisateur introuvable !"});
+        }
+        if (role === 1){
+            mysql.query(`UPDATE user SET role_id = ${newRole} WHERE id = ${id}`, (err, result, fields) => {
+                if(err){
+                    return res.status(500).json({err});
+                }
+                return res.status(201).json({message: "utilisateur modifié !"});
+            })
+        }
+        else {
+            return res.status(403).json({message: "requête non autorisée !"});
+        }
+    })
+};
