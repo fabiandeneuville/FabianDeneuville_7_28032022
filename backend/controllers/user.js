@@ -86,7 +86,7 @@ exports.login = (req, res, next) => {
                 userId: result[0].id,
                 role: result[0].role_id,
                 token: jwt.sign(
-                    {userId: result[0].id},
+                    {userId: result[0].id, role: result[0].role_id},
                     JWT_SECRET_TOKEN,
                     {expiresIn: '24h'}
                 )
@@ -125,7 +125,38 @@ exports.getOneUser = (req, res, next) => {
 
 /***** DELETE ONE USER *****/
 exports.deleteOneUser = (req, res, next) => {
-
+    const id = req.params.id;
+    const userId = req.auth.userId;
+    const role = req.auth.role;
+    const password = req.body.password;
+    let hash;
+    mysql.query(`SELECT * FROM user WHERE id = ${id}`, (err, result, fields) => {
+        if(err){
+            return res.status(500).json({err});
+        }
+        if(result.length === 0){
+            return res.status(404).json({message: "utilisateur introuvable !"})
+        }
+        if(role === 1){
+            mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
+                return res.status(200).json({message: "utilisateur supprimé !"})
+            })
+        } else if (role !== 1 && id === userId) {
+        hash = result[0].password;
+        bcrypt.compare(password, hash)
+        .then(valid => {
+            if(!valid){
+                return res.status(403).json({message: "le mot de passe n'est pas valable !"})
+            }
+            mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
+                return res.status(200).json({message: "utilisateur supprimé !"})
+            })
+        })
+        .catch(error => res.status(500).json({error}));
+        } else {
+            return res.status(403).json({message: "requête non autorisée !"})
+        }
+    })
 };
 
 /***** MODIFY ONE USER *****/
