@@ -196,3 +196,59 @@ exports.changeRole = (req, res, next) => {
         }
     })
 };
+
+
+
+
+
+
+/***** MODIFY ONE USER *****/
+exports.modifyUser = (req, res, next) => {
+    const userId = req.params.id;
+    const id = req.auth.userId;
+    if(req.file){
+        const user = JSON.parse(req.body.user);
+        const newUsername = user.username;
+        const newBio = user.bio;
+        const newImageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+        mysql.query(`SELECT * FROM user WHERE id = ${userId}`, (err, result, fields) => {
+            if(err){
+                return res.status(404).json({err})
+            }
+            if(result.length === 0){
+                return res.status(404).json({message: "utilisateur introuvable !"});
+            }
+            if(id != userId){
+                return res.status(403).json({message: "requête non autorisée !"})
+            }
+            mysql.query(`UPDATE user SET username = '${newUsername}', bio = '${newBio}', imageUrl = '${newImageUrl}' WHERE id = ${userId}`, (err, result, fields) => {
+                if(err){
+                    return res.status(500).json({err})
+                }
+                return res.status(201).json({message: "utilisateur modifié !"})
+            })    
+        })
+    } else {
+        const user = JSON.parse(req.body.user)
+        const newUsername = user.username;
+        const newBio = user.bio;
+        mysql.query(`SELECT * FROM user WHERE id = ${userId}`, (err, result, fields) => {
+            if(err){
+                return res.status(404).json({err})
+            }
+            if(result.length === 0){
+                return res.status(404).json({message: "utilisateur introuvable !"});
+            }
+            if(id != userId){
+                return res.status(403).json({message: "requête non autorisée !"})
+            }
+            mysql.query(`UPDATE user SET username = '${newUsername}', bio = '${newBio}' WHERE id = ${userId}`, (err, result, fields) => {
+                if(err){
+                    return res.status(500).json({err})
+                }
+                return res.status(201).json({message: "utilisateur modifié !"})
+            })
+  
+        })
+    }
+ };
