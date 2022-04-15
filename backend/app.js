@@ -3,6 +3,9 @@
 /* Importing express */
 const express = require('express');
 
+/* Importing node path package */
+const path = require('path');
+
 /* Importing environment variables */
 require('dotenv').config();
 const dbName = process.env.dbName;
@@ -35,6 +38,9 @@ app.use((req, res, next) => {
 /* Importing user router */
 const userRoutes = require('./routes/user')
 app.use('/api/user', userRoutes);
+
+/* Creating a middleware to handle requests thad add images to the images folder */
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 /* Exporting the express app to be used on other files */
 module.exports = app;
