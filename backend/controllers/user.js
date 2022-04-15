@@ -139,10 +139,20 @@ exports.deleteOneUser = (req, res, next) => {
         if(result.length === 0){
             return res.status(404).json({message: "utilisateur introuvable !"})
         }
+        const filename = result[0].imageUrl.split('/images/')[1];
+
         if(role === 1){
-            mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
-                return res.status(200).json({message: "utilisateur supprimé !"})
-            })
+            if (filename != "default_avatar.png"){
+                fs.unlink(`images/${filename}`, () => {
+                    mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
+                        return res.status(200).json({message: "utilisateur supprimé !"})
+                    })
+                })
+            } else {
+                mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
+                    return res.status(200).json({message: "utilisateur supprimé !"})
+                })
+            }
         } else if (role !== 1 && id == userId) {
             hash = result[0].password;
             bcrypt.compare(password, hash)
@@ -150,9 +160,17 @@ exports.deleteOneUser = (req, res, next) => {
                 if(!valid){
                     return res.status(403).json({message: "le mot de passe n'est pas valable !"})
                 }
-                mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
-                    return res.status(200).json({message: "utilisateur supprimé !"})
-                })
+                if (filename != "default_avatar.png"){
+                    fs.unlink(`images/${filename}`, () => {
+                        mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
+                            return res.status(200).json({message: "utilisateur supprimé !"})
+                        })
+                    })
+                } else {
+                    mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
+                        return res.status(200).json({message: "utilisateur supprimé !"})
+                    })
+                }
             })
             .catch(error => res.status(403).json({error}));
         } else if (role !== 1 && id !== userId){
