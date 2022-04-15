@@ -43,6 +43,8 @@ exports.signup = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
     const passwordConfirm = req.body.passwordConfirm;
+    const imageUrl = 'http://localhost:3000/images/default_avatar.png';
+    const bio = 'La bio n\'a pas encore été renseignée';
     if(!emailValidator.validate(email)){
         return res.status(500).json({message: "adresse email NON valide !"});
     } else if (!schema.validate(password)){
@@ -57,7 +59,7 @@ exports.signup = (req, res, next) => {
     }
     bcrypt.hash(password, 10)
     .then(hash => {
-        mysql.query(`INSERT INTO user (username, email, password, role_id) VALUES (?,?,?,?)`, [username, email, hash, role_id], (err, result, fields) => {
+        mysql.query(`INSERT INTO user (username, email, password, role_id, imageUrl, bio) VALUES (?,?,?,?,?,?)`, [username, email, hash, role_id, imageUrl, bio], (err, result, fields) => {
             if(err){
                 return res.status(500).json({err});
             }
