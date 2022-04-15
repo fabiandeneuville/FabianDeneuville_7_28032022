@@ -166,10 +166,9 @@ exports.modifyUser = (req, res, next) => {
 
 
 /***** CHANGE ROLE *****/
-exports.createModerator = (req, res, next) => {
+exports.changeRole = (req, res, next) => {
     const id = req.params.id;
     const role = req.auth.role;
-    const newRole = req.body.role;
     mysql.query(`SELECT * FROM user WHERE id = ${id}`, (err, result, fields) => {
         if(err){
             return res.status(500).json({err});
@@ -177,12 +176,19 @@ exports.createModerator = (req, res, next) => {
         if(result.length === 0){
             return res.status(404).json({message: "utilisateur introuvable !"});
         }
-        if (role === 1){
-            mysql.query(`UPDATE user SET role_id = ${newRole} WHERE id = ${id}`, (err, result, fields) => {
+        if (role === 1 & result[0].role_id == 3){
+            mysql.query(`UPDATE user SET role_id = 2 WHERE id = ${id}`, (err, result, fields) => {
                 if(err){
                     return res.status(500).json({err});
                 }
-                return res.status(201).json({message: "utilisateur modifié !"});
+                return res.status(201).json({message: "role de modérateur attribué à l'utilisateur !"});
+            })
+        } else if (role === 1 & result[0].role_id == 2){
+            mysql.query(`UPDATE user SET role_id = 3 WHERE id = ${id}`, (err, result, fields) => {
+                if(err){
+                    return res.status(500).json({err});
+                }
+                return res.status(201).json({message: "role de modérateur retiré à l'utilisateur !"});
             })
         }
         else {
