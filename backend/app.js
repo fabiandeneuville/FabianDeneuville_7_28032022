@@ -39,6 +39,10 @@ app.use((req, res, next) => {
 const userRoutes = require('./routes/user')
 app.use('/api/user', userRoutes);
 
+/* Importing post router */
+const postRoutes = require('./routes/post')
+app.use('/api/post', postRoutes);
+
 /* Creating a middleware to handle requests thad add images to the images folder */
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
