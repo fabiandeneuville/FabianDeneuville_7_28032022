@@ -211,6 +211,39 @@ exports.changeRole = (req, res, next) => {
     })
 };
 
+/***** CHANGE PASSWORD *****/
+exports.changePassword = (req, res, nex) => {
+    const id = req.params.id;
+    const role = req.auth.role;
+    const userId = req.auth.userId;
+    const password = req.body.password;
+    const passwordConfirm = req.body.passwordConfirm;
+    if(role == 1 || id == userId){
+        mysql.query(`SELECT * FROM user WHERE id = ${id}`, (err, result, fields) => {
+            if(err){
+                return res.status(500).json({err});
+            }
+            if(result.length === 0){
+                return res.status(404).json({message: "utilisateur introuvable !"});
+            }
+            if(password != passwordConfirm){
+                return res.status(403).json({message: "les mots ne passent ne sont pas identiques !"})
+            }
+            bcrypt.hash(password, 10)
+            .then(hash => {
+                mysql.query(`UPDATE user set password = '${hash}' WHERE id = ${id}`, (err, result, fields) => {
+                    if(err){
+                        return res.status(500).json({err});
+                    }
+                    return res.status(201).json({message: "mot de passe de l'utilisateur mis à jour !"})
+                })
+            })
+        })
+    } else {
+        return res.status(403).json({message: "requête non autorisée !"})
+    }
+};
+
 /***** MODIFY ONE USER *****/
 exports.modifyUser = (req, res, next) => {
     const userId = req.params.id;

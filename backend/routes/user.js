@@ -23,6 +23,7 @@ router.get('/', auth, userControl.getAllUsers);
 router.get('/:id', auth, userControl.getOneUser);
 router.delete('/:id', auth, userControl.deleteOneUser);
 router.put('/:id/role', auth, userControl.changeRole);
+router.put('/:id/password', auth, userControl.changePassword);
 
 /* Exporting router */
 module.exports = router;
