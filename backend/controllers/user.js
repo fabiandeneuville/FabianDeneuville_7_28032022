@@ -34,9 +34,6 @@ schema
 .has().not().spaces()
 .has().symbols()
 
-/* Creating a regex to check the validity of the req inputs to avoid injections */
-const regexInputs = /^[a-zA-Z0-9 _.,!()&éêèàçùîï]+$/;
-
 /***** SIGNUP *****/
 exports.signup = (req, res, next) => {
     const username = req.body.username;
@@ -72,7 +69,7 @@ exports.signup = (req, res, next) => {
 exports.login = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
-    mysql.query(`SELECT * FROM user WHERE email = '${email}'`, (err, result, fields) => {
+    mysql.query(`SELECT user.email, user.password, user.id, role.role FROM user JOIN role ON user.role_id = role.id WHERE email = '${email}'`, (err, result, fields) => {
         if(err){
             return res.status(500).json({err});
         }
@@ -86,9 +83,9 @@ exports.login = (req, res, next) => {
             }
             res.status(200).json({
                 userId: result[0].id,
-                role: result[0].role_id,
+                role: result[0].role,
                 token: jwt.sign(
-                    {userId: result[0].id, role: result[0].role_id},
+                    {userId: result[0].id, role: result[0].role},
                     JWT_SECRET_TOKEN,
                     {expiresIn: '24h'}
                 )
@@ -100,7 +97,7 @@ exports.login = (req, res, next) => {
 
 /***** GET ALL USERS *****/
 exports.getAllUsers = (req, res, next) => {
-    mysql.query(`SELECT id, username, email, imageUrl, bio FROM user`, (err, result, fields) => {
+    mysql.query(`SELECT user.id, user.username, user.email, user.imageUrl, user.bio, role.role FROM user JOIN role on user.role_id = role.id`, (err, result, fields) => {
         if(err){
             return res.status(500).json({err});
         }
@@ -114,7 +111,7 @@ exports.getAllUsers = (req, res, next) => {
 /***** GET ONE USER *****/
 exports.getOneUser = (req, res, next) => {
     let userId = req.params.id;
-    mysql.query(`SELECT id, username, email, imageUrl, bio FROM user WHERE id = ${userId}`, (err, result, fields) => {
+    mysql.query(`SELECT user.id, user.username, user.email, user.imageUrl, user.bio, role.role FROM user JOIN role ON user.role_id = role.id WHERE user.id = ${userId}`, (err, result, fields) => {
         if(err){
             return res.status(404).json({err});
         }
@@ -141,7 +138,7 @@ exports.deleteOneUser = (req, res, next) => {
         }
         const filename = result[0].imageUrl.split('/images/')[1];
 
-        if(role === 1){
+        if(role === "admin"){
             if (filename != "default_avatar.png"){
                 fs.unlink(`images/${filename}`, () => {
                     mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
@@ -153,7 +150,7 @@ exports.deleteOneUser = (req, res, next) => {
                     return res.status(200).json({message: "utilisateur supprimé !"})
                 })
             }
-        } else if (role !== 1 && id == userId) {
+        } else if (role !== "admin" && id == userId) {
             hash = result[0].password;
             bcrypt.compare(password, hash)
             .then(valid => {
@@ -173,7 +170,7 @@ exports.deleteOneUser = (req, res, next) => {
                 }
             })
             .catch(error => res.status(403).json({error}));
-        } else if (role !== 1 && id !== userId){
+        } else if (role !== "admin" && id !== userId){
             return res.status(403).json({message: "requête non autorisée !"})
         }
     })
@@ -183,21 +180,21 @@ exports.deleteOneUser = (req, res, next) => {
 exports.changeRole = (req, res, next) => {
     const id = req.params.id;
     const role = req.auth.role;
-    mysql.query(`SELECT * FROM user WHERE id = ${id}`, (err, result, fields) => {
+    mysql.query(`SELECT role.role FROM user JOIN role on user.role_id = role.id WHERE user.id = ${id}`, (err, result, fields) => {
         if(err){
             return res.status(500).json({err});
         }
         if(result.length === 0){
             return res.status(404).json({message: "utilisateur introuvable !"});
         }
-        if (role === 1 & result[0].role_id == 3){
+        if (role === "admin" & result[0].role === "utilisateur"){
             mysql.query(`UPDATE user SET role_id = 2 WHERE id = ${id}`, (err, result, fields) => {
                 if(err){
                     return res.status(500).json({err});
                 }
                 return res.status(201).json({message: "role de modérateur attribué à l'utilisateur !"});
             })
-        } else if (role === 1 & result[0].role_id == 2){
+        } else if (role === "admin" & result[0].role === "modérateur"){
             mysql.query(`UPDATE user SET role_id = 3 WHERE id = ${id}`, (err, result, fields) => {
                 if(err){
                     return res.status(500).json({err});
@@ -218,7 +215,7 @@ exports.changePassword = (req, res, nex) => {
     const userId = req.auth.userId;
     const password = req.body.password;
     const passwordConfirm = req.body.passwordConfirm;
-    if(role == 1 || id == userId){
+    if(role === "admin" || id == userId){
         mysql.query(`SELECT * FROM user WHERE id = ${id}`, (err, result, fields) => {
             if(err){
                 return res.status(500).json({err});
