@@ -71,7 +71,7 @@ exports.deleteOnePost = (req, res, next) => {
         if(result.length === 0){
             return res.status(404).json({message: "post introuvable !"});
         }
-        if(result[0].user_id != userId && role == 3){
+        if(result[0].user_id != userId && role == "utilisateur"){
             return res.status(403).json({message: "requête non autorisée !"});
         }
         if(result[0].imageUrl != null){
