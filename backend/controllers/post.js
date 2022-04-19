@@ -163,14 +163,11 @@ exports.modifyPost = (req, res, next) => {
             } else {
                 const newTitle = req.body.title;
                 const newContent = req.body.content;
-                const filename = result[0].imageUrl.split('/images')[1];
-                fs.unlink(`images/${filename}`, () => {
-                    mysql.query(`UPDATE post SET title = '${newTitle}', content = '${newContent}', imageUrl = null WHERE id = ${id}`, (err, result, fields) => {
-                        if(err){
-                            return res.status(500).json({err});
-                        }
-                        return res.status(201).json({message: "post mis à jour !"})
-                    })
+                mysql.query(`UPDATE post SET title = '${newTitle}', content = '${newContent}' WHERE id = ${id}`, (err, result, fields) => {
+                    if(err){
+                        return res.status(500).json({err});
+                    }
+                    return res.status(201).json({message: "post mis à jour !"})
                 })
             }
         }
