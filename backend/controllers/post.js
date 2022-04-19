@@ -45,6 +45,20 @@ exports.getAllPosts = (req, res, next) => {
     })
 };
 
+/***** GET ONE POST *****/
+exports.getOnePost = (req, res, next) => {
+    const postId = req.params.id;
+    mysql.query(`SELECT post.id, user.username, post.title, post.content, post.imageUrl, DATE_FORMAT(date, 'à %Hh%i le %d/%c/%Y') as date, post.likes FROM post JOIN user on user.id = post.user_id WHERE post.id = ${postId}`, (err, result, fields) => {
+        if(err){
+            return res.status(500).json({err});
+        }
+        if(result.length === 0){
+            return res.status(404).json({message: "aucun posts !"})
+        }
+        return res.status(200).json(result[0]);
+    })
+};
+
 /***** GET ALL POSTS FROM ONE USER *****/
 exports.getAllPostsFromOneUser = (req, res, next) => {
     const id = req.params.id;
