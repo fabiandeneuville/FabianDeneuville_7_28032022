@@ -94,3 +94,71 @@ exports.deleteOnePost = (req, res, next) => {
         }
     })
 };
+
+/****** MODIFY ONE POST *****/
+exports.modifyPost = (req, res, next) => {
+    const id = req.params.id;
+    const userId = req.auth.userId;
+    mysql.query(`SELECT * FROM post WHERE id = ${id}`, (err, result, fields) => {
+        if(err){
+            return res.status(500).json({err});
+        }
+        if(result.length === 0){
+            return res.status(404).json({message: "post introuvable !"})
+        }
+        if(result[0].user_id != userId){
+            return res.status(403).json({message: "requête non autorisée !"})
+        }
+        if(result[0].imageUrl === null){
+            if(req.file){
+                const post = JSON.parse(req.body.post);
+                const newTitle = post.title;
+                const newContent = post.content;
+                const imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+                mysql.query(`UPDATE post SET title = '${newTitle}', content = '${newContent}', imageUrl = '${imageUrl}' WHERE id = ${id}`, (err, result, fields) => {
+                    if(err){
+                        return res.status(500).json({err});
+                    }
+                    return res.status(201).json({message: "post mis à jour !"});
+                })
+            } else {
+                const newTitle = req.body.title;
+                const newContent = req.body.content;
+                mysql.query(`UPDATE post SET title = '${newTitle}', content = '${newContent}' WHERE id = ${id}`, (err, result, fields) => {
+                    if(err){
+                        return res.status(500).json({err});
+                    }
+                    return res.status(201).json({message: "post mis à jour !"});
+                })
+            }
+        } else {
+            if(req.file){
+                const post = JSON.parse(req.body.post);
+                const newTitle = post.title;
+                const newContent = post.content;
+                const imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+                const filename = result[0].imageUrl.split('/images/')[1];
+                fs.unlink(`images/${filename}`, () => {
+                    mysql.query(`UPDATE post SET title = '${newTitle}', content = '${newContent}', imageUrl = '${imageUrl}' WHERE id = ${id}`, (err, result, fields) => {
+                        if(err){
+                            return res.status(500).json({err});
+                        }
+                        return res.status(201).json({message: "post mis à jour !"})
+                    })
+                })
+            } else {
+                const newTitle = req.body.title;
+                const newContent = req.body.content;
+                const filename = result[0].imageUrl.split('/images')[1];
+                fs.unlink(`images/${filename}`, () => {
+                    mysql.query(`UPDATE post SET title = '${newTitle}', content = '${newContent}', imageUrl = null WHERE id = ${id}`, (err, result, fields) => {
+                        if(err){
+                            return res.status(500).json({err});
+                        }
+                        return res.status(201).json({message: "post mis à jour !"})
+                    })
+                })
+            }
+        }
+    })
+};
