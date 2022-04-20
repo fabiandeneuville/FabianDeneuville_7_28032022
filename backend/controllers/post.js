@@ -242,3 +242,28 @@ exports.deleteOneComment = (req, res, next) => {
         }
     })
 };
+
+/***** MODIFY ONE COMMENT *****/
+exports.modifyOneComment = (req, res, next) => {
+    const postId = req.params.id;
+    const commentId = req.params.commentid;
+    const userId = req.auth.userId;
+    const newContent = req.body.content;
+    mysql.query(`SELECT * FROM comment WHERE id = ${commentId} AND post_id = ${postId}`, (err, result, fields) => {
+        if(err){
+            return res.status(500).json({err});
+        }
+        if(result.length === 0){
+            return res.status(404).json({message: "commentaire introuvable !"});
+        }
+        if(result[0].user_id != userId){
+            return res.status(403).json({message: "requête non autorisée !"})
+        }
+        mysql.query(`UPDATE comment SET content = '${newContent}' WHERE id = ${commentId}`, (err, result, fields) => {
+            if(err){
+                return res.status(500).json({err});
+            }
+            return res.status(201).json({message: "commentaire modifié !"})
+        })
+    })
+};
