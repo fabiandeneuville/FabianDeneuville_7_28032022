@@ -5,6 +5,7 @@ const mysql = require('../dbConnection').connection;
 
 /* Importing the Node File System package */
 const fs = require('fs');
+const { isBuffer } = require('util');
 
 /***** CREATE POST *****/
 exports.createPost = (req, res, next) => {
@@ -170,6 +171,74 @@ exports.modifyPost = (req, res, next) => {
                     return res.status(201).json({message: "post mis à jour !"})
                 })
             }
+        }
+    })
+};
+
+/***** CREATE COMMENT *****/
+exports.createComment = (req, res, next) => {
+    const userId = req.auth.userId;
+    const postId = req.params.id;
+    const content = req.body.content;
+    mysql.query(`INSERT INTO comment (content, date, post_id, user_id) VALUES (?, NOW(), ?, ?)`, [content, postId, userId] , (err, result, fields) => {
+        if(err){
+            return res.status(500).json({err});
+        }
+        return res.status(201).json({message: "commentaire publié !"})
+    });
+};
+
+/***** GET ALL COMMENTS FROM ONE POST *****/
+exports.getAllCommentsFromOnePost = (req, res, next) => {
+    const postId = req.params.id;
+    mysql.query(`SELECT comment.id, user.username, comment.content, comment.post_id, DATE_FORMAT(date, 'à %Hh%i le %d/%c/%Y') as date, comment.likes FROM comment JOIN user on user.id = comment.user_id WHERE comment.post_Id = ${postId}`, (err, result, fields) => {
+        if(err){
+            return res.status(500).json({err});
+        }
+        if(result.length === 0){
+            return res.status(404).json({message: "aucun commentaires !"});
+        }
+        return res.status(200).json(result);
+    });
+};
+
+/***** GET ONE COMMENT FROM ONE POST *****/ 
+exports.getOneCommentFromOnePost = (req, res, next) => {
+    const postId = req.params.id;
+    const commentId = req.params.commentid;
+    mysql.query(`SELECT comment.id, comment.post_id, user.username, comment.content, comment.likes FROM comment JOIN post on post.id = comment.post_id JOIN user on user.id = comment.user_id WHERE comment.post_id = ${postId} AND comment.id = ${commentId}`, (err, result, fields) => {
+        if(err){
+            return res.status(500).json({err});
+        }
+        if(result.length === 0){
+            return res.status(404).json({message: "commentaire introuvable !"});
+        }
+        return res.status(200).json(result[0]);
+    })
+};
+
+/* DELETE ONE COMMENT */
+exports.deleteOneComment = (req, res, next) => {
+    const postId = req.params.id;
+    const commentId = req.params.commentid;
+    const userId = req.auth.userId;
+    const role = req.auth.role;
+    mysql.query(`SELECT comment.id, comment.user_id, comment.post_id FROM comment JOIN post on post.id = comment.post_id WHERE comment.id = ${commentId} AND post.id = ${postId}`, (err, result, fields) => {
+        if(err){
+            return res.status(500).json({err});
+        }
+        if(result.length === 0){
+            return res.status(404).json({message: "commentaire introuvable !"});
+        }
+        if(role === "utilisateur" && result[0].user_id != userId){
+            return res.status(403).json({message: "requête non autorisée !"});
+        } else {
+            mysql.query(`DELETE FROM comment WHERE id = ${commentId}`, (err, result, fields) => {
+                if(err){
+                    return res.status(500).json({err});
+                }
+                return res.status(201).json({message: "commentaire supprimé !"});
+            })
         }
     })
 };

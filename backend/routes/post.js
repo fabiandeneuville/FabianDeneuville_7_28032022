@@ -22,6 +22,10 @@ router.get('/:id', auth, postControl.getOnePost);
 router.get('/user/:id', auth, postControl.getAllPostsFromOneUser);
 router.delete('/:id', auth, postControl.deleteOnePost);
 router.put('/:id', auth, multer, postControl.modifyPost);
+router.post('/:id/comment', auth, postControl.createComment);
+router.get('/:id/comment', auth, postControl.getAllCommentsFromOnePost);
+router.get('/:id/comment/:commentid', auth, postControl.getOneCommentFromOnePost);
+router.delete('/:id/comment/:commentid', auth, postControl.deleteOneComment)
 
 /* Exporting router */ 
 module.exports = router;
