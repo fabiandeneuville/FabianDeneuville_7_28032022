@@ -267,3 +267,72 @@ exports.modifyOneComment = (req, res, next) => {
         })
     })
 };
+
+/***** LIKE POST *****/
+exports.likePost = (req, res, next) => {
+    const userId = req.auth.userId;
+    const postId = req.body.id;
+    mysql.query(`SELECT * FROM post where id = ${postId}`, (err, result, fields) => {
+        if(err){
+            return res.status(500).json({err});
+        }
+        if(result.length === 0){
+            return res.status(404).json({message: "post introuvable !"});
+        }
+        mysql.query(`SELECT * FROM groupomania.like WHERE post_id = ${postId} and user_id = ${userId}`, (err, result, fields) => {
+            if(err){
+                return res.status(500).json({err});
+            }
+            if(result.length === 0){
+                mysql.query(`INSERT INTO groupomania.like (post_id, user_id) VALUES (?,?)`, [postId, userId], (err, result, fields) => {
+                    if(err){
+                        return res.status(500).json({err});
+                    }
+                    return res.status(201).json({message: "post liké !"})
+                })
+            } else {
+                mysql.query(`DELETE FROM groupomania.like WHERE post_id = ${postId} AND user_id = ${userId}`, (err, result, fields) => {
+                    if(err){
+                        return res.status(500).json({err});
+                    }
+                    return res.status(201).json({message: "like du post annulé !"})
+                });
+            }
+        })
+    })
+};
+
+
+/***** LIKE COMMENT *****/
+exports.likeComment = (req, res, next) => {
+    const userId = req.auth.userId;
+    const commentId = req.body.id;
+    mysql.query(`SELECT * FROM comment where id = ${commentId}`, (err, result, fields) => {
+        if(err){
+            return res.status(500).json({err});
+        }
+        if(result.length === 0){
+            return res.status(404).json({message: "commentaire introuvable !"});
+        }
+        mysql.query(`SELECT * FROM groupomania.like WHERE comment_id = ${commentId} and user_id = ${userId}`, (err, result, fields) => {
+            if(err){
+                return res.status(500).json({err});
+            }
+            if(result.length === 0){
+                mysql.query(`INSERT INTO groupomania.like (comment_id, user_id) VALUES (?,?)`, [commentId, userId], (err, result, fields) => {
+                    if(err){
+                        return res.status(500).json({err});
+                    }
+                    return res.status(201).json({message: "commentaire liké !"})
+                })
+            } else {
+                mysql.query(`DELETE FROM groupomania.like WHERE comment_id = ${commentId} AND user_id = ${userId}`, (err, result, fields) => {
+                    if(err){
+                        return res.status(500).json({err});
+                    }
+                    return res.status(201).json({message: "like du commentaire annulé !"})
+                });
+            }
+        })
+    })
+};

@@ -27,6 +27,8 @@ router.get('/:id/comment', auth, postControl.getAllCommentsFromOnePost);
 router.get('/:id/comment/:commentid', auth, postControl.getOneCommentFromOnePost);
 router.delete('/:id/comment/:commentid', auth, postControl.deleteOneComment);
 router.put('/:id/comment/:commentid', auth, postControl.modifyOneComment);
+router.post('/:id/like', auth, postControl.likePost);
+router.post('/comment/:id/like', auth, postControl.likeComment);
 
 /* Exporting router */ 
 module.exports = router;
