@@ -271,7 +271,7 @@ exports.modifyOneComment = (req, res, next) => {
 /***** LIKE POST *****/
 exports.likePost = (req, res, next) => {
     const userId = req.auth.userId;
-    const postId = req.body.id;
+    const postId = req.params.id;
     mysql.query(`SELECT * FROM post where id = ${postId}`, (err, result, fields) => {
         if(err){
             return res.status(500).json({err});
@@ -306,7 +306,7 @@ exports.likePost = (req, res, next) => {
 /***** LIKE COMMENT *****/
 exports.likeComment = (req, res, next) => {
     const userId = req.auth.userId;
-    const commentId = req.body.id;
+    const commentId = req.params.id;
     mysql.query(`SELECT * FROM comment where id = ${commentId}`, (err, result, fields) => {
         if(err){
             return res.status(500).json({err});
