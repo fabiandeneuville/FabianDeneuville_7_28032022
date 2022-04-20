@@ -12,9 +12,7 @@ DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 INSERT INTO `role` (`role`)
-
 VALUES
-
 ('admin'),
 ('modérateur'),
 ('utilisateur');
@@ -140,8 +138,8 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `groupomania`.`like` (
   `id` INT NOT NULL,
-  `post_id` INT NOT NULL,
-  `comment_id` INT NOT NULL,
+  `post_id` INT,
+  `comment_id` INT,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_like_post1_idx` (`post_id` ASC) VISIBLE,
