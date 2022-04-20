@@ -137,7 +137,7 @@ DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `groupomania`.`like` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `post_id` INT,
   `comment_id` INT,
   `user_id` INT NOT NULL,
