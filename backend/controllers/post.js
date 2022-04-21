@@ -7,6 +7,8 @@ const mysql = require('../dbConnection').connection;
 const fs = require('fs');
 const { isBuffer } = require('util');
 
+/********** POSTS MANAGEMENT **********/
+
 /***** CREATE POST *****/
 exports.createPost = (req, res, next) => {
     const userId = req.auth.userId;
@@ -175,6 +177,8 @@ exports.modifyPost = (req, res, next) => {
     })
 };
 
+/********** COMMENTS MANAGEMENT **********/
+
 /***** CREATE COMMENT *****/
 exports.createComment = (req, res, next) => {
     const userId = req.auth.userId;
@@ -268,6 +272,8 @@ exports.modifyOneComment = (req, res, next) => {
     })
 };
 
+/********** LIKES MANAGEMENT **********/
+
 /***** LIKE POST *****/
 exports.likePost = (req, res, next) => {
     const userId = req.auth.userId;
@@ -288,20 +294,41 @@ exports.likePost = (req, res, next) => {
                     if(err){
                         return res.status(500).json({err});
                     }
-                    return res.status(201).json({message: "post liké !"})
+                    mysql.query(`SELECT COUNT(*) as likes FROM groupomania.like WHERE post_id = ${postId}`, (err, result, fields) => {
+                        if(err){
+                            return res.status(500).json({err});
+                        }
+                        const numberOfLikes = result[0].likes;
+                        mysql.query(`UPDATE post SET likes = ${numberOfLikes} WHERE id = ${postId}`, (err, result, fields) => {
+                            if(err){
+                                return res.status(500).json({err});
+                            }
+                            return res.status(201).json({message: "post liké !"});
+                        })
+                    })
                 })
             } else {
                 mysql.query(`DELETE FROM groupomania.like WHERE post_id = ${postId} AND user_id = ${userId}`, (err, result, fields) => {
                     if(err){
                         return res.status(500).json({err});
                     }
-                    return res.status(201).json({message: "like du post annulé !"})
+                    mysql.query(`SELECT COUNT(*) as likes FROM groupomania.like WHERE post_id = ${postId}`, (err, result, fields) => {
+                        if(err){
+                            return res.status(500).json({err});
+                        }
+                        const numberOfLikes = result[0].likes;
+                        mysql.query(`UPDATE post SET likes = ${numberOfLikes} WHERE id = ${postId}`, (err, result, fields) => {
+                            if(err){
+                                return res.status(500).json({err});
+                            }
+                            return res.status(201).json({message: "like du post annulé !"});
+                        })
+                    })
                 });
             }
         })
     })
 };
-
 
 /***** LIKE COMMENT *****/
 exports.likeComment = (req, res, next) => {
@@ -323,14 +350,36 @@ exports.likeComment = (req, res, next) => {
                     if(err){
                         return res.status(500).json({err});
                     }
-                    return res.status(201).json({message: "commentaire liké !"})
+                    mysql.query(`SELECT COUNT(*) as likes FROM groupomania.like WHERE comment_id = ${commentId}`, (err, result, fields) => {
+                        if(err){
+                            return res.status(500).json({err});
+                        }
+                        const numberOfLikes = result[0].likes;
+                        mysql.query(`UPDATE comment SET likes = ${numberOfLikes} WHERE id = ${commentId}`, (err, result, fields) => {
+                            if(err){
+                                return res.status(500).json({err});
+                            }
+                            return res.status(201).json({message: "commentaire liké !"});
+                        })
+                    })
                 })
             } else {
                 mysql.query(`DELETE FROM groupomania.like WHERE comment_id = ${commentId} AND user_id = ${userId}`, (err, result, fields) => {
                     if(err){
                         return res.status(500).json({err});
                     }
-                    return res.status(201).json({message: "like du commentaire annulé !"})
+                    mysql.query(`SELECT COUNT(*) as likes FROM groupomania.like WHERE comment_id = ${commentId}`, (err, result, fields) => {
+                        if(err){
+                            return res.status(500).json({err});
+                        }
+                        const numberOfLikes = result[0].likes;
+                        mysql.query(`UPDATE comment SET likes = ${numberOfLikes} WHERE id = ${commentId}`, (err, result, fields) => {
+                            if(err){
+                                return res.status(500).json({err});
+                            }
+                            return res.status(201).json({message: "like du commentaire annulé !"});
+                        })
+                    })
                 });
             }
         })
