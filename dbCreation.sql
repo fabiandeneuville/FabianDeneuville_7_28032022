@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `groupomania`.`user` (
   `username` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
-  `imageUrl` VARCHAR(255) NULL,
+  `imageUrl` VARCHAR(255) DEFAULT NULL,
   `bio` LONGTEXT NULL DEFAULT NULL,
   `role_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `groupomania`.`post` (
   `title` VARCHAR(77) NOT NULL,
   `content` LONGTEXT NOT NULL,
   `imageUrl` VARCHAR(255) NULL,
-  `likes` INT NULL,
+  `likes` INT DEFAULT NULL,
   `date` DATETIME NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -59,7 +59,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `groupomania`.`comment` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `content` LONGTEXT NOT NULL,
-  `likes` INT NULL,
+  `likes` INT DEFAULT NULL,
   `date` DATETIME NOT NULL,
   `post_id` INT NOT NULL,
   `user_id` INT NOT NULL,
@@ -77,64 +77,6 @@ CREATE TABLE IF NOT EXISTS `groupomania`.`comment` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `groupomania`.`user_has_post` (
-  `user_id` INT NOT NULL,
-  `post_id` INT NOT NULL,
-  PRIMARY KEY (`user_id`, `post_id`),
-  INDEX `fk_user_has_post_post1_idx` (`post_id` ASC) VISIBLE,
-  INDEX `fk_user_has_post_user_idx` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `fk_user_has_post_user`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `groupomania`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_has_post_post1`
-    FOREIGN KEY (`post_id`)
-    REFERENCES `groupomania`.`post` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-CREATE TABLE IF NOT EXISTS `groupomania`.`post_has_comment` (
-  `post_id` INT NOT NULL,
-  `comment_id` INT NOT NULL,
-  PRIMARY KEY (`post_id`, `comment_id`),
-  INDEX `fk_post_has_comment_comment1_idx` (`comment_id` ASC) VISIBLE,
-  INDEX `fk_post_has_comment_post1_idx` (`post_id` ASC) VISIBLE,
-  CONSTRAINT `fk_post_has_comment_post1`
-    FOREIGN KEY (`post_id`)
-    REFERENCES `groupomania`.`post` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_post_has_comment_comment1`
-    FOREIGN KEY (`comment_id`)
-    REFERENCES `groupomania`.`comment` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `groupomania`.`user_has_comment` (
-  `user_id` INT NOT NULL,
-  `comment_id` INT NOT NULL,
-  PRIMARY KEY (`user_id`, `comment_id`),
-  INDEX `fk_user_has_comment_comment1_idx` (`comment_id` ASC) VISIBLE,
-  INDEX `fk_user_has_comment_user1_idx` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `fk_user_has_comment_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `groupomania`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_has_comment_comment1`
-    FOREIGN KEY (`comment_id`)
-    REFERENCES `groupomania`.`comment` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `groupomania`.`like` (
   `id` INT NOT NULL AUTO_INCREMENT,
