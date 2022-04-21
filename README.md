@@ -67,4 +67,23 @@ Enfin, indiquez à MySQL que vous souhaitez utiliser la base de données Groupom
 USE groupomania;
 ```
 
-### Étape 5. Configuration des variables d'environnement ###
+### Étape 5. Configuration des variables d'environnement et du fichier .gitignore ###
+
+### Étape 6. Ajout du dossier images ###
+
+### Étape 7. Lancement de l'API ###
+
+Avec le terminal, depuis le dossier backend, éxécutez la commande :
+
+```
+nodemon server
+```
+
+Si tout se passe bien, les messages suivants apparaissent dans le terminal :
+
+```
+----------------------------------------
+Listening on port 3000
+----------------------------------------
+Connected successfully to groupomania database
+```
