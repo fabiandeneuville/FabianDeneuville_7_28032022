@@ -31,6 +31,14 @@ L'ensemble des pages soit respecter les **standards WCAG** pour l'accessibilité
 
 ## Installation ##
 
+### Prérequis ###
+
+Pour lancer le projet, vous devez avoir les programmes suivants installés sur votre machine :
+
+- Node.js
+- Vue.js
+- MySQL
+
 ### Étape 1. Clonage du projet
 
 Avec le terminal, depuis le dossier dans lequel vous souhaitez enregistrer le projet, pour cloner le projet, utilisez la commande :
