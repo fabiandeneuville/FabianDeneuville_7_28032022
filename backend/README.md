@@ -1,3 +1,6 @@
+# SPECIFICATIONS DE L'API #
+***
+
 ## RÔLES ##
 | ID | ROLE | PRÉROGATIVES |
 |:---:|:---:|:---:|
@@ -40,3 +43,15 @@
 | DELETE | Suppression   d'un commentaire | /api/post/:id/comment/:commentId | - | {message:   string} | Un   utilisateur peut supprimer ses propres commentaires. Un utilisateur avec le   rôle d'admin ou de modérateur peut supprimer tous les commentaires. |
 | POST | Like   d'un post (réversible) | /api/post/:id/like | - | {message:   string} | Vérifie   que l'utilisateur n'a pas déjà liké le post. Si NON, ajout d'une entrée (user_id + post_id) est ajouté dans la   table like,  comptage du nombre de like   correspondant au post_id et mise à jour du nombre de likes du post. Si OUI, suppression de la ligne   (user_id + post_id) de la table like,    comptage du nombre de like correspondant au post_id et mise à jour du   nombre de likes du post. |
 | POST | Like   d'un commentaire (réversible) | /api/post/comment/:id/like | - | {message:   string} | Vérifie   que l'utilisateur n'a pas déjà liké le commentaire. Si   NON, ajout d'une entrée (user_id + comment_id) est   ajouté dans la table like,  comptage du   nombre de like correspondant au comment_id et mise à jour du nombre de likes   du commentaire. Si OUI,   suppression de la ligne (user_id + comment_id) de la table like,  comptage du nombre de like correspondant au   comment_id et mise à jour du nombre de likes du commentaire. |
+
+## STRUCTURE DE LA BASE DE DONNÉES ##
+
+### TABLE USER ###
+
+### TABLE POST ###
+
+### TABLE ROLE ###
+
+### TABLE COMMENT ###
+
+### TABLE LIKE ###
