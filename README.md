@@ -33,6 +33,19 @@ L'ensemble des pages soit respecter les **standards WCAG** pour l'accessibilité
 
 ### Étape 1. Clonage du projet
 
+Avec le terminal, depuis le dossier dans lequel vous souhaitez enregistrer le projet, pour cloner le projet, utilisez la commande :
+
+```
+git clone https://github.com/fabiandeneuville/FabianDeneuville_7_28032022.git groupomania
+```
+
+Le dossier ainsi créé sur votre machine doit contenir les éléments suivants :
+
+- Un dossier backend contenant le code de l'API
+- Un dossier frontend contenant le code de l'application frontend
+- Un fichier dbCreation.sql avec lequel vous allez créer la base de données sur votre machine
+- Le fichier README.md que vous êtes en train de lire
+
 ### Étape 2. Installation de l'application Frontend ###
 
 ### Étape 3. Installation de l'API ###
@@ -87,3 +100,8 @@ Listening on port 3000
 ----------------------------------------
 Connected successfully to groupomania database
 ```
+
+Vous êtes désormais prêt à utiliser l'application.
+
+### Dernière étape, création du premier utilisateur ###
+
