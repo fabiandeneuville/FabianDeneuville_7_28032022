@@ -1,5 +1,4 @@
 # SPECIFICATIONS DE L'API #
-***
 
 ## RÔLES ##
 | ID | ROLE | PRÉROGATIVES |
