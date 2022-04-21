@@ -43,7 +43,7 @@ Il est nécessaire d'avoir MySQL d'installé sur votre machine.
 
 Exécutez MySQL avec votre Termial :
 
-```SQL
+```
 mysql -u root -p
 ```
 
@@ -51,19 +51,19 @@ Renseignez le mot de passe de l'utilisateur root.
 
 Une fois connecté, importez le fichier dbCreation.sql avec la commande :
 
-```SQL
+```
 SOURCE path/dbCreation.sql;
 ``` 
 
 Puis, vérifiez que la base de données Groupomania a bien été importée avec la commande :
 
-```SQL
+```
 SHOW DATABASES;
 ```
 
 Enfin, indiquez à MySQL que vous souhaitez utiliser la base de données Groupomania avec la commande :
 
-```SQL
+```
 USE groupomania;
 ```
 
