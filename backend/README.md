@@ -47,11 +47,47 @@
 ## STRUCTURE DE LA BASE DE DONNÉES ##
 
 ### TABLE USER ###
+| CHAMPS | TYPE | DESCRIPTION DU   CONTENU |
+|:---:|:---:|---|
+| id | Number | Id unique de   l'utilisateur |
+| username | String | Nom d'utilisateur   unique |
+| email | String | Adresse email unique |
+| password | String | Mot de passe de   l'utilisateur |
+| imageUrl | String | Avatar de   l'utilisateur |
+| bio | String | Biographie de   l'utilisateur |
+| role_id | Number | Id du rôle associé à   l'utilisateur |
 
 ### TABLE POST ###
+| CHAMPS | TYPE | DESCRIPTION |
+|---|:---:|---|
+| id | Number | Id unique de la   publication |
+| title | String | Titre de la   publication |
+| content | String | Contenu de la   publication |
+| imageUrl | String | Image de la   publication |
+| likes | Number | Nombre de likes reçus   par la publication |
+| date | Date | Date de publication |
+| user_id | Number | Id de l'utilisateur   auteur de la publication |
 
 ### TABLE ROLE ###
+| CHAMPS  | TYPE | DESCRIPTION |
+|---|:---:|---|
+| id | Number | Id unique du rôle |
+| role | String | Rôle |
 
 ### TABLE COMMENT ###
+| CHAMPS | TYPE | DESCRIPTION |
+|---|:---:|---|
+| id | Number | Id unique du   commentaire |
+| content | String | Contenu du   commentaire |
+| likes | Number | Nombre de likes reçus   par le commentaire |
+| date | Date | Date de publication   du commentaire |
+| post_id | Number | Id du post associé au   commentaire |
+| user_id | Number | Id de l'utilisateur   auteur du commentaire |
 
 ### TABLE LIKE ###
+| CHAMPS | TYPE | DESCRIPTION |
+|---|:---:|---|
+| id | Number | Id unique du like |
+| post_id | Number | Id de la publication   likée |
+| comment_id | Number | Id du commentaire   liké |
+| user_id | Number | Id de l'utilisateur   auteur du like |
