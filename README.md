@@ -2,16 +2,30 @@
 # Création d'un réseau social d'entreprise #
 ![icon-left-font](https://user-images.githubusercontent.com/94392055/164500842-1c6d96bb-27e4-40d9-8a29-4da945ed2ee4.png)
 
-## Contexte ##
+## CONTEXTE ##
 
 Employé en tant que développeur au sein de l'agence web **CONNECT-E**, nous sommes sollicités pour développer un **réseau social interne** pour les employés de **Groupomania**, groupe spécialisé dans la grande distribution.
-Le but de cet outil est de **faciliter les interactions entre collègues**.
+Le but de cet outil est de **faciliter les interactions entre collègues**. 
+Une enquête réalisée par un ***comité de pilotage sur le bien-être au travail** a en effet mis l'accent sur le fait qu'une partie du personnel n'était **pas satisfaite de l'ambiance de travail**.
 
 ***
 
-## Contraintes ##
+## CONTRAINTES ##
+
+### Exigences émises par le comité de pilotage ###
+
+- la présentation des fonctionalités doit être simple
+- la création d'un compte doit être simple et possible depuis un téléphone mobile
+- le profil doit contenir très peu d'informations pour que sa complétion soit rapide
+- la suppression du compte doit être possible
+- l'accès à un forum où les salariés publient des contenus multimédias doit être présent
+- l'accès à un forum où les salariés publient des textes doit être présent
+- les utilisateurs doivent pouvoir facilement repérer les dernières participations des employés
+- le ou la chargé-e de communication Groupomania doit pouvoir modérer les interactions entre salariés
 
 ### Fonctionnalités ###
+
+De manière à fournir dans un **délais raisonnable**, une **première version de l'application (MVP)**, il a été décidé de se concentrer dans un premier temps sur la fonctionnalité permettant à un utilisateur de **publier du contenu multimédia**, accompagné de texte. Une fonctionnalité connexe permet par ailleurs aux autres utilisateurs de **commenter et liker** les publications.
 
 ### Technologie ###
 
@@ -21,15 +35,28 @@ Le client doit utiliser une **base de données relationnelle** qui se manipule a
 
 ### Sécurité ###
 
+L'ensemble de l'**application**, ainsi que les **données des utilisateurs** doivent être **sécurisées** pour répondre aux standard de l'**OWASP** et de la **RGPD**.
+
 ### Accessibilité ###
 
 L'ensemble des pages doit respecter les **standards WCAG** pour l'accessibilité.
 
 ### Administration ###
 
+Il a été décidé de créer trois rôles distincts pour gérer les autorisations et assurer la modération de l'application :
+
+- l'**admin** peut supprimer un utilisateur, attribuer ou retirer le rôle de modérateur, supprimer une publiation ou un commentaire
+- le **modérateur** (rôle attribué par l'admin) peut supprimer une publication ou un commentaire
+- le simple **utilisateur** peut supprimer son propre compte, supprimer ou modifier ses propres publications et commentaires 
+
+### Évaluation du temps nécessaire au développement de l'application ###
+
+15 jours/homme pour la partie backend 
+-- jours/homme pour la partie frontend
+
 ***
 
-## Installation ##
+## INSTALLATION ##
 
 ### Prérequis ###
 
@@ -49,11 +76,11 @@ git clone https://github.com/fabiandeneuville/FabianDeneuville_7_28032022.git gr
 
 Le dossier ainsi créé sur votre machine doit contenir les éléments suivants :
 
-- Un dossier backend contenant le code de l'API
-- Un dossier frontend contenant le code de l'application frontend
-- Un fichier dbCreation.sql avec lequel vous allez créer la base de données sur votre machine
-- Le fichier README.md que vous êtes en train de lire
-- Le fichier image default_avatar.png
+- un dossier backend contenant le code de l'API
+- un dossier frontend contenant le code de l'application frontend
+- un fichier dbCreation.sql avec lequel vous allez créer la base de données sur votre machine
+- le fichier README.md que vous êtes en train de lire
+- le fichier image default_avatar.png
 
 ### Étape 2. Installation de l'application Frontend ###
 
@@ -136,3 +163,6 @@ Vous êtes désormais prêt à utiliser l'application.
 
 ### Dernière étape, création du premier utilisateur ###
 
+le ou la chargé-e de communication Groupomania peut dès à présent s'inscrire sur l'application. 
+
+L'adresse prévue par défaut pour l'administrateur est **administrateur@groupomanie.com**.
