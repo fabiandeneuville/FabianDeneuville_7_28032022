@@ -6,6 +6,7 @@
 
 Employé en tant que développeur au sein de l'agence web **CONNECT-E**, nous sommes sollicités pour développer un **réseau social interne** pour les employés de **Groupomania**, groupe spécialisé dans la grande distribution.
 Le but de cet outil est de **faciliter les interactions entre collègues**. 
+
 Une enquête réalisée par un ***comité de pilotage sur le bien-être au travail** a en effet mis l'accent sur le fait qu'une partie du personnel n'était **pas satisfaite de l'ambiance de travail**.
 
 ***
@@ -52,6 +53,7 @@ Il a été décidé de créer trois rôles distincts pour gérer les autorisatio
 ### Évaluation du temps nécessaire au développement de l'application ###
 
 15 jours/homme pour la partie backend 
+
 -- jours/homme pour la partie frontend
 
 ***
