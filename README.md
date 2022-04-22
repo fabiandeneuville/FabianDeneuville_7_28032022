@@ -23,7 +23,7 @@ Le client doit utiliser une **base de données relationnelle** qui se manipule a
 
 ### Accessibilité ###
 
-L'ensemble des pages soit respecter les **standards WCAG** pour l'accessibilité.
+L'ensemble des pages doit respecter les **standards WCAG** pour l'accessibilité.
 
 ### Administration ###
 
@@ -41,7 +41,7 @@ Pour lancer le projet, vous devez avoir les programmes suivants installés sur v
 
 ### Étape 1. Clonage du projet
 
-Avec le terminal, depuis le dossier dans lequel vous souhaitez enregistrer le projet, pour cloner le projet, utilisez la commande :
+Avec le terminal, depuis le dossier dans lequel vous souhaitez enregistrer le projet, clonez le projet avec la commande :
 
 ```
 git clone https://github.com/fabiandeneuville/FabianDeneuville_7_28032022.git groupomania
@@ -53,6 +53,7 @@ Le dossier ainsi créé sur votre machine doit contenir les éléments suivants 
 - Un dossier frontend contenant le code de l'application frontend
 - Un fichier dbCreation.sql avec lequel vous allez créer la base de données sur votre machine
 - Le fichier README.md que vous êtes en train de lire
+- Le fichier image default_avatar.png
 
 ### Étape 2. Installation de l'application Frontend ###
 
@@ -90,7 +91,29 @@ USE groupomania;
 
 ### Étape 5. Configuration des variables d'environnement et du fichier .gitignore ###
 
+À la **racine** du dossier **backend**, ajoutez un fichier **.env** avec les éléments suivants :
+
+```
+dbUser = "identifiant de connexion à MySQl sur votre machine (utilisateur root)"
+dbPassword = "mot de passe de connexion à MySQl sur votre machine (utilisateur root)"
+dbHost = "127.0.0.1"
+dbName = "groupomania"
+EMAIL_ENCRYPTION_KEY = "chaîne de caractères aléatoire"
+JWT_SECRET_TOKEN = "chaîne de caractères aléatoire"
+```
+
+À la **racine** du dossier **backend**, ajoutez un fichier **.gitignore** avec les éléments suivants :
+
+```
+/.env
+/node_modules
+/images
+```
+
 ### Étape 6. Ajout du dossier images ###
+
+À la **racine** du dossier **backend**, ajoutez le dossier images.
+Placez-y le fichier **default_avatar.png**. 
 
 ### Étape 7. Lancement de l'API ###
 
