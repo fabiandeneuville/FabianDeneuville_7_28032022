@@ -54,7 +54,7 @@ Il a été décidé de créer trois rôles distincts pour gérer les autorisatio
 
 15 jours/homme pour la partie backend 
 
--- jours/homme pour la partie frontend
+-- jours/homme pour la partie frontend - DÉVELOPPEMENT EN COURS
 
 ***
 
@@ -86,7 +86,27 @@ Le dossier ainsi créé sur votre machine doit contenir les éléments suivants 
 
 ### Étape 2. Installation de l'application Frontend ###
 
+A VENIR !
+
 ### Étape 3. Installation de l'API ###
+
+Depuis le dossier **backend**, à l'aide de votre terminal, installez les dépendances avec la commande :
+
+```
+npm install
+```
+
+Vous pouvez ensuite vérifier que les différents packages sont **à jour** avec la commande :
+
+```
+npm outdated
+```
+
+Enfin, vous pouvez vérifier les éventuelles **vulnérabilités** avec la commande :
+
+```
+npm audit
+```
 
 ### Étape 4. Création de la base de données MySQL ###
 
