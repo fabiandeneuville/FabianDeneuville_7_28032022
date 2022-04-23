@@ -147,7 +147,6 @@ dbUser = "identifiant de connexion à MySQl sur votre machine (utilisateur root)
 dbPassword = "mot de passe de connexion à MySQl sur votre machine (utilisateur root)"
 dbHost = "127.0.0.1"
 dbName = "groupomania"
-EMAIL_ENCRYPTION_KEY = "chaîne de caractères aléatoire"
 JWT_SECRET_TOKEN = "chaîne de caractères aléatoire"
 ```
 
