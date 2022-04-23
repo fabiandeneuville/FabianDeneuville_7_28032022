@@ -3,6 +3,9 @@
 /* Importing express */
 const express = require('express');
 
+/* Importing helmet */
+const helmet = require('helmet');
+
 /* Importing node path package */
 const path = require('path');
 
@@ -23,6 +26,9 @@ mysql.connect(function(err){
 
 /* Creating the express app using the express method */
 const app = express();
+
+/* Creating helmet middleware */
+app.use(helmet());
 
 /* Creating a middleware using the .json method from express to get access to the request body */
 app.use(express.json());
