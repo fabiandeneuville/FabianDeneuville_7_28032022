@@ -187,4 +187,4 @@ Vous êtes désormais prêt à utiliser l'application.
 
 le ou la chargé-e de communication Groupomania peut dès à présent s'inscrire sur l'application. 
 
-L'adresse prévue par défaut pour l'administrateur est **administrateur@groupomanie.com**.
+L'adresse prévue par défaut pour l'administrateur est **administrateur@groupomania.com**.
