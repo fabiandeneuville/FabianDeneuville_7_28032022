@@ -7,7 +7,7 @@
             <input class="signup__form__input" v-model="username" type="text" id="username">
 
             <label class="signup__form__label" for="email">Email</label>
-            <input class="signup__form__input" v-model="email" type="text" id="email">
+            <input class="signup__form__input" v-model="email" type="email" id="email">
 
             <label class="signup__form__label" for="password">Mot de passe</label>
             <input class="signup__form__input" v-model="password" type="text" id="password">
@@ -17,16 +17,11 @@
 
             <button class="signup__form__submit-btn" v-on:click.prevent="signingUp">Inscription</button>
 
-            <p class="error-msg">{{ errorMessage }}</p>
-            <p class="error-msg">{{ successMessage }}</p>
-
-
+            <p class="msg">{{ apiResponseMessage }}</p>
 
         </form>
     </div>
 </template>
-
-
 
 <script>
 
@@ -40,35 +35,25 @@
                 email: '',
                 password: '',
                 passwordConfirm: '',
-                errorMessage: '',
-                successMessage: ''
+                apiResponseMessage: ''
             }
         },
         methods: {
             signingUp: function(){
-                const user = {
-                    "username": this.username,
-                    "email": this.email,
-                    "password": this.password,
-                    "passwordConfirm": this.passwordConfirm
-                }
                 axios
                 .post('http://localhost:3000/api/user/signup', {
-                    headers: {
-
-                    },
-                    body: user
+                    username: this.username,
+                    email: this.email,
+                    password: this.password,
+                    passwordConfirm: this.passwordConfirm   
                 })
                 .then(response => {
-                    console.log(response)
-                    console.log(user)
+                    this.apiResponseMessage = "Inscription réussie"
                 })
-                .catch(err => {
-                    console.log(err)
-                    console.log(user)
-                    this.errorMessage = err.response.data.message
+                .catch(error => {
+                    console.log(error)
+                    this.apiResponseMessage = "Un problème est survenu"
                 })
-
             }
         }
     }
