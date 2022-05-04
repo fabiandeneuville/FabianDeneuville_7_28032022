@@ -3,6 +3,12 @@
         <form class="signup__form">
             <h2>Inscrivez-vous</h2>
 
+            <div>
+                <p>Déjà inscrit ?</p>
+                <router-link to="/login">Connexion</router-link>
+            </div>
+
+
             <label class="signup__form__label" for="username">Nom d'utilisateur</label>
             <input class="signup__form__input" v-model="username" type="text" id="username">
 
@@ -39,6 +45,10 @@
             }
         },
         methods: {
+            toLoginIn: function(){
+                window.location.href="/login"
+            },
+
             signingUp: function(){
                 axios
                 .post('http://localhost:3000/api/user/signup', {
@@ -49,6 +59,7 @@
                 })
                 .then(response => {
                     this.apiResponseMessage = "Inscription réussie"
+                    setTimeout(this.toLoginIn, 1000)
                 })
                 .catch(error => {
                     console.log(error)
