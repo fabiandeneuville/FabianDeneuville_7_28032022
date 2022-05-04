@@ -24,6 +24,7 @@ const emailValidator = require('email-validator');
 
 /* Importing password-validator and creating schema */
 const passwordValidator = require('password-validator');
+const { json } = require('express');
 const schema = new passwordValidator();
 schema
 .is().min(8)
@@ -42,12 +43,13 @@ exports.signup = (req, res, next) => {
     const passwordConfirm = req.body.passwordConfirm;
     const imageUrl = 'http://localhost:3000/images/default_avatar.png';
     const bio = 'La bio n\'a pas encore été renseignée';
+ 
     if(!emailValidator.validate(email)){
-        return res.status(400).json({message: "adresse email NON valide !"});
+        return res.status(401).json({message: `L'adresse email ${email} est NON valide !`});
     } else if (!schema.validate(password)){
-        return res.status(500).json({message: "mot de passe NON valide. Utilisez des majuscules, minuscules, chiffres et symboles, aucun espace, pour 8(min) à 16(max) caractères"})
+        return res.status(401).json({message: "Le mot de passe NON valide. Utilisez des majuscules, minuscules, chiffres et symboles, aucun espace, pour 8(min) à 16(max) caractères"})
     } else if (passwordConfirm !== password){
-        return res.status(500).json({message: "les mots de passe ne sont pas identiques !"})
+        return res.status(401).json({message: "Les mots de passe ne sont pas identiques !"})
     }
     if(email === 'administrateur@groupomania.com'){
         role_id = 1;
@@ -58,7 +60,7 @@ exports.signup = (req, res, next) => {
     .then(hash => {
         mysql.query(`INSERT INTO user (username, email, password, role_id, imageUrl, bio) VALUES (?,?,?,?,?,?)`, [username, email, hash, role_id, imageUrl, bio], (err, result, fields) => {
             if(err){
-                return res.status(500).json({err});
+                return res.status(401).json({message: `L'adresse ${email} est déjà utilisée`});
             }
             res.status(200).json({message: 'Bienvenue !'})
         })
