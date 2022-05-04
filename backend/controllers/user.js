@@ -43,7 +43,7 @@ exports.signup = (req, res, next) => {
     const imageUrl = 'http://localhost:3000/images/default_avatar.png';
     const bio = 'La bio n\'a pas encore été renseignée';
     if(!emailValidator.validate(email)){
-        return res.status(500).json({message: "adresse email NON valide !"});
+        return res.status(400).json({message: "adresse email NON valide !"});
     } else if (!schema.validate(password)){
         return res.status(500).json({message: "mot de passe NON valide. Utilisez des majuscules, minuscules, chiffres et symboles, aucun espace, pour 8(min) à 16(max) caractères"})
     } else if (passwordConfirm !== password){
