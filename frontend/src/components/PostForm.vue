@@ -29,7 +29,7 @@
                     <input type="file" class="post__form__file__input" id="file">
                 </div>
                 <div class="btn__bloc">
-                    <button class="post__form__submit-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                    <button v-on:click.prevent="postPublication" class="post__form__submit-btn"><i class="fa-solid fa-paper-plane"></i></button>
                 </div>
             </div>
 
@@ -40,16 +40,42 @@
 
 <script>
 
+import axios from 'axios'
+
 export default {
     name: 'postForm',
     data(){
         return {
             isVisible: false,
-            title:'',
-            content:'',
+            title: null,
+            content: null,
         }
     },
-    props: ['username', 'imageUrl']
+    props: ['username', 'imageUrl', 'token'],
+    methods: {
+        postPublication: function(){
+
+            const config = {
+                headers: { Authorization: `Bearer ${this.token}` }
+            }
+                axios
+                .post('http://localhost:3000/api/post', {
+                    title: this.title,
+                    content: this.content
+                }, config)
+                .then(response => {
+                    console.log(response.data.message)
+                    alert(response.data.message)
+                    this.title = null
+                    this.content = null
+                })
+                .catch(error =>{
+                    console.log(error)
+                })
+            
+
+        }
+    }
 }
 
 </script>
@@ -58,7 +84,7 @@ export default {
 
     .post__form__caller {
         position: fixed;
-        top:110px;
+        top:100px;
         left:50%;
         transform: translateX(-50%);
         width:95%;
@@ -69,12 +95,12 @@ export default {
         align-items: center;
         justify-content: space-around;
         background: #f1f1f1;
-        border-radius:15px;
+        border-radius:0px 0px 15px 15px;
         box-shadow: 5px 2px 25px 5px #333;
     }
 
     .avatar {
-        border:2px solid;
+        border:2px solid #333;
         border-radius:50%;
         height:50px;
     }
@@ -125,18 +151,18 @@ export default {
     }
 
     .post__form {
-        position: absolute;
+        position: fixed;
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
-        top: 110px;
+        top: 100px;
         left:50%;
         transform: translateX(-50%);
-        width:80%;
+        width:95%;
         max-width: 600px;
         background: #f1f1f1;
         padding: 25px;
-        border-radius:15px;
+        border-radius:0px 0px 15px 15px;
         box-shadow: 5px 2px 25px 5px #333;
     }
 
@@ -148,7 +174,6 @@ export default {
         font-size: 20px;
         display: block;
         text-align: left;
-        margin: 15px 0px 5px 5px;
     }
 
     .post__form__input {
