@@ -43,9 +43,6 @@
             }
         },
         methods: {
-            toMainFeed: function(){
-                window.location.href="/fil"
-            },
             toLocalStorage: function(){
                 const user = {
                     'userId': this.userId,
@@ -61,7 +58,6 @@
                     password: this.password,
                 })
                 .then(response => {
-                    console.log(response.data)
                     this.userId = response.data.userId
                     this.role = response.data.role
                     this.token = response.data.token
@@ -69,7 +65,7 @@
 
                     this.toLocalStorage();
 
-                    setTimeout(this.toMainFeed, 1000);
+                    this.$router.push('/fil')
                 })
                 .catch(error => {
                     console.log(error)

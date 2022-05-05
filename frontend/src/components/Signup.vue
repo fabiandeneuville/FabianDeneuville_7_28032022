@@ -45,10 +45,6 @@
             }
         },
         methods: {
-            toLoginIn: function(){
-                window.location.href="/login"
-            },
-
             signingUp: function(){
                 axios
                 .post('http://localhost:3000/api/user/signup', {
@@ -58,8 +54,8 @@
                     passwordConfirm: this.passwordConfirm   
                 })
                 .then(response => {
-                    this.apiResponseMessage = "Inscription réussie"
-                    setTimeout(this.toLoginIn, 1000)
+                    console.log(response)
+                    this.$router.push('/login')
                 })
                 .catch(error => {
                     console.log(error)
