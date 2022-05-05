@@ -9,7 +9,7 @@
         <div class="header__link">
             <i class="fa-solid fa-gear"></i>
         </div>
-        <div class="header__link">
+        <div v-on:click="this.logOut" class="header__link">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
         </div>
     </div>
@@ -23,6 +23,12 @@
         data(){
             return {
 
+            }
+        },
+        methods: {
+            logOut: function(){
+                localStorage.removeItem('user')
+                this.$router.push('/login')
             }
         }
     }
