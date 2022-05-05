@@ -84,7 +84,7 @@
         background: white;
         width:80%;
         max-width: 500px;
-        margin: 25px auto;
+        margin: auto;
         border-radius:15px;
         box-shadow: 5px 2px 25px 5px #333;
     }
