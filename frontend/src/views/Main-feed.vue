@@ -3,7 +3,8 @@
         <headerTop> </headerTop>
         <postForm 
             v-bind:username="username" 
-            v-bind:imageUrl="imageUrl">
+            v-bind:imageUrl="imageUrl"
+            v-bind:token="token">
         </postForm>
     </div>
 
@@ -38,9 +39,13 @@
         methods: {
             fromLocalStorage: function(){
                 const user = JSON.parse(localStorage.getItem('user'))
-                this.userId = user.userId
-                this.role = user.role
-                this.token = user.token
+                if(user){
+                    this.userId = user.userId
+                    this.role = user.role
+                    this.token = user.token
+                } else {
+                    this.$router.push('/login')
+                }
             },
             getOneUser: function(){
 
