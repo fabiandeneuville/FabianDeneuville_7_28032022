@@ -8,6 +8,8 @@
 
         <form v-if="isVisible" class="post__form">
 
+            <h3>Votre publication</h3>
+
             <div v-on:click="isVisible = !isVisible" class="close-btn">
                 <i class="fa-solid fa-xmark"></i>
             </div>
@@ -26,12 +28,14 @@
             <div class="post__form__bloc btn__bloc__container">
                 <div class="btn__bloc">
                     <label class="post__form__file__label" for="file"><i class="fa-solid fa-image"></i></label>
-                    <input type="file" class="post__form__file__input" id="file">
+                    <input v-on:change="previewFile" type="file" class="post__form__file__input" id="file">
                 </div>
                 <div class="btn__bloc">
                     <button v-on:click.prevent="postPublication" class="post__form__submit-btn"><i class="fa-solid fa-paper-plane"></i></button>
                 </div>
             </div>
+
+            <p v-if="this.file != ''">Fichier sélectionné : {{ this.file.name }}</p>
 
         </form>
     </div>
@@ -49,15 +53,23 @@ export default {
             isVisible: false,
             title: null,
             content: null,
+            file: '',
+            apiResponseMessage: ''
         }
     },
     props: ['username', 'imageUrl', 'token'],
     methods: {
+        previewFile(event){
+            this.file = event.target.files[0]
+            console.log(this.file)
+        },
         postPublication: function(){
 
             const config = {
                 headers: { Authorization: `Bearer ${this.token}` }
             }
+
+            if (this.file === ''){
                 axios
                 .post('http://localhost:3000/api/post', {
                     title: this.title,
@@ -72,15 +84,31 @@ export default {
                 .catch(error =>{
                     console.log(error)
                 })
-            
+            } else {
+                let postData = new FormData();
+                const post = JSON.stringify({title: this.title, content: this.content})
+                const image = this.file
+                postData.append('post', post)
+                postData.append('image', image)
 
+                axios
+                .post('http://localhost:3000/api/post', postData, config)
+                .then(response => {
+                    console.log(response.data.message)
+                    this.apiResponseMessage = response.data.message
+                })
+                .catch(error => {
+                    console.log(error)
+                    this.apiResponseMessage = 'Une erreur est survenue !'
+                })
+            }
         }
     }
 }
 
 </script>
 
-<style>
+<style scoped>
 
     .post__form__caller {
         position: fixed;
@@ -202,13 +230,13 @@ export default {
     .btn__bloc {
         width:50%;
         height:40px;
+        line-height: 20px;
     }
 
     .post__form__submit-btn {
         font-size: 30px;
         line-height: 40px;
         border-radius:50px;
-        padding: 5px;
         border:none;
         color: #333;
         cursor: pointer;
