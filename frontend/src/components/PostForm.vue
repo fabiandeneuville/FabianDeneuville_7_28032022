@@ -106,7 +106,7 @@ export default {
 <style scoped>
 
     .post__form__container {
-        margin:110px auto 15px auto;
+        margin:110px auto 10px auto;
         width:95%;
         max-width: 600px;
         display: flex;
