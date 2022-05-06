@@ -1,18 +1,13 @@
 <template>
-    <div>
-        <div v-if="!isVisible" class="post__form__caller">
-            <img class="call-elt avatar" v-bind:src="imageUrl" v-bind:alt="`Photo de ${username}`">
-            <h3 class="call-elt call-heading">Quoi de neuf {{ username }} ?</h3>
-            <div v-on:click="isVisible = !isVisible" class="call-elt call-btn"><i class="fa-solid fa-pen"></i></div>
+    <div class="post__form__container">
+        <div class="post__form__header">
+            <img class="avatar" v-bind:src="imageUrl" v-bind:alt="`Photo de ${username}`">
+            <h3 class="post__form__header__title">Quoi de neuf {{ username }} ?</h3>
+            <div v-if="!isVisible" v-on:click="isVisible = !isVisible" class="post__form__header__btn"><i class="fa-solid fa-pen"></i></div>
+            <div v-if="isVisible" v-on:click="isVisible = !isVisible" class="post__form__header__btn"><i class="fa-solid fa-xmark"></i></div>
         </div>
 
         <form v-if="isVisible" class="post__form">
-
-            <h3>Votre publication</h3>
-
-            <div v-on:click="isVisible = !isVisible" class="close-btn">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
 
             <div class="post__form__bloc">
                 <label class="post__form__label" for="title">Titre :</label>
@@ -35,7 +30,7 @@
                 </div>
             </div>
 
-            <p v-if="this.file != ''">Fichier sélectionné : {{ this.file.name }}</p>
+            <p class="fileMessage" v-if="this.file != ''">Fichier sélectionné : {{ this.file.name }}</p>
 
         </form>
     </div>
@@ -110,21 +105,37 @@ export default {
 
 <style scoped>
 
-    .post__form__caller {
-        position: fixed;
-        top:100px;
-        left:50%;
-        transform: translateX(-50%);
-        width:95%;
-        height:70px;
-        max-width: 600px;
+    .post__form__header {
+        
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-around;
-        background: #f1f1f1;
-        border-radius:0px 0px 15px 15px;
-        box-shadow: 5px 2px 25px 5px #333;
+        justify-content: space-between;
+        padding:0 15px;
+        height:70px;
+    }
+
+    .post__form__header__title {
+        font-size: 20px;
+    }
+
+    @media screen and (max-width:350px){
+        .post__form__header__title {
+            font-size: 14px;
+        }
+    }
+
+    .post__form__header__btn {
+        width:25px;
+        height:25px;
+        font-size: 25px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .post__form__header__btn:hover {
+        transform: scale(1.2);
+        color: rgb(233, 68, 37);
     }
 
     .avatar {
@@ -133,65 +144,23 @@ export default {
         height:50px;
     }
 
-    .call-elt {
-        display: block;
-        line-height: 70px;
-    }
-
-    .call-heading {
-        font-size: 15px;
-        width:60%;
-    }
-
-    @media screen and (max-width:300px){
-        .call-heading {
-            display:none;
-        }
-    }
-
-    .call-btn {
-        width:20%;
-        font-size: 25px;
-    }
-
-    .call-btn i{
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .call-btn i:hover {
-        color: rgb(233, 68, 37);
-        transform: scale(1.2);
-    }
-
-    .close-btn {
-        position: absolute;
-        top:15px;
-        right:15px;
-        font-size: 30px;
-        color: rgb(233, 68, 37);
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .close-btn:hover {
-        transform: scale(1.2);
-    }
-
-    .post__form {
+    .post__form__container {
         position: fixed;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        top: 100px;
+        top:100px;
         left:50%;
         transform: translateX(-50%);
         width:95%;
         max-width: 600px;
-        background: #f1f1f1;
-        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(45deg, white, silver);
         border-radius:0px 0px 15px 15px;
         box-shadow: 5px 2px 25px 5px #333;
+    }
+
+    .post__form {
+        width:90%;
+        margin: 0 auto;
     }
 
     .post__form__bloc {
@@ -210,7 +179,6 @@ export default {
         padding: 10px;
         height:30px;
         border: 2px solid rgb(233, 68, 37);
-        border-radius:50px;
     }
 
     .post__form__textarea {
@@ -219,7 +187,6 @@ export default {
         padding: 10px;
         height:80px;
         border: 2px solid rgb(233, 68, 37);
-        border-radius:15px;
     }
 
     .btn__bloc__container {
@@ -241,6 +208,7 @@ export default {
         color: #333;
         cursor: pointer;
         transition: all 0.3s ease;
+        background: none;
     }
 
     .post__form__submit-btn:hover {
@@ -265,6 +233,10 @@ export default {
 
     .post__form__file__input{
         display:none;
+    }
+
+    .fileMessage {
+        padding: 10px;
     }
 
 </style>
