@@ -22,7 +22,7 @@
 
             <div class="post__form__bloc btn__bloc__container">
                 <div class="btn__bloc">
-                    <label tabindex="0" role="button" class="post__form__file__label" for="file"><i class="fa-solid fa-image"></i></label>
+                    <label tabindex=0 role="button" class="post__form__file__label" for="file"><i class="fa-solid fa-image"></i></label>
                     <input v-on:change="previewFile" type="file" class="post__form__file__input" id="file">
                 </div>
                 <div class="btn__bloc">

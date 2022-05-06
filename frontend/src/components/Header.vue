@@ -6,10 +6,10 @@
         <div class="header__logo__mobile__container">
             <img class="logo__mobile" src="../assets/icon-white.png" alt="logo de Groupomania">
         </div>
-        <div class="header__link">
+        <div role="button" tabindex=0 class="header__link">
             <i class="fa-solid fa-user"></i>
         </div>
-        <div v-on:click="this.logOut" class="header__link">
+        <div v-on:click="this.logOut" role="button" tabindex=0 class="header__link">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
         </div>
     </div>
