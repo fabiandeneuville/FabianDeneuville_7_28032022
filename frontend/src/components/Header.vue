@@ -7,7 +7,7 @@
             <img class="logo__mobile" src="../assets/icon-white.png" alt="logo de Groupomania">
         </div>
         <div class="header__link">
-            <i class="fa-solid fa-gear"></i>
+            <i class="fa-solid fa-user"></i>
         </div>
         <div v-on:click="this.logOut" class="header__link">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -22,9 +22,11 @@
         name: 'header-top',
         data(){
             return {
-
+                isAdmin: false
             }
         },
+        props: ['role', 'token', 'username'],
+        
         methods: {
             logOut: function(){
                 localStorage.removeItem('user')
@@ -78,7 +80,7 @@
 
     .header__link i {
         color: white;
-        font-size: 45px;
+        font-size: 25px;
     }
 
     @media screen and (max-width:600px){
