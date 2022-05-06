@@ -107,7 +107,6 @@
         padding: 5px;
         height:30px;
         border: 2px solid rgb(233, 68, 37);
-        border-radius:50px;
     }
 
     .login__form__submit-btn {
