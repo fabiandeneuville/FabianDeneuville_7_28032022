@@ -22,7 +22,7 @@
 
             <div class="post__form__bloc btn__bloc__container">
                 <div class="btn__bloc">
-                    <label class="post__form__file__label" for="file"><i class="fa-solid fa-image"></i></label>
+                    <label tabindex="0" role="button" class="post__form__file__label" for="file"><i class="fa-solid fa-image"></i></label>
                     <input v-on:change="previewFile" type="file" class="post__form__file__input" id="file">
                 </div>
                 <div class="btn__bloc">
@@ -105,8 +105,18 @@ export default {
 
 <style scoped>
 
+    .post__form__container {
+        margin:110px auto 15px auto;
+        width:95%;
+        max-width: 600px;
+        display: flex;
+        flex-direction: column;
+        background: white;
+        border-radius:5px;
+        box-shadow: 5px 2px 25px 5px #333;
+    }
+
     .post__form__header {
-        
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -144,20 +154,6 @@ export default {
         height:50px;
     }
 
-    .post__form__container {
-        position: fixed;
-        top:100px;
-        left:50%;
-        transform: translateX(-50%);
-        width:95%;
-        max-width: 600px;
-        display: flex;
-        flex-direction: column;
-        background: linear-gradient(45deg, white, silver);
-        border-radius:0px 0px 15px 15px;
-        box-shadow: 5px 2px 25px 5px #333;
-    }
-
     .post__form {
         width:90%;
         margin: 0 auto;
@@ -168,7 +164,7 @@ export default {
     }
 
     .post__form__label {
-        font-size: 20px;
+        font-size: 15px;
         display: block;
         text-align: left;
     }
