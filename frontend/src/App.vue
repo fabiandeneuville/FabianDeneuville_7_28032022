@@ -35,6 +35,6 @@ export default {
 
 body {
   height:100vh;
-  background: linear-gradient(120deg, #f1f1f1, rgb(233, 68, 37));
+  background: rgb(255, 213, 215);
 }
 </style>
