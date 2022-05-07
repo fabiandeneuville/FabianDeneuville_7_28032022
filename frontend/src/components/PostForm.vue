@@ -75,6 +75,7 @@ export default {
                     alert(response.data.message)
                     this.title = null
                     this.content = null
+                    location.reload()
                 })
                 .catch(error =>{
                     console.log(error)
@@ -90,7 +91,9 @@ export default {
                 .post('http://localhost:3000/api/post', postData, config)
                 .then(response => {
                     console.log(response.data.message)
+                    alert(response.data.message)
                     this.apiResponseMessage = response.data.message
+                    location.reload()
                 })
                 .catch(error => {
                     console.log(error)
@@ -113,7 +116,7 @@ export default {
         flex-direction: column;
         background: white;
         border-radius:5px;
-        box-shadow: 5px 2px 25px 5px #333;
+        box-shadow: 2px 5px 10px 0px #333;
     }
 
     .post__form__header {
