@@ -6,6 +6,7 @@
             v-bind:imageUrl="imageUrl"
             v-bind:token="token">
         </postForm>
+        <postFeed> </postFeed>
     </div>
 
 </template>
@@ -16,6 +17,7 @@
 
     import Header from '../components/Header'
     import PostForm from '../components/PostForm'
+    import PostFeed from '../components/PostFeed'
 
     export default {
         name: 'MainFeed',
@@ -34,7 +36,8 @@
         },
         components: {
             'headerTop' : Header,
-            'postForm' : PostForm
+            'postForm' : PostForm,
+            'postFeed' : PostFeed
         },
         methods: {
             fromLocalStorage: function(){
