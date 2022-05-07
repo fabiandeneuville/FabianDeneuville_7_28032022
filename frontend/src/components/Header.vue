@@ -49,6 +49,7 @@
         justify-content: space-between;
         align-items: center;
         background: #333;
+        overflow: hidden;
     }
 
     .header__logo__desktop__container {
