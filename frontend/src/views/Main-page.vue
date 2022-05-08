@@ -20,7 +20,7 @@
     import PostFeed from '../components/PostFeed'
 
     export default {
-        name: 'MainFeed',
+        name: 'MainPage',
         data(){
             return {
                 userId: null,
