@@ -1,6 +1,7 @@
 <template>
     <div class="post">
-        <p class="post__username">Publication de {{ username }}</p>
+        <p v-if="user_Id != loggedUserId" class="post__username">Publication de {{ username }}</p>
+        <p v-else class="post__username">Publié par vous</p>
         <p class="post__date">{{ date }}</p>
         <h3 class="post__title">{{ title }}</h3>
         <div class="post__image__container">
@@ -24,10 +25,35 @@ export default {
     name:'Post',
     data(){
         return {
-
+            loggedUserId: null,
+            loggedUserRole: null,
+            token: null
         }
     },
-    props: ['id', 'title', 'content', 'imageUrl', 'username', 'date', 'likes']
+    props: ['id', 'user_Id', 'title', 'content', 'imageUrl', 'username', 'date', 'likes'],
+    mounted: function(){
+        this.getFromLocalStorage()
+    },
+    methods: {
+        getFromLocalStorage(){
+            const user = JSON.parse(localStorage.getItem('user'))
+            this.loggedUserId = user.userId;
+            this.loggedUserRole = user.role;
+            this.token = user.token
+        },
+        deletePost: function(){
+
+        },
+        editPost: function(){
+
+        },
+        likePost: function(){
+
+        },
+        commentPost: function(){
+
+        }
+    }
 }
 
 </script>
@@ -48,6 +74,8 @@ export default {
     .post__username {
         width:50%;
         padding: 5px 0;
+        font-weight: 800;
+        color: rgb(233, 68, 37);
     }
 
     .post__date {

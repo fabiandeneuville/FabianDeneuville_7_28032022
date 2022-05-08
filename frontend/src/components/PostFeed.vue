@@ -10,6 +10,7 @@
                 v-bind:username="allPosts[index].username"
                 v-bind:date="allPosts[index].date"
                 v-bind:likes="allPosts[index].likes"
+                v-bind:user_Id="allPosts[index].user_Id"
                 v-for="(post, index) in allPosts">
                 </post>
             </li>
