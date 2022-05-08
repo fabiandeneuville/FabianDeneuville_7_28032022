@@ -45,7 +45,6 @@ export default {
         .then(response => {
             for (let post of response.data){
                 this.allPosts.push(post)
-                console.log(post)
             }
         })
         .catch(error => {
@@ -58,7 +57,6 @@ export default {
 
 <style>
     .feed {
-        height: 100vh;
         width: 95%;
         max-width: 600px;
         margin: 0 auto;

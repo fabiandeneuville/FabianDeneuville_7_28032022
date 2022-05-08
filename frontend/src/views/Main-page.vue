@@ -7,6 +7,7 @@
             v-bind:token="token">
         </postForm>
         <postFeed> </postFeed>
+        <footerBottom> </footerBottom>
     </div>
 
 </template>
@@ -18,6 +19,7 @@
     import Header from '../components/Header'
     import PostForm from '../components/PostForm'
     import PostFeed from '../components/PostFeed'
+    import Footer from '../components/Footer.vue'
 
     export default {
         name: 'MainPage',
@@ -37,7 +39,8 @@
         components: {
             'headerTop' : Header,
             'postForm' : PostForm,
-            'postFeed' : PostFeed
+            'postFeed' : PostFeed,
+            'footerBottom' : Footer
         },
         methods: {
             fromLocalStorage: function(){
