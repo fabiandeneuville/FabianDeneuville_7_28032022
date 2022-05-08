@@ -1,30 +1,25 @@
 <template>
     <div class="feed">
         <ul>
-            <li v-bind:key="index" v-for="(post, index) in allPosts">
-                <div class="post">
-                    <p class="post__username">Publication de {{ post.username }}</p>
-                    <p class="post__date">{{ post.date }}</p>
-                    <h3 class="post__title">{{ post.title }}</h3>
-                    <div class="post__image__container">
-                        <img v-if="post.imageUrl" v-bind:src="post.imageUrl" v-bind:alt="`Imgage de ${title}`">
-                    </div>
-                    <p class="post__content">{{ post.content }}</p>
-                    <div class="btn__bloc__container">
-                        <div class="btn__bloc">
-                            <i class="fa-solid fa-thumbs-up"></i><span class="likes__count">{{ post.likes }}</span>
-                        </div>
-                        <div class="btn__bloc">
-                            <i class="fa-solid fa-comment"></i>
-                        </div>
-                    </div>
-                </div>
+            <li>
+                <post v-bind:key="index" 
+                v-bind:id="allPosts[index].id"
+                v-bind:title="allPosts[index].title"
+                v-bind:content="allPosts[index].content"
+                v-bind:imageUrl="allPosts[index].imageUrl"
+                v-bind:username="allPosts[index].username"
+                v-bind:date="allPosts[index].date"
+                v-bind:likes="allPosts[index].likes"
+                v-for="(post, index) in allPosts">
+                </post>
             </li>
         </ul>
     </div>
 </template>
 
 <script>
+
+import Post from './Post'
 
 import axios from 'axios'
 
@@ -34,6 +29,9 @@ export default {
         return {
             allPosts: [],
         }
+    },
+    components: {
+        'post': Post
     },
     mounted(){
 
@@ -69,77 +67,5 @@ export default {
     li {
         list-style-type: none;
     }
-
-    .post{
-        width: 100%;
-        background: white;
-        margin: 0 0 10px 0;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        border-radius:5px;
-        box-shadow: 2px 5px 10px 0px #333;
-    }
-
-    .post__username {
-        width:50%;
-        padding: 5px 0;
-    }
-
-    .post__date {
-        width:50%;
-        padding: 5px 0;
-    }
-
-    .post__image__container {
-        width:100%;
-        object-fit: contain;
-        overflow: hidden;
-        padding:5px;
-    }
-
-    .post img {
-        width:100%;
-    }
-
-    .post__title {
-        width:90%;
-        padding:10px;
-        margin:0 auto;
-    }
-
-    .post__content {
-        width: 90%;
-        padding:10px;
-        margin:0 auto;
-        text-align: justify;
-    }
-
-    .btn__bloc__container {
-        width:100%;
-        display:flex; 
-        flex-direction: row;
-        justify-content: space-between;
-        padding:10px 0;
-        border-top:1px solid #333;
-    }
-
-    .btn__bloc {
-        width:50%;
-        height:40px;
-        font-size: 25px;
-    }
-
-    .btn__bloc i {
-        line-height: 40px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .btn__bloc i:hover {
-        color: rgb(233, 68, 37);
-        transform: scale(1.2);
-    }
-
 
 </style>
