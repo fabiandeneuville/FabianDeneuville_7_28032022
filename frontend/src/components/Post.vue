@@ -1,5 +1,18 @@
 <template>
     <div class="post">
+        <div class="post__management" v-if="user_Id === loggedUserId || loggedUserRole === 'administrateur' || loggedUserRole === 'modérateur' " post__management>
+            <div v-on:click="isVisible = !isVisible" class="post__management__btn">
+                <i class="fa-solid fa-ellipsis"></i>
+            </div>
+            <div v-if="isVisible" class="post__management__container">
+                <div class="btn__bloc">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </div>
+                <div class="btn__bloc">
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+            </div>
+        </div>
         <p v-if="user_Id != loggedUserId" class="post__username">Publication de {{ username }}</p>
         <p v-else class="post__username">Publié par vous</p>
         <p class="post__date">{{ date }}</p>
@@ -27,7 +40,8 @@ export default {
         return {
             loggedUserId: null,
             loggedUserRole: null,
-            token: null
+            token: null,
+            isVisible: false
         }
     },
     props: ['id', 'user_Id', 'title', 'content', 'imageUrl', 'username', 'date', 'likes'],
@@ -69,6 +83,34 @@ export default {
         flex-wrap: wrap;
         border-radius:5px;
         box-shadow: 2px 5px 10px 0px #333;
+    }
+
+    .post__management {
+        width:100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        border-bottom: 1px solid #333;
+    }
+
+    .post__management__btn {
+        width: 100%;
+        height:40px;
+        line-height: 40px;
+        font-size: 25px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .post__management__btn:hover {
+        color: rgb(233, 68, 37);
+        transform: scale(1.2);
+    }
+
+    .post__management__container {
+        width:100%;
+        display: flex;
+        flex-direction: row;
     }
 
     .post__username {
