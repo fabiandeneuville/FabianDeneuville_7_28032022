@@ -12,7 +12,7 @@
             <input class="login__form__input" v-model="email" type="email" id="email">
 
             <label class="login__form__label" for="password">Mot de passe</label>
-            <input class="login__form__input" v-model="password" type="text" id="password">
+            <input class="login__form__input" v-model="password" type="password" id="password">
 
             <button class="login__form__submit-btn" v-on:click.prevent="logingIn">Connexion</button>
 
