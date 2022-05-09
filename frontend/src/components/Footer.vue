@@ -30,8 +30,7 @@ export default {
         margin-top: 10px;
         height: 100px;
         width: 100%;
-        background: #333;
-        color: white;
+        color: #332;
         display: flex;
         justify-content: center;
         align-items: center;
