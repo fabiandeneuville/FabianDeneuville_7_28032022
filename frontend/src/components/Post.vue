@@ -8,7 +8,7 @@
                 <div class="btn__bloc">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </div>
-                <div class="btn__bloc">
+                <div v-on:click="deletePost" class="btn__bloc">
                     <i class="fa-solid fa-trash"></i>
                 </div>
             </div>
@@ -29,10 +29,20 @@
                 <i class="fa-solid fa-comment"></i>
             </div>
         </div>
+        <validationModal
+        v-bind:reveal="reveal"
+        v-bind:token="token"
+        v-bind:id="id"
+        >
+        </validationModal>
     </div>
 </template>
 
 <script>
+
+import ValidationModal from './ValidationModale.vue'
+
+import axios from 'axios'
 
 export default {
     name:'Post',
@@ -41,8 +51,12 @@ export default {
             loggedUserId: null,
             loggedUserRole: null,
             token: null,
-            isVisible: false
+            isVisible: false,
+            reveal: false
         }
+    },
+    components: {
+        'validationModal': ValidationModal
     },
     props: ['id', 'user_Id', 'title', 'content', 'imageUrl', 'username', 'date', 'likes'],
     mounted: function(){
@@ -56,7 +70,7 @@ export default {
             this.token = user.token
         },
         deletePost: function(){
-
+            this.reveal = true;
         },
         editPost: function(){
 

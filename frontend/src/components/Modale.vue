@@ -14,7 +14,7 @@
 
 export default {
     name: 'Modale',
-    props: ['reveal', 'toggleModale', 'username'],
+    props: ['reveal', 'username'],
     methods: {
         closeModale: function(){
             this.reveal = false;
@@ -26,7 +26,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 
     .bloc-modale {
         position: fixed;
