@@ -1,45 +1,51 @@
 <template>
-    <div class="post__form__container">
-        <div class="post__form__header">
-            <img class="avatar" v-bind:src="imageUrl" v-bind:alt="`Photo de ${username}`">
-            <h3 class="post__form__header__title">Quoi de neuf {{ username }} ?</h3>
-            <div v-if="!isVisible" v-on:click="isVisible = !isVisible" class="post__form__header__btn"><i class="fa-solid fa-pen"></i></div>
-            <div v-if="isVisible" v-on:click="isVisible = !isVisible" class="post__form__header__btn"><i class="fa-solid fa-xmark"></i></div>
+
+    <div>
+        <div class="post__form__container">
+            <div class="post__form__header">
+                <img class="avatar" v-bind:src="imageUrl" v-bind:alt="`Photo de ${username}`">
+                <h3 class="post__form__header__title">Quoi de neuf {{ username }} ?</h3>
+                <div v-if="!isVisible" v-on:click="isVisible = !isVisible" class="post__form__header__btn"><i class="fa-solid fa-pen"></i></div>
+                <div v-if="isVisible" v-on:click="isVisible = !isVisible" class="post__form__header__btn"><i class="fa-solid fa-xmark"></i></div>
+            </div>
+
+            <form v-if="isVisible" class="post__form">
+
+                <div class="post__form__bloc">
+                    <label class="post__form__label" for="title">Titre :</label>
+                    <input v-model="title" class="post__form__input" type="text" id="title" required>
+                </div>
+
+                <div class="post__form__bloc">
+                    <label class="post__form__label" for="content">Message :</label>
+                    <textarea v-model="content" class="post__form__textarea" type="text" id="content" required></textarea>
+                </div>
+
+
+                <div class="post__form__bloc btn__bloc__container">
+                    <div class="btn__bloc">
+                        <label tabindex=0 role="button" class="post__form__file__label" for="file"><i class="fa-solid fa-image"></i></label>
+                        <input v-on:change="previewFile" type="file" class="post__form__file__input" id="file">
+                    </div>
+                    <div class="btn__bloc">
+                        <button v-on:click.prevent="postPublication" class="post__form__submit-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
+
+                <p class="fileMessage" v-if="this.file != ''">Fichier sélectionné : {{ this.file.name }}</p>
+
+            </form>
         </div>
 
-        <form v-if="isVisible" class="post__form">
-
-            <div class="post__form__bloc">
-                <label class="post__form__label" for="title">Titre :</label>
-                <input v-model="title" class="post__form__input" type="text" id="title" required>
-            </div>
-
-            <div class="post__form__bloc">
-                <label class="post__form__label" for="content">Message :</label>
-                <textarea v-model="content" class="post__form__textarea" type="text" id="content" required></textarea>
-            </div>
-
-
-            <div class="post__form__bloc btn__bloc__container">
-                <div class="btn__bloc">
-                    <label tabindex=0 role="button" class="post__form__file__label" for="file"><i class="fa-solid fa-image"></i></label>
-                    <input v-on:change="previewFile" type="file" class="post__form__file__input" id="file">
-                </div>
-                <div class="btn__bloc">
-                    <button v-on:click.prevent="postPublication" class="post__form__submit-btn"><i class="fa-solid fa-paper-plane"></i></button>
-                </div>
-            </div>
-
-            <p class="fileMessage" v-if="this.file != ''">Fichier sélectionné : {{ this.file.name }}</p>
-
-        </form>
+        <modale v-bind:reveal="reveal"
+                v-bind:username="username"></modale>
     </div>
-    
 </template>
 
 <script>
 
 import axios from 'axios'
+import Modale from './Modale.vue'
 
 export default {
     name: 'postForm',
@@ -49,10 +55,14 @@ export default {
             title: null,
             content: null,
             file: '',
-            apiResponseMessage: ''
+            apiResponseMessage: '',
+            reveal: false
         }
     },
     props: ['username', 'imageUrl', 'token'],
+    components: {
+        'modale': Modale
+    },
     methods: {
         previewFile(event){
             this.file = event.target.files[0]
@@ -72,10 +82,9 @@ export default {
                 }, config)
                 .then(response => {
                     console.log(response.data.message)
-                    alert(response.data.message)
                     this.title = null
                     this.content = null
-                    location.reload()
+                    this.reveal = true;
                 })
                 .catch(error =>{
                     console.log(error)
@@ -91,9 +100,8 @@ export default {
                 .post('http://localhost:3000/api/post', postData, config)
                 .then(response => {
                     console.log(response.data.message)
-                    alert(response.data.message)
                     this.apiResponseMessage = response.data.message
-                    location.reload()
+                    this.reveal = true;
                 })
                 .catch(error => {
                     console.log(error)
