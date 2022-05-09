@@ -1,14 +1,13 @@
 <template>
     <div class="header-top">
-        <div class="header__logo__desktop__container">
+        <router-link to="/fil" class="header__logo__desktop__container">
             <img class="logo__desktop" src="../assets/icon-left-font-monochrome-white.png" alt="logo de Groupomania">
-        </div>
+        </router-link>
         <div class="header__logo__mobile__container">
             <img class="logo__mobile" src="../assets/icon-white.png" alt="logo de Groupomania">
         </div>
-        <div role="button" tabindex=0 class="header__link">
-            <i class="fa-solid fa-user"></i>
-        </div>
+        <router-link v-if="location === '/fil'" to="/profile" role="button" tabindex=0 class="header__link"><i class="fa-solid fa-user"></i></router-link>
+        <router-link v-if="location === '/profile'" to="/fil" role="button" tabindex=0 class="header__link"><i class="fa-solid fa-arrow-left"></i></router-link>
         <div v-on:click="this.logOut" role="button" tabindex=0 class="header__link">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
         </div>
@@ -22,7 +21,7 @@
         name: 'header-top',
         data(){
             return {
-                isAdmin: false
+                location: ''
             }
         },
         props: ['role', 'token', 'username'],
@@ -32,6 +31,10 @@
                 localStorage.removeItem('user')
                 this.$router.push('/login')
             }
+        },
+        created(){
+            const currentLocation = window.location.pathname;
+            this.location = currentLocation;
         }
     }
 
@@ -73,6 +76,7 @@
         width:25%;
         cursor: pointer;
         transition: all 0.2s ease;
+        text-decoration: none;
     }
 
     .header__link:hover {
