@@ -1,6 +1,6 @@
 <template>
     <div class="post">
-        <div class="post__management" v-if="user_Id === loggedUserId || loggedUserRole === 'administrateur' || loggedUserRole === 'modérateur' " post__management>
+        <div class="post__management" v-if="user_Id === loggedUserId || loggedUserRole === 'admin' || loggedUserRole === 'modérateur' " post__management>
             <div v-on:click="isVisible = !isVisible" class="post__management__btn">
                 <i class="fa-solid fa-ellipsis"></i>
             </div>
