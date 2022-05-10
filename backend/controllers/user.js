@@ -42,7 +42,7 @@ exports.signup = (req, res, next) => {
     const password = req.body.password;
     const passwordConfirm = req.body.passwordConfirm;
     const imageUrl = 'http://localhost:3000/images/default_avatar.png';
-    const bio = 'La bio n\'a pas encore été renseignée';
+    const bio = 'La bio n\'a pas encore été renseignée.';
  
     if(!emailValidator.validate(email)){
         return res.status(401).json({message: `L'adresse email ${email} est NON valide !`});
