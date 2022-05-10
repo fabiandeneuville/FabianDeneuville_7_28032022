@@ -4,7 +4,7 @@
         
         <div class="modale">
             <div v-on:click="closeModale" class="btn-modale"><i class="fa-solid fa-xmark"></i></div>
-            <h3>Merci {{ username }} C'est publié !</h3>
+            <h3>C'est publié !</h3>
         </div>
     </div>
 </template>
