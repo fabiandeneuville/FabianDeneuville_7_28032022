@@ -8,7 +8,7 @@
                 <div class="btn__bloc">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </div>
-                <div v-on:click="deletePost" class="btn__bloc">
+                <div v-on:click="toPostDeletion" class="btn__bloc">
                     <i class="fa-solid fa-trash"></i>
                 </div>
             </div>
@@ -33,6 +33,7 @@
         v-bind:reveal="reveal"
         v-bind:token="token"
         v-bind:id="id"
+        v-on:closeModale="closeModale"
         >
         </postDeletionModale>
     </div>
@@ -69,8 +70,11 @@ export default {
             this.loggedUserRole = user.role;
             this.token = user.token
         },
-        deletePost: function(){
+        toPostDeletion: function(){
             this.reveal = true;
+        },
+        closeModale: function(){
+            this.reveal = false;
         },
         editPost: function(){
 

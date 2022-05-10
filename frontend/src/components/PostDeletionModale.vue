@@ -36,8 +36,7 @@ export default {
             })
         },
         closeModale: function(){
-            this.reveal = false;
-            location.reload();
+            this.$emit('closeModale')
         }
     }
 }
