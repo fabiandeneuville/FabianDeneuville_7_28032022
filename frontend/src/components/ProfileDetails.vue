@@ -19,6 +19,7 @@
         v-bind:userId="userId"
         v-bind:reveal="reveal"
         v-bind:token="token"
+        v-on:closeModale="closeModale()"
         >
         </profileDeletionModale>
     </div>
@@ -66,6 +67,9 @@ export default {
         deleteProfile: function(){
             this.reveal = true
         },
+        closeModale: function(){
+            this.reveal = false
+        }
     }
 }
 

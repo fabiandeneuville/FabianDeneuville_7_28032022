@@ -36,6 +36,7 @@ export default {
             .delete(`http://localhost:3000/api/user/${this.userId}`, 
             config)
             .then(response => {
+                console.log(response.data.message)
                 this.$router.push('/')
             })
             .catch(error => {
@@ -43,8 +44,7 @@ export default {
             })
         },
         closeModale: function(){
-            this.reveal = false;
-            location.reload()
+            this.$emit('closeModale')
         }
     }
 }
