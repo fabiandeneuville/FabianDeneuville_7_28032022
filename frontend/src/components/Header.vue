@@ -3,9 +3,9 @@
         <router-link to="/fil" class="header__logo__desktop__container">
             <img class="logo__desktop" src="../assets/icon-left-font-monochrome-white.png" alt="logo de Groupomania">
         </router-link>
-        <div class="header__logo__mobile__container">
+        <router-link to="/fil" class="header__logo__mobile__container">
             <img class="logo__mobile" src="../assets/icon-white.png" alt="logo de Groupomania">
-        </div>
+        </router-link>
         <router-link v-if="location === '/fil'" to="/profile" role="button" tabindex=0 class="header__link"><i class="fa-solid fa-user"></i></router-link>
         <router-link v-if="location === '/profile'" to="/fil" role="button" tabindex=0 class="header__link"><i class="fa-solid fa-arrow-left"></i></router-link>
         <div v-on:click="this.logOut" role="button" tabindex=0 class="header__link">
