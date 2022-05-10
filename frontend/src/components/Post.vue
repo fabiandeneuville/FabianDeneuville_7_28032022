@@ -88,7 +88,7 @@ export default {
 
 <style>
 
-.post{
+    .post{
         width: 100%;
         background: white;
         margin: 0 0 10px 0;
