@@ -29,18 +29,18 @@
                 <i class="fa-solid fa-comment"></i>
             </div>
         </div>
-        <validationModal
+        <postDeletionModale
         v-bind:reveal="reveal"
         v-bind:token="token"
         v-bind:id="id"
         >
-        </validationModal>
+        </postDeletionModale>
     </div>
 </template>
 
 <script>
 
-import ValidationModal from './ValidationModale.vue'
+import PostDeletionModale from './PostDeletionModale'
 
 import axios from 'axios'
 
@@ -56,7 +56,7 @@ export default {
         }
     },
     components: {
-        'validationModal': ValidationModal
+        'postDeletionModale': PostDeletionModale
     },
     props: ['id', 'user_Id', 'title', 'content', 'imageUrl', 'username', 'date', 'likes'],
     mounted: function(){
