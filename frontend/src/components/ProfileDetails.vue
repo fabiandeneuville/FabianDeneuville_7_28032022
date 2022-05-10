@@ -93,11 +93,9 @@ export default {
     }
 
     .profile__img__container {
-        width:150px;
-        height:150px;
-        object-fit: cover;
-        border:2px solid #333;
-        border-radius:50%;
+        width:25%;
+        object-fit: contain;
+        border-radius:5px;
         overflow: hidden;
     }
 
@@ -106,7 +104,7 @@ export default {
     }
 
     .profile__username {
-        width: calc(100% - 150px);
+        width: 75%;
     }
 
     .profile__bio {
