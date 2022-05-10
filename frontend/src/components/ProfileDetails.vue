@@ -97,6 +97,7 @@ export default {
         height:150px;
         object-fit: contain;
         border-radius:50%;
+        border:4px solid rgb(233, 68, 37);
         overflow: hidden;
     }
 
@@ -113,6 +114,7 @@ export default {
         width:100%;
         padding:20px;
         text-align: justify;
+        border-bottom:1px solid rgb(233, 68, 37);
     }
 
     .edit__profile__btn__container {
