@@ -5,6 +5,14 @@
         </div>
         <h3 class="profile__username">{{ username }}</h3>
         <p class="profile__bio">{{ bio }}</p>
+        <div class="edit__profile__btn__container">
+            <div class="btn edit-btn">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </div>
+            <div class="btn delete-btn">
+                <i class="fa-solid fa-trash"></i>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -83,6 +91,30 @@ export default {
     .profile__bio {
         padding:20px;
         text-align: justify;
+    }
+
+    .edit__profile__btn__container {
+        width:100%;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .btn {
+        width:50%;
+        padding:10px;
+        height:40px;
+        line-height: 20px;
+    }
+
+    .btn i {
+        font-size: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn i:hover {
+        color: rgb(233, 68, 37);
+        transform: scale(1.2);
     }
 
 
