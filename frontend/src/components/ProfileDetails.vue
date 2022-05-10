@@ -1,22 +1,32 @@
 <template>
-    <div class="profile__container">
-        <div class="profile__img__container">
-            <img class="profile__img" v-bind:src="imageUrl" v-bind:alt="`Photo de ${username}`">
-        </div>
-        <h3 class="profile__username">{{ username }}</h3>
-        <p class="profile__bio">{{ bio }}</p>
-        <div class="edit__profile__btn__container">
-            <div class="btn edit-btn">
-                <i class="fa-solid fa-pen-to-square"></i>
+    <div>
+        <div class="profile__container">
+            <div class="profile__img__container">
+                <img class="profile__img" v-bind:src="imageUrl" v-bind:alt="`Photo de ${username}`">
             </div>
-            <div class="btn delete-btn">
-                <i class="fa-solid fa-trash"></i>
+            <h3 class="profile__username">{{ username }}</h3>
+            <p class="profile__bio">{{ bio }}</p>
+            <div class="edit__profile__btn__container">
+                <div class="btn edit-btn">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </div>
+                <div v-on:click="deleteProfile" class="btn delete-btn">
+                    <i class="fa-solid fa-trash"></i>
+                </div>
             </div>
         </div>
+        <profileDeletionModale
+        v-bind:userId="userId"
+        v-bind:reveal="reveal"
+        v-bind:token="token"
+        >
+        </profileDeletionModale>
     </div>
 </template>
 
 <script>
+
+import ProfileDeletionModale from './ProfileDeletionModale.vue'
 
 import axios from 'axios'
 
@@ -26,10 +36,14 @@ export default {
         return {
             username: '',
             imageUrl: '',
-            bio: ''
+            bio: '', 
+            reveal: false
         }
     },
     props: ['userId', 'token'],
+    components: {
+        'profileDeletionModale': ProfileDeletionModale
+    },
     mounted: function(){
         this.getProfile()
     },
@@ -48,7 +62,10 @@ export default {
             .catch(error => {
                 console.log(error)
             })
-        }
+        },
+        deleteProfile: function(){
+            this.reveal = true
+        },
     }
 }
 
