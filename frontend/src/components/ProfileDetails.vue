@@ -93,9 +93,10 @@ export default {
     }
 
     .profile__img__container {
-        width:25%;
+        width:150px;
+        height:150px;
         object-fit: contain;
-        border-radius:5px;
+        border-radius:50%;
         overflow: hidden;
     }
 
@@ -104,10 +105,12 @@ export default {
     }
 
     .profile__username {
-        width: 75%;
+        width: 100%;
+        margin-top: 15px;
     }
 
     .profile__bio {
+        width:100%;
         padding:20px;
         text-align: justify;
     }
