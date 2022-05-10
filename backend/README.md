@@ -18,7 +18,7 @@
 |:---:|:---:|:---:|:---:|:---:|:---:|
 | POST | Inscription   d'un utilisateur | /api/user/signup | {username:   string, email: string, password: string, passwordconfirm: string} | {message:   string} | Hachage   du mot de passe de l'utilisateur et ajout de l'utilisateur à la base de   données. Confirmation du mot de passe choisi par l'utilisateur. |
 | POST | Connexion   d'un utilisateur | /api/user/login | {   email: string, password: string} | {userId:   number, role: string, token: string} | Vérification   des informations d'identification de l'utilisateur, renvoie l'id de   l'utilisateur, son role et un token signé qui contient également l'id et le   role. |
-| DELETE | Suppression   d'un profil | /api/user/:id | {password:   string} | {message:   string} | Supprime   l'utilisateur avec l'id fourni. L'admin peut supprimer un utilisateur. Un   utilisateur peut supprimer son profil à condition de renseigner son mot de   passe. |
+| DELETE | Suppression   d'un profil | /api/user/:id | - | {message:   string} | Supprime   l'utilisateur avec l'id fourni. L'admin peut supprimer un utilisateur. Un   utilisateur peut supprimer son profil. |
 | PUT | Modification   d'un profil | /api/user/:id | {username:   string, bio: string} OU {user:   string, image: file} | {message:   string} | L'utilisateur   peut modifier sa bio et son username uniquement, ou également changer son   image de profil. |
 | GET | Visualisation   d'un profil | /api/user/:id | - | user | Renvoie   l'utilisateur avec l'id fourni. |
 | GET | Visualisation   des profils | /api/user/ | - | Tableau   d'users | Renvoie   un tableau contenant tous les utilisateurs de la base de données |

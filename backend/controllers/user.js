@@ -153,25 +153,17 @@ exports.deleteOneUser = (req, res, next) => {
                 })
             }
         } else if (role !== "admin" && id == userId) {
-            hash = result[0].password;
-            bcrypt.compare(password, hash)
-            .then(valid => {
-                if(!valid){
-                    return res.status(403).json({message: "le mot de passe n'est pas valable !"})
-                }
-                if (filename != "default_avatar.png"){
-                    fs.unlink(`images/${filename}`, () => {
-                        mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
-                            return res.status(200).json({message: "utilisateur supprimé !"})
-                        })
+            if (filename != "default_avatar.png"){
+                fs.unlink(`images/${filename}`, () => {
+                    mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
+                        return res.status(200).json({message: "utilisateur supprimé !"})
                     })
+                })
                 } else {
                     mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
                         return res.status(200).json({message: "utilisateur supprimé !"})
                     })
                 }
-            })
-            .catch(error => res.status(403).json({error}));
         } else if (role !== "admin" && id !== userId){
             return res.status(403).json({message: "requête non autorisée !"})
         }
