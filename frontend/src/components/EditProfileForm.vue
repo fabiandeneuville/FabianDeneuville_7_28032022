@@ -4,12 +4,12 @@
             <form class="edit__form">
                 <div class="edit__form__bloc">
                     <label class="edit__form__label" for="username">Nouveau nom d'utilisateur :</label>
-                    <input v-model="newUsername" class="edit__form__input" type="text" id="username">
+                    <input v-model="newUsername" class="edit__form__input" type="text" id="username" v-bind:placeholder="username">
                 </div>
 
                 <div class="edit__form__bloc">
                     <label class="edit__form__label" for="content">Bio :</label>
-                    <textarea v-model="newBio" class="edit__form__textarea" type="text" id="bio" required></textarea>
+                    <textarea v-model="newBio" class="edit__form__textarea" type="text" id="bio" v-bind:placeholder="bio"></textarea>
                 </div>
 
 
