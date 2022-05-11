@@ -6,8 +6,9 @@
         <router-link to="/fil" class="header__logo__mobile__container">
             <img class="logo__mobile" src="../assets/icon-white.png" alt="logo de Groupomania">
         </router-link>
-        <router-link v-if="location === '/fil'" to="/profile" role="button" tabindex=0 class="header__link"><i class="fa-solid fa-user"></i></router-link>
-        <router-link v-if="location === '/profile'" to="/fil" role="button" tabindex=0 class="header__link"><i class="fa-solid fa-arrow-left"></i></router-link>
+        <router-link v-if="location !== '/profile'" to="/profile" role="button" tabindex=0 class="header__link"><i class="fa-solid fa-user"></i></router-link>
+        <router-link v-if="location === '/profile' || location === '/utilisateurs'" to="/fil" role="button" tabindex=0 class="header__link"><i class="fa-solid fa-arrow-left"></i></router-link>
+        <router-link v-if="location === '/fil' || location === '/profile'" to="/utilisateurs" role="button" tabindex="0" class="header__link"><i class="fa-solid fa-users"></i></router-link>
         <div v-on:click="this.logOut" role="button" tabindex=0 class="header__link">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
         </div>
