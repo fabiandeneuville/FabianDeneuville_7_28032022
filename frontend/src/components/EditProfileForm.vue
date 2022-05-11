@@ -3,12 +3,12 @@
         <div class="edit__form__container">
             <form class="edit__form">
                 <div class="edit__form__bloc">
-                    <label class="edit__form__label" for="username">Nouveau nom d'utilisateur (facultatif) :</label>
+                    <label class="edit__form__label" for="username">Nouveau nom d'utilisateur :</label>
                     <input v-model="newUsername" class="edit__form__input" type="text" id="username">
                 </div>
 
                 <div class="edit__form__bloc">
-                    <label class="edit__form__label" for="content">Bio (obligatoire):</label>
+                    <label class="edit__form__label" for="content">Bio :</label>
                     <textarea v-model="newBio" class="edit__form__textarea" type="text" id="bio" required></textarea>
                 </div>
 
