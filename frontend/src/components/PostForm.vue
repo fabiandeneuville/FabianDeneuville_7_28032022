@@ -3,7 +3,9 @@
     <div>
         <div class="post__form__container">
             <div class="post__form__header">
-                <img class="avatar" v-bind:src="imageUrl" v-bind:alt="`Photo de ${username}`">
+                <div class="avatar__container">
+                    <img class="avatar" v-bind:src="imageUrl" v-bind:alt="`Photo de ${username}`">
+                </div>
                 <h3 class="post__form__header__title">Quoi de neuf {{ username }} ?</h3>
                 <div v-if="!isVisible" v-on:click="isVisible = !isVisible" class="post__form__header__btn"><i class="fa-solid fa-pen"></i></div>
                 <div v-if="isVisible" v-on:click="isVisible = !isVisible" class="post__form__header__btn"><i class="fa-solid fa-xmark"></i></div>
@@ -159,10 +161,21 @@ export default {
         color: rgb(233, 68, 37);
     }
 
-    .avatar {
+    .avatar__container {
         border:2px solid #333;
         border-radius:50%;
         height:50px;
+        width:50px;
+        overflow: hidden;
+        object-fit: cover;
+    }
+    .avatar {
+        width:auto;
+        height: 100%;
+        position: relative;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
     }
 
     .post__form {
