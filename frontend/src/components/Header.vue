@@ -43,6 +43,7 @@
 <style>
     .header-top {
         position: fixed;
+        z-index:9999;
         top:0px;
         width: 100%;
         height:100px;
