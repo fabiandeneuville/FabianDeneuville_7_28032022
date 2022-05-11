@@ -95,7 +95,7 @@ export default {
     .post{
         width: 100%;
         background: white;
-        margin: 0 0 10px 0;
+        margin: 20px 0 20px 0;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
