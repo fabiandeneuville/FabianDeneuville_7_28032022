@@ -7,7 +7,7 @@
             <h3 class="profile__username">{{ username }}</h3>
             <p class="profile__bio">{{ bio }}</p>
             <div class="edit__profile__btn__container">
-                <div class="btn edit-btn">
+                <div v-on:click="isVisible = !isVisible" class="btn edit-btn">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </div>
                 <div v-on:click="deleteProfile" class="btn delete-btn">
@@ -15,6 +15,15 @@
                 </div>
             </div>
         </div>
+        <editProfileForm
+        v-if="isVisible"
+        v-bind:username="username"
+        v-bind:bio="bio"
+        v-bind:imageUrl="imageUrl"
+        v-bind:userId="userId"
+        v-bind:token="token"
+        >
+        </editProfileForm>
         <profileDeletionModale
         v-bind:userId="userId"
         v-bind:reveal="reveal"
@@ -28,6 +37,7 @@
 <script>
 
 import ProfileDeletionModale from './ProfileDeletionModale.vue'
+import EditProfileForm from './EditProfileForm.vue'
 
 import axios from 'axios'
 
@@ -38,12 +48,14 @@ export default {
             username: '',
             imageUrl: '',
             bio: '', 
-            reveal: false
+            reveal: false,
+            isVisible:false
         }
     },
     props: ['userId', 'token'],
     components: {
-        'profileDeletionModale': ProfileDeletionModale
+        'profileDeletionModale': ProfileDeletionModale,
+        'editProfileForm': EditProfileForm
     },
     mounted: function(){
         this.getProfile()
@@ -95,14 +107,18 @@ export default {
     .profile__img__container {
         width:150px;
         height:150px;
-        object-fit: contain;
+        object-fit: cover;
         border-radius:50%;
         border:4px solid rgb(233, 68, 37);
         overflow: hidden;
     }
 
     .profile__img {
-        width:100%;
+        height:100%;
+        position:relative;
+        top:50%;
+        left:50%;
+        transform:translate(-50%, -50%)
     }
 
     .profile__username {
