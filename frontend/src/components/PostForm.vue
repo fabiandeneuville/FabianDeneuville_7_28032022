@@ -207,6 +207,7 @@ export default {
         padding: 10px;
         height:80px;
         border: 2px solid rgb(233, 68, 37);
+        font-family: 'Roboto', Helvetica, Arial, sans-serif;
     }
 
     .btn__bloc__container {
