@@ -260,7 +260,7 @@ exports.modifyUser = (req, res, next) => {
             const filename = result[0].imageUrl.split('/images/')[1];
             if(filename != "default_avatar.png"){
                 fs.unlink(`images/${filename}`, () => {
-                    mysql.query(`UPDATE user SET username = '${newUsername}', bio = '${newBio}', imageUrl = '${newImageUrl}' WHERE id = ${userId}`, (err, result, fields) => {
+                    mysql.query(`UPDATE user SET username = ?, bio = ?, imageUrl = ? WHERE id = ${userId}`, [newUsername, newBio, newImageUrl], (err, result, fields) => {
                         if(err){
                             return res.status(500).json({err})
                         }
@@ -268,7 +268,7 @@ exports.modifyUser = (req, res, next) => {
                     })    
                 })
             } else {
-                mysql.query(`UPDATE user SET username = '${newUsername}', bio = '${newBio}', imageUrl = '${newImageUrl}' WHERE id = ${userId}`, (err, result, fields) => {
+                mysql.query(`UPDATE user SET username = ?, bio = ?, imageUrl = ? WHERE id = ${userId}`, [newUsername, newBio, newImageUrl],(err, result, fields) => {
                     if(err){
                         return res.status(500).json({err})
                     }
@@ -289,7 +289,7 @@ exports.modifyUser = (req, res, next) => {
             if(id != userId){
                 return res.status(403).json({message: "requête non autorisée !"})
             }
-            mysql.query(`UPDATE user SET username = '${newUsername}', bio = '${newBio}' WHERE id = ${userId}`, (err, result, fields) => {
+            mysql.query(`UPDATE user SET username = ?, bio = ? WHERE id = ${userId}`, [newUsername, newBio], (err, result, fields) => {
                 if(err){
                     return res.status(500).json({err})
                 }
