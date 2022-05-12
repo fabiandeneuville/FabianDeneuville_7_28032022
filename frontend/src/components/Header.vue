@@ -6,11 +6,21 @@
         <router-link to="/fil" class="header__logo__mobile__container">
             <img class="logo__mobile" src="../assets/icon-white.png" alt="logo de Groupomania">
         </router-link>
-        <router-link v-if="location !== '/profile'" to="/profile" role="button" tabindex=0 class="header__link"><i class="fa-solid fa-user"></i></router-link>
-        <router-link v-if="location === '/profile' || location === '/utilisateurs'" to="/fil" role="button" tabindex=0 class="header__link"><i class="fa-solid fa-arrow-left"></i></router-link>
-        <router-link v-if="location === '/fil' || location === '/profile'" to="/utilisateurs" role="button" tabindex="0" class="header__link"><i class="fa-solid fa-users"></i></router-link>
+        <router-link v-if="location !== '/profile'" to="/profile" role="button" tabindex=0 class="header__link">
+            <i class="fa-solid fa-user"></i>
+            <span class="tooltiptext">Gérer le profil</span>
+        </router-link>
+        <router-link v-if="location === '/profile' || location === '/utilisateurs'" to="/fil" role="button" tabindex=0 class="header__link">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span class="tooltiptext">Retour</span>
+        </router-link>
+        <router-link v-if="location === '/fil' || location === '/profile'" to="/utilisateurs" role="button" tabindex="0" class="header__link">
+            <i class="fa-solid fa-users"></i>
+            <span class="tooltiptext">Utilisateurs</span>
+        </router-link>
         <div v-on:click="this.logOut" role="button" tabindex=0 class="header__link">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span class="tooltiptext">Déconnexion</span>
         </div>
     </div>
 </template>
@@ -112,6 +122,21 @@
             width: 33%;
         }
     }
+
+    .tooltiptext {
+        display: inline-block;
+        opacity: 0;
+        padding:0 5px;
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .header__link:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+    }
+
+
 
 
 </style>
