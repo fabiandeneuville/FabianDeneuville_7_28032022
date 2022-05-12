@@ -37,7 +37,7 @@ exports.createPost = (req, res, next) => {
 
 /***** GET ALL POSTS *****/
 exports.getAllPosts = (req, res, next) => {
-    mysql.query(`SELECT post.id, user.username, post.user_Id, post.title, post.content, post.imageUrl, DATE_FORMAT(date, 'à %Hh%i le %d/%c/%Y') as date, post.likes FROM post JOIN user ON user.id = post.user_Id ORDER BY date DESC`, (err, result, fields) => {
+    mysql.query(`SELECT post.id, user.username, post.user_Id, post.title, post.content, post.imageUrl, DATE_FORMAT(date, 'le %d/%c/%Y à %Hh%i') as date, post.likes FROM post JOIN user ON user.id = post.user_Id ORDER BY date DESC`, (err, result, fields) => {
         if(err){
             res.status(500).json({err});
         }
@@ -51,7 +51,7 @@ exports.getAllPosts = (req, res, next) => {
 /***** GET ONE POST *****/
 exports.getOnePost = (req, res, next) => {
     const postId = req.params.id;
-    mysql.query(`SELECT post.id, user.username, post.title, post.content, post.imageUrl, DATE_FORMAT(date, 'à %Hh%i le %d/%c/%Y') as date, post.likes FROM post JOIN user on user.id = post.user_id WHERE post.id = ${postId}`, (err, result, fields) => {
+    mysql.query(`SELECT post.id, user.username, post.title, post.content, post.imageUrl, DATE_FORMAT(date, 'le %d/%c/%Y à %Hh%i') as date, post.likes FROM post JOIN user on user.id = post.user_id WHERE post.id = ${postId}`, (err, result, fields) => {
         if(err){
             return res.status(500).json({err});
         }
@@ -65,7 +65,7 @@ exports.getOnePost = (req, res, next) => {
 /***** GET ALL POSTS FROM ONE USER *****/
 exports.getAllPostsFromOneUser = (req, res, next) => {
     const id = req.params.id;
-    mysql.query(`SELECT post.id, user.username, post.title, post.content, post.imageUrl, DATE_FORMAT(date, 'à %Hh%i le %d/%c/%Y') as date, post.likes FROM post JOIN user on user.id = post.user_id WHERE user.id = ${id} ORDER BY date DESC`, (err, result, fields) => {
+    mysql.query(`SELECT post.id, user.username, post.title, post.content, post.imageUrl, DATE_FORMAT(date, 'le %d/%c/%Y à %Hh%i ') as date, post.likes FROM post JOIN user on user.id = post.user_id WHERE user.id = ${id} ORDER BY date DESC`, (err, result, fields) => {
         if(err){
             res.status(500).json({err});
         }
@@ -195,7 +195,7 @@ exports.createComment = (req, res, next) => {
 /***** GET ALL COMMENTS FROM ONE POST *****/
 exports.getAllCommentsFromOnePost = (req, res, next) => {
     const postId = req.params.id;
-    mysql.query(`SELECT comment.id, user.username, comment.content, comment.post_id, DATE_FORMAT(date, 'à %Hh%i le %d/%c/%Y') as date, comment.likes FROM comment JOIN user on user.id = comment.user_id WHERE comment.post_Id = ${postId} ORDER BY date DESC`, (err, result, fields) => {
+    mysql.query(`SELECT comment.id, user.username, comment.content, comment.post_id, DATE_FORMAT(date, 'le %d/%c/%Y à %Hh%i') as date, comment.likes FROM comment JOIN user on user.id = comment.user_id WHERE comment.post_Id = ${postId} ORDER BY date DESC`, (err, result, fields) => {
         if(err){
             return res.status(500).json({err});
         }
