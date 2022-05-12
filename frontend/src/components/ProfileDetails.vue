@@ -10,6 +10,9 @@
                 <div v-on:click="isVisible = !isVisible" class="btn edit-btn">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </div>
+                <div v-on:click="passwordFormIsVisible = !passwordFormIsVisible" class="btn change-password-btn">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
                 <div v-on:click="deleteProfile" class="btn delete-btn">
                     <i class="fa-solid fa-trash"></i>
                 </div>
@@ -24,6 +27,13 @@
         v-bind:token="token"
         >
         </editProfileForm>
+        <changePasswordForm
+        v-bind:userId="userId"
+        v-bind:token="token"
+        v-if="passwordFormIsVisible">
+        </changePasswordForm>
+
+
         <profileDeletionModale
         v-bind:userId="userId"
         v-bind:reveal="reveal"
@@ -38,6 +48,7 @@
 
 import ProfileDeletionModale from './ProfileDeletionModale.vue'
 import EditProfileForm from './EditProfileForm.vue'
+import ChangePasswordForm from './ChangePasswordForm.vue'
 
 import axios from 'axios'
 
@@ -49,13 +60,15 @@ export default {
             imageUrl: '',
             bio: '', 
             reveal: false,
-            isVisible:false
+            isVisible:false,
+            passwordFormIsVisible: false
         }
     },
     props: ['userId', 'token'],
     components: {
         'profileDeletionModale': ProfileDeletionModale,
-        'editProfileForm': EditProfileForm
+        'editProfileForm': EditProfileForm,
+        'changePasswordForm': ChangePasswordForm
     },
     mounted: function(){
         this.getProfile()
