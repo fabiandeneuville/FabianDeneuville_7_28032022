@@ -9,10 +9,10 @@
             </div>
 
             <label class="login__form__label" for="email">Email</label>
-            <input class="login__form__input" v-model="email" type="email" id="email">
+            <input class="login__form__input" v-model="email" type="email" id="email" required>
 
             <label class="login__form__label" for="password">Mot de passe</label>
-            <input class="login__form__input" v-model="password" type="password" id="password">
+            <input class="login__form__input" v-model="password" type="password" id="password" required>
 
             <button class="login__form__submit-btn" v-on:click.prevent="logingIn">Connexion</button>
 
@@ -69,7 +69,7 @@
                 })
                 .catch(error => {
                     console.log(error)
-                    this.apiResponseMessage = "Un problème est survenu"
+                    this.apiResponseMessage = error.response.data.message
                 })
             }
         }

@@ -10,16 +10,16 @@
 
 
             <label class="signup__form__label" for="username">Nom d'utilisateur</label>
-            <input class="signup__form__input" v-model="username" type="text" id="username">
+            <input class="signup__form__input" v-model="username" type="text" id="username" required>
 
             <label class="signup__form__label" for="email">Email</label>
-            <input class="signup__form__input" v-model="email" type="email" id="email">
+            <input class="signup__form__input" v-model="email" type="email" id="email" required>
 
             <label class="signup__form__label" for="password">Mot de passe</label>
-            <input class="signup__form__input" v-model="password" type="text" id="password">
+            <input class="signup__form__input" v-model="password" type="text" id="password" required>
 
             <label class="signup__form__label" for="passwordConfirm">Confirmez le mot de passe</label>
-            <input class="signup__form__input" v-model="passwordConfirm" type="text" id="passwordConfirm">
+            <input class="signup__form__input" v-model="passwordConfirm" type="text" id="passwordConfirm" required>
 
             <button class="signup__form__submit-btn" v-on:click.prevent="signingUp">Inscription</button>
 
@@ -59,7 +59,7 @@
                 })
                 .catch(error => {
                     console.log(error)
-                    this.apiResponseMessage = "Un problème est survenu"
+                    this.apiResponseMessage = error.response.data.message
                 })
             }
         }

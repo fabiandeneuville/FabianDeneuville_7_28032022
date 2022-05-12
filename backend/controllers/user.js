@@ -45,7 +45,7 @@ exports.signup = (req, res, next) => {
     const bio = 'La bio n\'a pas encore été renseignée.';
  
     if(!emailValidator.validate(email)){
-        return res.status(401).json({message: `L'adresse email ${email} est NON valide !`});
+        return res.status(401).json({message: `L'adresse email "${email}" est NON valide !`});
     } else if (!schema.validate(password)){
         return res.status(401).json({message: "Le mot de passe NON valide. Utilisez des majuscules, minuscules, chiffres et symboles, aucun espace, pour 8(min) à 16(max) caractères"})
     } else if (passwordConfirm !== password){
@@ -60,7 +60,7 @@ exports.signup = (req, res, next) => {
     .then(hash => {
         mysql.query(`INSERT INTO user (username, email, password, role_id, imageUrl, bio) VALUES (?,?,?,?,?,?)`, [username, email, hash, role_id, imageUrl, bio], (err, result, fields) => {
             if(err){
-                return res.status(401).json({message: `L'adresse ${email} est déjà utilisée`});
+                return res.status(401).json({message: `L'adresse "${email}" est déjà utilisée`});
             }
             res.status(200).json({message: 'Bienvenue !'})
         })
