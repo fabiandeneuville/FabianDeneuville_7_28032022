@@ -4,7 +4,7 @@
         
         <div class="modale">
             <div v-on:click="closeModale" class="btn-modale"><i class="fa-solid fa-xmark"></i></div>
-            <h3>Publié !</h3>
+            <h3>{{ apiResponseMessage }}</h3>
         </div>
     </div>
 </template>
@@ -14,7 +14,7 @@
 
 export default {
     name: 'Modale',
-    props: ['reveal', 'username'],
+    props: ['reveal', 'username', 'apiResponseMessage'],
     methods: {
         closeModale: function(){
             this.reveal = false;
