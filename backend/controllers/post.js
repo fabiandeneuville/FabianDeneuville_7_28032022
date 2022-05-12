@@ -21,7 +21,7 @@ exports.createPost = (req, res, next) => {
             if(err){
                 return res.status(500).json({err});
             }
-            return res.status(201).json({message: "post publié !"})
+            return res.status(201).json({message: "Post publié !"})
         })
     } else {
         const title = req.body.title;
@@ -30,7 +30,7 @@ exports.createPost = (req, res, next) => {
             if(err){
                 return res.status(500).json({err});
             }
-            return res.status(201).json({message: "post publié !"})
+            return res.status(201).json({message: "Post publié !"})
         });
     }
 };
@@ -42,7 +42,7 @@ exports.getAllPosts = (req, res, next) => {
             res.status(500).json({err});
         }
         if(result.length === 0){
-            return res.status(404).json({message: "aucun posts !"})
+            return res.status(404).json({message: "Aucun posts !"})
         }
         return res.status(200).json(result);
     })
@@ -56,7 +56,7 @@ exports.getOnePost = (req, res, next) => {
             return res.status(500).json({err});
         }
         if(result.length === 0){
-            return res.status(404).json({message: "aucun posts !"})
+            return res.status(404).json({message: "Aucun posts !"})
         }
         return res.status(200).json(result[0]);
     })
@@ -70,7 +70,7 @@ exports.getAllPostsFromOneUser = (req, res, next) => {
             res.status(500).json({err});
         }
         if(result.length === 0){
-            return res.status(404).json({message: "aucun posts !"})
+            return res.status(404).json({message: "Aucun posts !"})
         }
         return res.status(200).json(result);
     })
@@ -86,10 +86,10 @@ exports.deleteOnePost = (req, res, next) => {
             return res.status(500).json({err});
         }
         if(result.length === 0){
-            return res.status(404).json({message: "post introuvable !"});
+            return res.status(404).json({message: "Post introuvable !"});
         }
         if(result[0].user_id != userId && role == "utilisateur"){
-            return res.status(403).json({message: "requête non autorisée !"});
+            return res.status(403).json({message: "Requête non autorisée !"});
         }
         if(result[0].imageUrl != null){
             const filename = result[0].imageUrl.split('/images/')[1];
@@ -98,7 +98,7 @@ exports.deleteOnePost = (req, res, next) => {
                     if(err){
                         return res.status(500).json({err});
                     }
-                    return res.status(200).json({message: "post supprimé !"});
+                    return res.status(200).json({message: "Post supprimé !"});
                 })
             })
         } else {
@@ -106,7 +106,7 @@ exports.deleteOnePost = (req, res, next) => {
                 if(err){
                     return res.status(500).json({err});
                 }
-                return res.status(200).json({message: "post supprimé !"});
+                return res.status(200).json({message: "Post supprimé !"});
             })
         }
     })
@@ -121,10 +121,10 @@ exports.modifyPost = (req, res, next) => {
             return res.status(500).json({err});
         }
         if(result.length === 0){
-            return res.status(404).json({message: "post introuvable !"})
+            return res.status(404).json({message: "Post introuvable !"})
         }
         if(result[0].user_id != userId){
-            return res.status(403).json({message: "requête non autorisée !"})
+            return res.status(403).json({message: "Requête non autorisée !"})
         }
         if(result[0].imageUrl === null){
             if(req.file){
@@ -136,7 +136,7 @@ exports.modifyPost = (req, res, next) => {
                     if(err){
                         return res.status(500).json({err});
                     }
-                    return res.status(201).json({message: "post mis à jour !"});
+                    return res.status(201).json({message: "Post mis à jour !"});
                 })
             } else {
                 const newTitle = req.body.title;
@@ -145,7 +145,7 @@ exports.modifyPost = (req, res, next) => {
                     if(err){
                         return res.status(500).json({err});
                     }
-                    return res.status(201).json({message: "post mis à jour !"});
+                    return res.status(201).json({message: "Post mis à jour !"});
                 })
             }
         } else {
@@ -160,7 +160,7 @@ exports.modifyPost = (req, res, next) => {
                         if(err){
                             return res.status(500).json({err});
                         }
-                        return res.status(201).json({message: "post mis à jour !"})
+                        return res.status(201).json({message: "Post mis à jour !"})
                     })
                 })
             } else {
@@ -170,7 +170,7 @@ exports.modifyPost = (req, res, next) => {
                     if(err){
                         return res.status(500).json({err});
                     }
-                    return res.status(201).json({message: "post mis à jour !"})
+                    return res.status(201).json({message: "Post mis à jour !"})
                 })
             }
         }
@@ -188,7 +188,7 @@ exports.createComment = (req, res, next) => {
         if(err){
             return res.status(500).json({err});
         }
-        return res.status(201).json({message: "commentaire publié !"})
+        return res.status(201).json({message: "Commentaire publié !"})
     });
 };
 
@@ -200,7 +200,7 @@ exports.getAllCommentsFromOnePost = (req, res, next) => {
             return res.status(500).json({err});
         }
         if(result.length === 0){
-            return res.status(404).json({message: "aucun commentaires !"});
+            return res.status(404).json({message: "Aucun commentaires !"});
         }
         return res.status(200).json(result);
     });
@@ -215,7 +215,7 @@ exports.getOneCommentFromOnePost = (req, res, next) => {
             return res.status(500).json({err});
         }
         if(result.length === 0){
-            return res.status(404).json({message: "commentaire introuvable !"});
+            return res.status(404).json({message: "Commentaire introuvable !"});
         }
         return res.status(200).json(result[0]);
     })
@@ -232,16 +232,16 @@ exports.deleteOneComment = (req, res, next) => {
             return res.status(500).json({err});
         }
         if(result.length === 0){
-            return res.status(404).json({message: "commentaire introuvable !"});
+            return res.status(404).json({message: "Commentaire introuvable !"});
         }
         if(role === "utilisateur" && result[0].user_id != userId){
-            return res.status(403).json({message: "requête non autorisée !"});
+            return res.status(403).json({message: "Requête non autorisée !"});
         } else {
             mysql.query(`DELETE FROM comment WHERE id = ${commentId}`, (err, result, fields) => {
                 if(err){
                     return res.status(500).json({err});
                 }
-                return res.status(201).json({message: "commentaire supprimé !"});
+                return res.status(201).json({message: "Commentaire supprimé !"});
             })
         }
     })
@@ -258,16 +258,16 @@ exports.modifyOneComment = (req, res, next) => {
             return res.status(500).json({err});
         }
         if(result.length === 0){
-            return res.status(404).json({message: "commentaire introuvable !"});
+            return res.status(404).json({message: "Commentaire introuvable !"});
         }
         if(result[0].user_id != userId){
-            return res.status(403).json({message: "requête non autorisée !"})
+            return res.status(403).json({message: "Requête non autorisée !"})
         }
         mysql.query(`UPDATE comment SET content = '${newContent}' WHERE id = ${commentId}`, (err, result, fields) => {
             if(err){
                 return res.status(500).json({err});
             }
-            return res.status(201).json({message: "commentaire modifié !"})
+            return res.status(201).json({message: "Commentaire modifié !"})
         })
     })
 };
@@ -283,7 +283,7 @@ exports.likePost = (req, res, next) => {
             return res.status(500).json({err});
         }
         if(result.length === 0){
-            return res.status(404).json({message: "post introuvable !"});
+            return res.status(404).json({message: "Post introuvable !"});
         }
         mysql.query(`SELECT * FROM groupomania.like WHERE post_id = ${postId} and user_id = ${userId}`, (err, result, fields) => {
             if(err){
@@ -303,7 +303,7 @@ exports.likePost = (req, res, next) => {
                             if(err){
                                 return res.status(500).json({err});
                             }
-                            return res.status(201).json({message: "post liké !"});
+                            return res.status(201).json({message: "Post liké !"});
                         })
                     })
                 })
@@ -321,7 +321,7 @@ exports.likePost = (req, res, next) => {
                             if(err){
                                 return res.status(500).json({err});
                             }
-                            return res.status(201).json({message: "like du post annulé !"});
+                            return res.status(201).json({message: "Like du post annulé !"});
                         })
                     })
                 });
@@ -339,7 +339,7 @@ exports.likeComment = (req, res, next) => {
             return res.status(500).json({err});
         }
         if(result.length === 0){
-            return res.status(404).json({message: "commentaire introuvable !"});
+            return res.status(404).json({message: "Commentaire introuvable !"});
         }
         mysql.query(`SELECT * FROM groupomania.like WHERE comment_id = ${commentId} and user_id = ${userId}`, (err, result, fields) => {
             if(err){
@@ -359,7 +359,7 @@ exports.likeComment = (req, res, next) => {
                             if(err){
                                 return res.status(500).json({err});
                             }
-                            return res.status(201).json({message: "commentaire liké !"});
+                            return res.status(201).json({message: "Commentaire liké !"});
                         })
                     })
                 })
@@ -377,7 +377,7 @@ exports.likeComment = (req, res, next) => {
                             if(err){
                                 return res.status(500).json({err});
                             }
-                            return res.status(201).json({message: "like du commentaire annulé !"});
+                            return res.status(201).json({message: "Like du commentaire annulé !"});
                         })
                     })
                 });

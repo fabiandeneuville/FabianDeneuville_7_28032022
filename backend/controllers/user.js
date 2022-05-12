@@ -76,12 +76,12 @@ exports.login = (req, res, next) => {
             return res.status(500).json({err});
         }
         if(result.length === 0){
-            return res.status(404).json({message: "utilisateur introuvable !"})
+            return res.status(404).json({message: "Utilisateur introuvable !"})
         }
         bcrypt.compare(password, result[0].password)
         .then(valid => {
             if(!valid){
-                return res.status(401).json({message: "mot de passe incorrect !"})
+                return res.status(401).json({message: "Mot de passe incorrect !"})
             }
             res.status(200).json({
                 userId: result[0].id,
@@ -104,7 +104,7 @@ exports.getAllUsers = (req, res, next) => {
             return res.status(500).json({err});
         }
         if(result.length === 0){
-            return res.status(404).json({message: "aucuns utilisateurs !"})
+            return res.status(404).json({message: "Aucuns utilisateurs !"})
         }
         res.status(200).json(result);
     })
@@ -118,7 +118,7 @@ exports.getOneUser = (req, res, next) => {
             return res.status(404).json({err});
         }
         if(result.length === 0){
-            return res.status(404).json({message: "utilisateur introuvable !"})
+            return res.status(404).json({message: "Utilisateur introuvable !"})
         }
         return res.status(200).json(result[0]);
     })
@@ -136,7 +136,7 @@ exports.deleteOneUser = (req, res, next) => {
             return res.status(500).json({err});
         }
         if(result.length === 0){
-            return res.status(404).json({message: "utilisateur introuvable !"})
+            return res.status(404).json({message: "Utilisateur introuvable !"})
         }
         const filename = result[0].imageUrl.split('/images/')[1];
 
@@ -144,28 +144,28 @@ exports.deleteOneUser = (req, res, next) => {
             if (filename != "default_avatar.png"){
                 fs.unlink(`images/${filename}`, () => {
                     mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
-                        return res.status(200).json({message: "utilisateur supprimé !"})
+                        return res.status(200).json({message: "Utilisateur supprimé !"})
                     })
                 })
             } else {
                 mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
-                    return res.status(200).json({message: "utilisateur supprimé !"})
+                    return res.status(200).json({message: "Utilisateur supprimé !"})
                 })
             }
         } else if (role !== "admin" && id == userId) {
             if (filename != "default_avatar.png"){
                 fs.unlink(`images/${filename}`, () => {
                     mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
-                        return res.status(200).json({message: "utilisateur supprimé !"})
+                        return res.status(200).json({message: "Utilisateur supprimé !"})
                     })
                 })
                 } else {
                     mysql.query(`DELETE FROM user WHERE id = ${id}`, (err, result, fields) => {
-                        return res.status(200).json({message: "utilisateur supprimé !"})
+                        return res.status(200).json({message: "Utilisateur supprimé !"})
                     })
                 }
         } else if (role !== "admin" && id !== userId){
-            return res.status(403).json({message: "requête non autorisée !"})
+            return res.status(403).json({message: "Requête non autorisée !"})
         }
     })
 };
@@ -179,25 +179,25 @@ exports.changeRole = (req, res, next) => {
             return res.status(500).json({err});
         }
         if(result.length === 0){
-            return res.status(404).json({message: "utilisateur introuvable !"});
+            return res.status(404).json({message: "Utilisateur introuvable !"});
         }
         if (role === "admin" & result[0].role === "utilisateur"){
             mysql.query(`UPDATE user SET role_id = 2 WHERE id = ${id}`, (err, result, fields) => {
                 if(err){
                     return res.status(500).json({err});
                 }
-                return res.status(201).json({message: "role de modérateur attribué à l'utilisateur !"});
+                return res.status(201).json({message: "Role de modérateur attribué à l'utilisateur !"});
             })
         } else if (role === "admin" & result[0].role === "modérateur"){
             mysql.query(`UPDATE user SET role_id = 3 WHERE id = ${id}`, (err, result, fields) => {
                 if(err){
                     return res.status(500).json({err});
                 }
-                return res.status(201).json({message: "role de modérateur retiré à l'utilisateur !"});
+                return res.status(201).json({message: "Role de modérateur retiré à l'utilisateur !"});
             })
         }
         else {
-            return res.status(403).json({message: "requête non autorisée !"});
+            return res.status(403).json({message: "Requête non autorisée !"});
         }
     })
 };
@@ -215,23 +215,27 @@ exports.changePassword = (req, res, nex) => {
                 return res.status(500).json({err});
             }
             if(result.length === 0){
-                return res.status(404).json({message: "utilisateur introuvable !"});
+                return res.status(404).json({message: "Utilisateur introuvable !"});
             }
             if(password != passwordConfirm){
-                return res.status(403).json({message: "les mots ne passent ne sont pas identiques !"})
+                return res.status(403).json({message: "Les mots ne passent ne sont pas identiques !"})
             }
-            bcrypt.hash(password, 10)
-            .then(hash => {
-                mysql.query(`UPDATE user set password = '${hash}' WHERE id = ${id}`, (err, result, fields) => {
-                    if(err){
-                        return res.status(500).json({err});
-                    }
-                    return res.status(201).json({message: "mot de passe de l'utilisateur mis à jour !"})
+            if(!schema.validate(password)){
+                return res.status(401).json({message: "Le mot de passe NON valide. Utilisez des majuscules, minuscules, chiffres et symboles, aucun espace, pour 8(min) à 16(max) caractères"})
+            } else {
+                bcrypt.hash(password, 10)
+                .then(hash => {
+                    mysql.query(`UPDATE user set password = '${hash}' WHERE id = ${id}`, (err, result, fields) => {
+                        if(err){
+                            return res.status(500).json({err});
+                        }
+                        return res.status(201).json({message: "Mot de passe mis à jour !"})
+                    })
                 })
-            })
+            }
         })
     } else {
-        return res.status(403).json({message: "requête non autorisée !"})
+        return res.status(403).json({message: "Requête non autorisée !"})
     }
 };
 
@@ -240,7 +244,7 @@ exports.modifyUser = (req, res, next) => {
     const userId = req.params.id;
     const id = req.auth.userId;
     if(userId != id){
-        return res.status(403).json({message: "requête non autorisée !"})
+        return res.status(403).json({message: "Requête non autorisée !"})
     }
     if(req.file){
         const user = JSON.parse(req.body.user);
@@ -252,10 +256,10 @@ exports.modifyUser = (req, res, next) => {
                 return res.status(404).json({err})
             }
             if(result.length === 0){
-                return res.status(404).json({message: "utilisateur introuvable !"});
+                return res.status(404).json({message: "Utilisateur introuvable !"});
             }
             if(id != userId){
-                return res.status(403).json({message: "requête non autorisée !"})
+                return res.status(403).json({message: "Requête non autorisée !"})
             }
             const filename = result[0].imageUrl.split('/images/')[1];
             if(filename != "default_avatar.png"){
@@ -264,7 +268,7 @@ exports.modifyUser = (req, res, next) => {
                         if(err){
                             return res.status(500).json({err})
                         }
-                        return res.status(201).json({message: "profil mis à jour !"})
+                        return res.status(201).json({message: "Profil mis à jour !"})
                     })    
                 })
             } else {
@@ -272,7 +276,7 @@ exports.modifyUser = (req, res, next) => {
                     if(err){
                         return res.status(500).json({err})
                     }
-                    return res.status(201).json({message: "profil mis à jour !"})
+                    return res.status(201).json({message: "Profil mis à jour !"})
                 }) 
             }
         })
@@ -284,16 +288,16 @@ exports.modifyUser = (req, res, next) => {
                 return res.status(404).json({err})
             }
             if(result.length === 0){
-                return res.status(404).json({message: "utilisateur introuvable !"});
+                return res.status(404).json({message: "Utilisateur introuvable !"});
             }
             if(id != userId){
-                return res.status(403).json({message: "requête non autorisée !"})
+                return res.status(403).json({message: "Requête non autorisée !"})
             }
             mysql.query(`UPDATE user SET username = ?, bio = ? WHERE id = ${userId}`, [newUsername, newBio], (err, result, fields) => {
                 if(err){
                     return res.status(500).json({err})
                 }
-                return res.status(201).json({message: "profil mis à jour !"})
+                return res.status(201).json({message: "Profil mis à jour !"})
             })
   
         })
