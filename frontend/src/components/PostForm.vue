@@ -40,7 +40,7 @@
         </div>
 
         <modale v-bind:reveal="reveal"
-                v-bind:username="username"></modale>
+                v-bind:apiResponseMessage="apiResponseMessage"></modale>
     </div>
 </template>
 
@@ -83,9 +83,9 @@ export default {
                     content: this.content
                 }, config)
                 .then(response => {
-                    console.log(response.data.message)
-                    this.title = null
-                    this.content = null
+                    this.apiResponseMessage = response.data.message
+                    this.title = null;
+                    this.content = null;
                     this.reveal = true;
                 })
                 .catch(error =>{
