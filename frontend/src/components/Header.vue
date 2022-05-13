@@ -8,7 +8,7 @@
         </router-link>
         <router-link v-if="location !== '/profile'" to="/profile" role="button" tabindex=0 class="header__link">
             <i class="fa-solid fa-user"></i>
-            <span class="tooltiptext">Gérer le profil</span>
+            <span class="tooltiptext">Profil</span>
         </router-link>
         <router-link v-if="location === '/profile' || location === '/utilisateurs'" to="/fil" role="button" tabindex=0 class="header__link">
             <i class="fa-solid fa-arrow-left"></i>
@@ -83,6 +83,7 @@
 
     .header__link {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         width:25%;
@@ -100,33 +101,12 @@
         font-size: 25px;
     }
 
-    @media screen and (max-width:600px){
-
-        .header-top {
-            justify-content: space-around;
-        }
-        .header__logo__desktop__container {
-            display: none;
-        }
-
-        .header__logo__mobile__container {
-            display: block; 
-            width: 33%;
-        }
-
-        .logo__mobile {
-            height: 80px;
-        }
-
-        .header__link {
-            width: 33%;
-        }
-    }
 
     .tooltiptext {
         display: inline-block;
         opacity: 0;
-        padding:0 10px;
+        margin-top: 5px;
+        font-size: 14px;
         color: white;
         transition: all 0.3s ease;
     }
@@ -134,6 +114,35 @@
     .header__link:hover .tooltiptext {
         visibility: visible;
         opacity: 1;
+    }
+    
+    @media screen and (max-width:900px){
+    
+            
+        .header-top {
+            justify-content: space-around;
+        }
+        
+        .header__logo__desktop__container {
+            display: none;
+        }
+    
+        .header__logo__mobile__container {
+            display: block; 
+            width: 33%;
+        }
+    
+        .logo__mobile {
+            height: 80px;
+        }
+    
+        .header__link {
+            width: 33%;
+        }
+
+        .tooltiptext {
+            font-size: 10px;
+        }
     }
 
 </style>
