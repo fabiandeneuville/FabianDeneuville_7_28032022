@@ -2,6 +2,7 @@
     <div>
         <div class="edit__form__container">
             <form class="edit__form">
+                <h3 class="edit__form__heading">Edition du profil</h3>
                 <div class="edit__form__bloc">
                     <label class="edit__form__label" for="username">Nouveau nom d'utilisateur :</label>
                     <input v-model="newUsername" class="edit__form__input" type="text" id="username" v-bind:placeholder="username">
@@ -121,6 +122,10 @@ export default {
         width:95%;
         max-width: 600px;
         margin:20px auto
+    }
+
+    .edit__form__heading {
+        margin:15px auto;
     }
 
     .edit__form__bloc {

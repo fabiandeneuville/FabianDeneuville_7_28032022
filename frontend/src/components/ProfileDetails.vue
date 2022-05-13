@@ -7,7 +7,7 @@
             <h3 class="profile__username">{{ username }}</h3>
             <p class="profile__bio">{{ bio }}</p>
             <div class="edit__profile__btn__container">
-                <div v-on:click="isVisible = !isVisible" class="btn edit-btn">
+                <div v-on:click="editFormIsVisible = !editFormIsVisible" class="btn edit-btn">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </div>
                 <div v-on:click="passwordFormIsVisible = !passwordFormIsVisible" class="btn change-password-btn">
@@ -19,7 +19,7 @@
             </div>
         </div>
         <editProfileForm
-        v-if="isVisible"
+        v-if="editFormIsVisible"
         v-bind:username="username"
         v-bind:bio="bio"
         v-bind:imageUrl="imageUrl"
@@ -60,7 +60,7 @@ export default {
             imageUrl: '',
             bio: '', 
             reveal: false,
-            isVisible:false,
+            editFormIsVisible:false,
             passwordFormIsVisible: false
         }
     },
