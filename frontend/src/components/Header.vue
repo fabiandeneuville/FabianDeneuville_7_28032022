@@ -51,7 +51,7 @@
 
 </script>
 
-<style>
+<style scoped>
     .header-top {
         position: fixed;
         z-index:9999;
