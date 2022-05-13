@@ -9,12 +9,15 @@
             <div class="edit__profile__btn__container">
                 <div v-on:click="editFormIsVisible = !editFormIsVisible, passwordFormIsVisible = false" class="btn edit-btn">
                     <i class="fa-solid fa-pen-to-square"></i>
+                    <span class="tooltiptext">Modifier le profil</span>
                 </div>
                 <div v-on:click="passwordFormIsVisible = !passwordFormIsVisible, editFormIsVisible = false" class="btn change-password-btn">
                     <i class="fa-solid fa-gear"></i>
+                    <span class="tooltiptext">Changer le mot de passe</span>
                 </div>
                 <div v-on:click="deleteProfile" class="btn delete-btn">
                     <i class="fa-solid fa-trash"></i>
+                    <span class="tooltiptext">Supprimer le compte</span>
                 </div>
             </div>
         </div>
@@ -155,8 +158,9 @@ export default {
     .btn {
         width:50%;
         padding:10px;
-        height:40px;
         line-height: 20px;
+        display: flex;
+        flex-direction: column;
     }
 
     .btn i {
@@ -168,6 +172,19 @@ export default {
     .btn i:hover {
         color: rgb(233, 68, 37);
         transform: scale(1.2);
+    }
+
+    .tooltiptext {
+        color: rgb(233, 68, 37);
+        display: inline-block;
+        opacity: 0;
+        margin-top: 5px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover .tooltiptext {
+        opacity: 1;
     }
 
 
