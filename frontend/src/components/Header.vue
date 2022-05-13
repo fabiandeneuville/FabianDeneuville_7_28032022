@@ -126,7 +126,7 @@
     .tooltiptext {
         display: inline-block;
         opacity: 0;
-        padding:0 5px;
+        padding:0 10px;
         color: white;
         transition: all 0.3s ease;
     }
@@ -135,8 +135,5 @@
         visibility: visible;
         opacity: 1;
     }
-
-
-
 
 </style>
