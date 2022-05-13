@@ -7,10 +7,10 @@
             <h3 class="profile__username">{{ username }}</h3>
             <p class="profile__bio">{{ bio }}</p>
             <div class="edit__profile__btn__container">
-                <div v-on:click="editFormIsVisible = !editFormIsVisible" class="btn edit-btn">
+                <div v-on:click="editFormIsVisible = !editFormIsVisible, passwordFormIsVisible = false" class="btn edit-btn">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </div>
-                <div v-on:click="passwordFormIsVisible = !passwordFormIsVisible" class="btn change-password-btn">
+                <div v-on:click="passwordFormIsVisible = !passwordFormIsVisible, editFormIsVisible = false" class="btn change-password-btn">
                     <i class="fa-solid fa-gear"></i>
                 </div>
                 <div v-on:click="deleteProfile" class="btn delete-btn">

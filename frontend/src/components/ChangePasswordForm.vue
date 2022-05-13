@@ -2,10 +2,14 @@
     <div class="form__container">
         <form class="password__change__form">
             <h3 class="password__change__form__heading">Changement du mot de passe</h3>
-            <label class="password__change__form__label" for="password">Nouveau mot de passe</label>
-            <input v-model="password" class="password__change__form__input" type="password" id="password" required>
-            <label class="password__change__form__label" for="passwordConfirm">Confirmez le mot de passe</label>
-            <input v-model="passwordConfirm" class="password__change__form__input" type="password" id="passwordConfirm" required>
+            <div class="password__change__form__bloc">
+                <label class="password__change__form__label" for="password">Nouveau mot de passe</label>
+                <input v-model="password" class="password__change__form__input" type="password" id="password" required>
+            </div>
+            <div class="password__change__form__bloc">
+                <label class="password__change__form__label" for="passwordConfirm">Confirmez le mot de passe</label>
+                <input v-model="passwordConfirm" class="password__change__form__input" type="password" id="passwordConfirm" required>
+            </div>
             <p>{{ apiResponseMessage }}</p>
             <button v-on:click.prevent="changePassword" class="password__change__form-btn">Valider</button>
 
@@ -80,6 +84,10 @@ export default {
         flex-direction: column;
         width:100%;
         margin:0 auto;
+    }
+
+    .password__change__form__bloc {
+        margin: 10px 0px;
     }
 
     .password__change__form__heading{
