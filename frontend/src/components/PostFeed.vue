@@ -1,17 +1,17 @@
 <template>
     <div class="feed">
         <ul>
-            <li>
-                <post v-bind:key="index" 
-                v-bind:id="allPosts[index].id"
-                v-bind:title="allPosts[index].title"
-                v-bind:content="allPosts[index].content"
-                v-bind:imageUrl="allPosts[index].imageUrl"
-                v-bind:username="allPosts[index].username"
-                v-bind:date="allPosts[index].date"
-                v-bind:likes="allPosts[index].likes"
-                v-bind:user_Id="allPosts[index].user_Id"
-                v-for="(post, index) in allPosts">
+            <li v-bind:key="index" v-for="(post, index) in allPosts">
+                <post  
+                v-bind:id="post.id"
+                v-bind:title="post.title"
+                v-bind:content="post.content"
+                v-bind:imageUrl="post.imageUrl"
+                v-bind:username="post.username"
+                v-bind:date="post.date"
+                v-bind:likes="post.likes"
+                v-bind:user_Id="post.user_Id"
+                >
                 </post>
             </li>
         </ul>
@@ -34,7 +34,7 @@ export default {
     components: {
         'post': Post
     },
-    mounted(){
+    created(){
 
         const token = JSON.parse(localStorage.getItem('user')).token
         
