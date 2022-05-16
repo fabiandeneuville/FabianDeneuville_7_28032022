@@ -99,7 +99,7 @@ exports.login = (req, res, next) => {
 
 /***** GET ALL USERS *****/
 exports.getAllUsers = (req, res, next) => {
-    mysql.query(`SELECT user.id, user.username, user.email, user.imageUrl, user.bio, role.role FROM user JOIN role on user.role_id = role.id`, (err, result, fields) => {
+    mysql.query(`SELECT user.id, user.username, user.email, user.imageUrl, user.bio, role.role FROM user JOIN role on user.role_id = role.id ORDER BY user.username ASC` , (err, result, fields) => {
         if(err){
             return res.status(500).json({err});
         }
