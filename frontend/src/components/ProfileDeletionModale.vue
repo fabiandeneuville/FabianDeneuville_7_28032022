@@ -4,7 +4,7 @@
         
         <div class="modale">
             <h3 class="modale-title">Êtes-vous sûr ?</h3>
-            <p>La suppression de votre profil est irréversible !</p>
+            <p>La suppression du profil est irréversible !</p>
             <div v-on:click="closeModale" class="modale-btn cancel-btn">ANNULER</div>
             <div v-on:click="deletePost" class="modale-btn validate-btn">CONFIRMER</div>
         </div>
