@@ -11,6 +11,7 @@
                 v-bind:imageUrl="user.imageUrl"
                 
                 v-bind:loggedUserRole="loggedUserRole"
+                v-bind:loggedUserId="loggedUserId"
                 v-bind:token="token">
                 </userCard>
             </li>
@@ -31,18 +32,20 @@ export default {
         return {
             allUsers: [],
             loggedUserRole: undefined,
+            loggedUserId: undefined,
             token: undefined
         }
     },
     components: {
         'userCard': UserCard
     },
-    created(){
+    mounted(){
 
         const token = JSON.parse(localStorage.getItem('user')).token
 
         this.token = JSON.parse(localStorage.getItem('user')).token
         this.loggedUserRole = JSON.parse(localStorage.getItem('user')).role
+        this.loggedUserId = JSON.parse(localStorage.getItem('user')).userId
         
         const config = {
         headers: { Authorization: `Bearer ${token}` }

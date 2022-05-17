@@ -3,6 +3,7 @@ import Connection from './views/Connection'
 import MainPage from './views/Main-page'
 import Profile from './views/Profile'
 import Users from './views/Users'
+import User from './views/User'
 
 export default [
     {path: '/', component: Landing},
@@ -10,5 +11,6 @@ export default [
     {path: '/login', component: Connection},
     {path: '/fil', component: MainPage},
     {path: '/profile', component: Profile},
-    {path: '/utilisateurs', component: Users}
+    {path: '/utilisateurs', component: Users},
+    {path: '/utilisateur/:id', component: User}
 ]
