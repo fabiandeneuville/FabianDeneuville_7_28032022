@@ -34,7 +34,7 @@ export default {
     components: {
         'post': Post
     },
-    created(){
+    mounted(){
 
         const token = JSON.parse(localStorage.getItem('user')).token
         
@@ -51,7 +51,7 @@ export default {
         .catch(error => {
             console.log(error)
         })
-    },
+    }
 }
 
 </script>
