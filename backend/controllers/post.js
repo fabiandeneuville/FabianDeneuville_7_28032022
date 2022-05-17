@@ -303,7 +303,7 @@ exports.likePost = (req, res, next) => {
                             if(err){
                                 return res.status(500).json({err});
                             }
-                            return res.status(201).json({message: "Post liké !"});
+                            return res.status(201).json({message: "Post liké !", count: 1});
                         })
                     })
                 })
@@ -321,7 +321,7 @@ exports.likePost = (req, res, next) => {
                             if(err){
                                 return res.status(500).json({err});
                             }
-                            return res.status(201).json({message: "Like du post annulé !"});
+                            return res.status(201).json({message: "Like du post annulé !", count: -1});
                         })
                     })
                 });
