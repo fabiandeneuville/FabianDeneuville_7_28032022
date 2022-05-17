@@ -70,7 +70,7 @@ export default {
     .usersList {
         margin:110px auto 0 auto;
         width:95%;
-        max-width: 1000px;
+        max-width: 600px;
     }
 
 
