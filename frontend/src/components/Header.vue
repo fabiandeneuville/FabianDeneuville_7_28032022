@@ -14,6 +14,10 @@
             <i class="fa-solid fa-arrow-left"></i>
             <span class="tooltiptext">Retour</span>
         </router-link>
+        <router-link v-if="location.includes('/utilisateur/') " to="/utilisateurs" role="button" tabindex=0 class="header__link">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span class="tooltiptext">Retour</span>
+        </router-link>
         <router-link v-if="location === '/fil' || location === '/profile'" to="/utilisateurs" role="button" tabindex="0" class="header__link">
             <i class="fa-solid fa-users"></i>
             <span class="tooltiptext">Utilisateurs</span>
