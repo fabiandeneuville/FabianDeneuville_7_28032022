@@ -330,6 +330,25 @@ exports.likePost = (req, res, next) => {
     })
 };
 
+/***** CHECK LIKE *****/
+exports.checkLike = (req, res, next) => {
+    const userId = req.auth.userId;
+    const postId = req.params.id;
+    mysql.query(`SELECT * FROM groupomania.like WHERE post_id = ${postId} and user_id = ${userId}`, (err, result, fields) => {
+        if(err){
+            return res.status(500).json({err});
+        }
+        if(result.length !== 0){
+            return res.status(200).json({message: 'YES'})
+        } else if (result.length === 0){
+            return res.status(200).json({message: 'NO'})
+        } else {
+            return res.status(404).json({message: "Information indisponible !"})
+        }
+    })
+}
+
+
 /***** LIKE COMMENT *****/
 exports.likeComment = (req, res, next) => {
     const userId = req.auth.userId;
