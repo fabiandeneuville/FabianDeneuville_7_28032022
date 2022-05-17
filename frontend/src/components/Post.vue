@@ -23,7 +23,7 @@
         <p class="post__content">{{ content }}</p>
         <div class="btn__bloc__container">
             <div class="btn__bloc">
-                <i class="fa-solid fa-thumbs-up"></i><span class="likes__count">{{ likes }}</span>
+                <i v-bind:class="{ orange : postLiked }" v-on:click="likePost" class="fa-solid fa-thumbs-up"></i><span class="likes__count">{{ compteur + likes }}</span>
             </div>
             <div class="btn__bloc">
                 <i class="fa-solid fa-comment"></i>
@@ -43,6 +43,8 @@
 
 import PostDeletionModale from './PostDeletionModale'
 
+import axios from 'axios'
+
 export default {
     name:'Post',
     data(){
@@ -51,7 +53,9 @@ export default {
             loggedUserRole: null,
             token: null,
             isVisible: false,
-            reveal: false
+            reveal: false,
+            compteur: 0,
+            postLiked: false
         }
     },
     components: {
@@ -60,6 +64,10 @@ export default {
     props: ['id', 'user_Id', 'title', 'content', 'imageUrl', 'username', 'date', 'likes'],
     mounted: function(){
         this.getFromLocalStorage()
+        this.checkLike()
+    },
+    updated(){
+        this.checkLike()
     },
     methods: {
         getFromLocalStorage(){
@@ -77,13 +85,41 @@ export default {
         editPost: function(){
 
         },
+        checkLike: function(){
+            const config = {
+                headers: { Authorization: `Bearer ${this.token}` }
+            };
+            axios
+            .get(`http://localhost:3000/api/post/${this.id}/like`, config)
+            .then(response => {
+                if(response.data.message === 'YES'){
+                    this.postLiked = true;
+                } else {
+                    this.postLiked = false;
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        },
         likePost: function(){
-
+            const config = {
+                headers: { Authorization: `Bearer ${this.token}` }
+            };
+            const data = {};
+            axios
+            .post(`http://localhost:3000/api/post/${this.id}/like`, data, config)
+            .then(response => {
+                this.compteur += response.data.count
+            })
+            .catch(error => {
+                console.log(error)
+            })
         },
         commentPost: function(){
 
         }
-    }
+    },
 }
 
 </script>
@@ -189,6 +225,15 @@ export default {
     .btn__bloc i:hover {
         color: rgb(233, 68, 37);
         transform: scale(1.2);
+    }
+
+    .likes__count {
+        font-size: 18px;
+        padding:5px;
+    }
+
+    .orange {
+        color: rgb(233, 68, 37);
     }
 
 </style>
