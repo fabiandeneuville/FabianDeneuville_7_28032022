@@ -43,8 +43,6 @@
 
 import PostDeletionModale from './PostDeletionModale'
 
-import axios from 'axios'
-
 export default {
     name:'Post',
     data(){
