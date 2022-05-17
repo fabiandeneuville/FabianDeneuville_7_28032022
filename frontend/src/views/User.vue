@@ -11,6 +11,8 @@
                 <i class="fa-solid fa-envelope"></i>
             </a>
         </div>
+        <userPostFeed
+        v-bind:userId="this.userId"></userPostFeed>
         <footerBottom></footerBottom>
     </div>
 </template>
@@ -19,6 +21,7 @@
 <script>
 
 import Header from '../components/Header.vue'
+import UserPostFeed from '../components/UserPostFeed'
 import Footer from '../components/Footer.vue'
 
 import axios from 'axios'
@@ -38,6 +41,7 @@ export default {
     },
     components: {
         'headerTop': Header,
+        'userPostFeed': UserPostFeed,
         'footerBottom': Footer
     },
     created(){
