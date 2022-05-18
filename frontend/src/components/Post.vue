@@ -26,7 +26,7 @@
                 <i v-bind:class="{ orange : postLiked }" v-on:click="likePost" class="fa-solid fa-thumbs-up"></i><span class="likes__count">{{ compteur + likes }}</span>
             </div>
             <div class="btn__bloc">
-                <i class="fa-solid fa-comment"></i>
+                <i v-on:click="showCommentModale = !showCommentModale" class="fa-solid fa-comment"></i>
             </div>
         </div>
         <postDeletionModale
@@ -36,12 +36,19 @@
         v-on:closeModale="closeModale"
         >
         </postDeletionModale>
+
+        <commentModale
+        v-bind:showCommentModale="showCommentModale"
+        v-bind:id="id"
+        v-on:closeCommentModale="closeCommentModale">
+        </commentModale>
     </div>
 </template>
 
 <script>
 
 import PostDeletionModale from './PostDeletionModale'
+import CommentModale from './CommentModale.vue'
 
 import axios from 'axios'
 
@@ -54,12 +61,14 @@ export default {
             token: null,
             isVisible: false,
             reveal: false,
+            showCommentModale: false,
             compteur: 0,
             postLiked: false
         }
     },
     components: {
-        'postDeletionModale': PostDeletionModale
+        'postDeletionModale': PostDeletionModale,
+        'commentModale': CommentModale
     },
     props: ['id', 'user_Id', 'title', 'content', 'imageUrl', 'username', 'date', 'likes'],
     mounted: function(){
@@ -81,6 +90,9 @@ export default {
         },
         closeModale: function(){
             this.reveal = false;
+        },
+        closeCommentModale: function(){
+            this.showCommentModale = false;
         },
         editPost: function(){
 
@@ -116,9 +128,6 @@ export default {
                 console.log(error)
             })
         },
-        commentPost: function(){
-
-        }
     },
 }
 
