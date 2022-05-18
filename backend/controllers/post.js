@@ -327,8 +327,8 @@ exports.likePost = (req, res, next) => {
     })
 };
 
-/***** CHECK LIKE *****/
-exports.checkLike = (req, res, next) => {
+/***** CHECK POST LIKE *****/
+exports.checkPostLike = (req, res, next) => {
     const userId = req.auth.userId;
     const postId = req.params.id;
     mysql.query(`SELECT * FROM groupomania.like WHERE post_id = ${postId} and user_id = ${userId}`, (err, result, fields) => {
@@ -344,7 +344,6 @@ exports.checkLike = (req, res, next) => {
         }
     })
 }
-
 
 /***** LIKE COMMENT *****/
 exports.likeComment = (req, res, next) => {
@@ -375,7 +374,7 @@ exports.likeComment = (req, res, next) => {
                             if(err){
                                 return res.status(500).json({err});
                             }
-                            return res.status(201).json({message: "Commentaire liké !"});
+                            return res.status(201).json({message: "Commentaire liké !", count: 1});
                         })
                     })
                 })
@@ -393,7 +392,7 @@ exports.likeComment = (req, res, next) => {
                             if(err){
                                 return res.status(500).json({err});
                             }
-                            return res.status(201).json({message: "Like du commentaire annulé !"});
+                            return res.status(201).json({message: "Like du commentaire annulé !", count: -1});
                         })
                     })
                 });
@@ -401,3 +400,21 @@ exports.likeComment = (req, res, next) => {
         })
     })
 };
+
+/***** CHECK COMMENT LIKE *****/
+exports.checkCommentLike = (req, res, next) => {
+    const userId = req.auth.userId;
+    const postId = req.params.id;
+    mysql.query(`SELECT * FROM groupomania.like WHERE comment_id = ${postId} and user_id = ${userId}`, (err, result, fields) => {
+        if(err){
+            return res.status(500).json({err});
+        }
+        if(result.length !== 0){
+            return res.status(200).json({message: 'YES'})
+        } else if (result.length === 0){
+            return res.status(200).json({message: 'NO'})
+        } else {
+            return res.status(404).json({message: "Information indisponible !"})
+        }
+    })
+}
