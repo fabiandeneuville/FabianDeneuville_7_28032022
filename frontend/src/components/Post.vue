@@ -96,6 +96,7 @@ export default {
         },
         closeCommentModale: function(){
             this.showCommentModale = false;
+            location.reload()
         },
         editPost: function(){
 

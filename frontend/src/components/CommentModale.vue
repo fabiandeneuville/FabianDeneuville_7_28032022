@@ -7,7 +7,18 @@
             <h3 class="comment__form__heading">{{ heading }}</h3>
             <ul class="comment__list">
                 <li v-bind:key="index" v-for="(comment, index) in allComments">
-                    <p>{{ comment.content }}</p>
+                    <comment
+                    v-bind:id="comment.id"
+                    v-bind:content="comment.content"
+                    v-bind:postId="comment.post_id"
+                    v-bind:username="comment.username"
+                    v-bind:userId="comment.user_id"
+                    v-bind:date="comment.date"
+                    v-bind:likes="comment.likes"
+                    v-bind:token="token"
+                    v-bind:loggedUserRole="loggedUserRole"
+                    v-bind:loggedUserId="loggedUserId">
+                    </comment>
                 </li>
             </ul>
             <hr>
@@ -22,6 +33,8 @@
 
 <script>
 
+import Comment from './Comment.vue'
+
 import axios from 'axios'
 
 export default {
@@ -29,21 +42,31 @@ export default {
     data(){
         return {
             allComments: [],
+            token: undefined,
+            loggedUserRole: undefined,
+            loggedUserId: undefined,
             heading: "Tous les commentaires",
             comment: undefined,
             commentsCounts: 0
         }
+    },
+    components: {
+        'comment': Comment
     },
     props: ['id', 'showCommentModale', 'compteurComment'],
     methods: {
         closeCommentModale: function(){
             this.$emit('closeCommentModale')
         },
+        getFromLocalStotage: function(){
+            this.token = JSON.parse(localStorage.getItem('user')).token
+            this.loggedUserRole = JSON.parse(localStorage.getItem('user')).role
+            this.loggedUserId = JSON.parse(localStorage.getItem('user')).userId
+        },
         getAllComments: function(){
-            const token = JSON.parse(localStorage.getItem('user')).token
 
             const config = {
-                headers: { Authorization: `Bearer ${token}` }
+                headers: { Authorization: `Bearer ${this.token}` }
             }
             axios
             .get(`http://localhost:3000/api/post/${this.id}/comment`, config)
@@ -82,6 +105,7 @@ export default {
         }
     },
     mounted(){
+        this.getFromLocalStotage()
         this.getAllComments()
         
     },
@@ -115,6 +139,12 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+
+    .comment__list {
+        width:100%;
+        max-height:250px;
+        overflow: scroll;
     }
 
     .comment__form {
