@@ -6,7 +6,7 @@
         </div>
         <div class="comment__btn__bloc">
             <div class="comment__like__btn comment__btn">
-                <i class="fa-solid fa-thumbs-up"></i>
+                <i v-bind:class="{ orange : commentLiked }" v-on:click="likeComment" class="fa-solid fa-thumbs-up"></i><span class="count">{{ likesCount + likes }}</span>
             </div>
             <div v-if="this.userId === this.loggedUserId || this.loggedUserRole === 'admin'" v-on:click="deleteComment" class="comment__delete__btn comment__btn">
                 <i class="fa-solid fa-trash"></i>
@@ -26,10 +26,18 @@ export default {
     name:'Comment',
     data(){
         return {
-            commentDeleted: false
+            commentDeleted: false,
+            commentLiked: false,
+            likesCount:0
         }
     },
     props: ['id', 'content', 'postId', 'userId', 'username', 'date', 'likes', 'token', 'loggedUserRole', 'loggedUserId'],
+    mounted(){
+        this.checkLike()
+    },
+    updated(){
+        this.checkLike()
+    },
     methods: {
         deleteComment: function(){
             const config = {
@@ -43,7 +51,38 @@ export default {
             .catch(error => {
                 console.log(error)
             })
-        }
+        },
+        likeComment: function(){
+            const config = {
+                headers: { Authorization: `Bearer ${this.token}` }
+            };
+            const data = {};
+            axios
+            .post(`http://localhost:3000/api/post/comment/${this.id}/like`, data, config)
+            .then(response => {
+                this.likesCount += response.data.count
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        },
+        checkLike: function(){
+            const config = {
+                headers: { Authorization: `Bearer ${this.token}` }
+            };
+            axios
+            .get(`http://localhost:3000/api/post/comment/${this.id}/like`, config)
+            .then(response => {
+                if(response.data.message === 'YES'){
+                    this.commentLiked = true;
+                } else {
+                    this.commentLiked = false;
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        },
     }
 }
 
@@ -87,6 +126,14 @@ export default {
 
 .hide {
     display:none;
+}
+
+.count {
+    padding-left:5px;
+}
+
+.orange {
+        color: rgb(233, 68, 37);
 }
 
 </style>
