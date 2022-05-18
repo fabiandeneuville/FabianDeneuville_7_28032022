@@ -195,7 +195,7 @@ exports.createComment = (req, res, next) => {
 /***** GET ALL COMMENTS FROM ONE POST *****/
 exports.getAllCommentsFromOnePost = (req, res, next) => {
     const postId = req.params.id;
-    mysql.query(`SELECT comment.id, user.username, comment.content, comment.post_id, DATE_FORMAT(date, 'le %d/%c/%Y à %Hh%i') as date, comment.likes FROM comment JOIN user on user.id = comment.user_id WHERE comment.post_Id = ${postId} ORDER BY date DESC`, (err, result, fields) => {
+    mysql.query(`SELECT comment.id, user.username, comment.user_id, comment.content, comment.post_id, DATE_FORMAT(date, 'le %d/%c/%Y à %Hh%i') as date, comment.likes FROM comment JOIN user on user.id = comment.user_id WHERE comment.post_Id = ${postId} ORDER BY date DESC`, (err, result, fields) => {
         if(err){
             return res.status(500).json({err});
         }
