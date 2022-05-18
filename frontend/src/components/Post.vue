@@ -23,10 +23,10 @@
         <p class="post__content">{{ content }}</p>
         <div class="btn__bloc__container">
             <div class="btn__bloc">
-                <i v-bind:class="{ orange : postLiked }" v-on:click="likePost" class="fa-solid fa-thumbs-up"></i><span class="likes__count">{{ compteur + likes }}</span>
+                <i v-bind:class="{ orange : postLiked }" v-on:click="likePost" class="fa-solid fa-thumbs-up"></i><span class="count">{{ likesCount + likes }}</span>
             </div>
             <div class="btn__bloc">
-                <i v-on:click="showCommentModale = !showCommentModale" class="fa-solid fa-comment"></i>
+                <i v-on:click="showCommentModale = !showCommentModale" class="fa-solid fa-comment"></i><span class="count">{{ commentsCount }}</span>
             </div>
         </div>
         <postDeletionModale
@@ -38,6 +38,7 @@
         </postDeletionModale>
 
         <commentModale
+        @commentsCount="getCommentsCount"
         v-bind:showCommentModale="showCommentModale"
         v-bind:id="id"
         v-on:closeCommentModale="closeCommentModale">
@@ -62,8 +63,9 @@ export default {
             isVisible: false,
             reveal: false,
             showCommentModale: false,
-            compteur: 0,
-            postLiked: false
+            likesCount: 0,
+            postLiked: false,
+            commentsCount: 0
         }
     },
     components: {
@@ -74,6 +76,7 @@ export default {
     mounted: function(){
         this.getFromLocalStorage()
         this.checkLike()
+        this.getCommentsCount()
     },
     updated(){
         this.checkLike()
@@ -122,11 +125,14 @@ export default {
             axios
             .post(`http://localhost:3000/api/post/${this.id}/like`, data, config)
             .then(response => {
-                this.compteur += response.data.count
+                this.likesCount += response.data.count
             })
             .catch(error => {
                 console.log(error)
             })
+        },
+        getCommentsCount(commentsCount){
+            this.commentsCount = commentsCount;
         },
     },
 }
@@ -236,7 +242,7 @@ export default {
         transform: scale(1.2);
     }
 
-    .likes__count {
+    .count {
         font-size: 18px;
         padding:5px;
     }
