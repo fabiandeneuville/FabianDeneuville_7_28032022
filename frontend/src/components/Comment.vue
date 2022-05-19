@@ -1,7 +1,7 @@
 /********** COMMENT **********/
 
 <template>
-    <div v-bind:class="{ hide : commentDeleted }" class="comment">
+    <div class="comment">
         <div class="comment__bloc">
             <h4 class="comment__bloc__elt">{{ username }} - {{ date }}</h4>
             <p class="comment__bloc__elt">{{ content }}</p>
@@ -45,7 +45,7 @@ export default {
             axios
             .delete(`http://localhost:3000/api/post/${this.postId}/comment/${this.id}`, config)
             .then(response => {
-                this.commentDeleted = true
+                this.$emit('commentDeleted')
             })
             .catch(error => {
                 console.log(error)
@@ -124,10 +124,6 @@ export default {
 .comment__btn:hover i {
     color: rgb(233, 68, 37);
     transform: scale(1.2);
-}
-
-.hide {
-    display:none;
 }
 
 .count {

@@ -9,6 +9,7 @@
             <ul class="comment__list">
                 <li v-bind:key="index" v-for="(comment, index) in allComments">
                     <comment
+                    v-on:commentDeleted="commentDeleted"
                     v-bind:id="comment.id"
                     v-bind:content="comment.content"
                     v-bind:postId="comment.post_id"
@@ -98,11 +99,17 @@ export default {
                 content: this.comment
             }, config)
             .then(response => {
-                location.reload()
+                this.allComments = []
+                this.comment = ''
+                this.getAllComments()
             })
             .catch(error => {
                 console.log(error)
             })
+        },
+        commentDeleted: function(){
+            this.allComments = []
+            this.getAllComments()
         }
     },
     mounted(){
