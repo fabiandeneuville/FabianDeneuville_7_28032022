@@ -144,7 +144,9 @@ export default {
     .comment__list {
         width:100%;
         max-height:250px;
-        overflow: scroll;
+        overflow-y: scroll;
+        scrollbar-width: thin;
+        scrollbar-color: rgb(255, 213, 215);       
     }
 
     .comment__form {
