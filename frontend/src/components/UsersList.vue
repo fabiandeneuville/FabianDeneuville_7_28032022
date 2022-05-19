@@ -64,6 +64,7 @@ export default {
         })
     }
 }
+
 </script>
 
 <style scoped>
@@ -72,6 +73,10 @@ export default {
         margin:110px auto 0 auto;
         width:95%;
         max-width: 600px;
+    }
+
+    li {
+        list-style-type: none;
     }
 
 </style>
