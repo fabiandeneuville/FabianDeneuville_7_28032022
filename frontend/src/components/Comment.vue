@@ -94,7 +94,7 @@ export default {
 }
 
 .comment__bloc {
-    background: lightgray;
+    background: rgb(255, 213, 215);
     padding:10px;
     border-radius:15px;
 }

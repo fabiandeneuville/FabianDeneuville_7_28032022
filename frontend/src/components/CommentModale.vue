@@ -150,7 +150,7 @@ export default {
 
     .comment__list {
         width:100%;
-        max-height:250px;
+        max-height:300px;
         overflow-y: scroll;
         scrollbar-width: thin;
         scrollbar-color: rgb(255, 213, 215);       
@@ -175,6 +175,7 @@ export default {
         margin: 5px auto;
         padding: 10px;
         height:30px;
+        border-radius:5px;
         border: 2px solid rgb(233, 68, 37);
     }
 
