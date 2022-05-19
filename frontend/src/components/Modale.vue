@@ -1,7 +1,7 @@
 /********** MODALE **********/
 
 <template>
-    <div v-if="reveal" class="bloc-modale">
+    <div v-if="showSuccessModale" class="bloc-modale">
         <div v-on:click="closeModale" class="overlay"></div>
         <div class="modale">
             <div v-on:click="closeModale" class="btn-modale"><i class="fa-solid fa-xmark"></i></div>
@@ -14,10 +14,10 @@
 
 export default {
     name: 'Modale',
-    props: ['reveal', 'username', 'apiResponseMessage'],
+    props: ['showSuccessModale', 'username', 'apiResponseMessage'],
     methods: {
         closeModale: function(){
-            this.reveal = false;
+            this.showSuccessModale = false;
             location.reload();
         }
     }

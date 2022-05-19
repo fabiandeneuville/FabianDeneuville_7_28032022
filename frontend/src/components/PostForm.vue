@@ -34,8 +34,10 @@
             </form>
         </div>
 
-        <modale v-bind:reveal="reveal"
-                v-bind:apiResponseMessage="apiResponseMessage"></modale>
+        <modale 
+        v-bind:showSuccessModale="showSuccessModale"
+        v-bind:apiResponseMessage="apiResponseMessage">
+        </modale>
     </div>
 </template>
 
@@ -53,7 +55,7 @@ export default {
             content: null,
             file: '',
             apiResponseMessage: '',
-            reveal: false
+            showSuccessModale: false
         }
     },
     props: ['username', 'imageUrl', 'token'],
@@ -81,7 +83,7 @@ export default {
                     this.apiResponseMessage = response.data.message
                     this.title = null;
                     this.content = null;
-                    this.reveal = true;
+                    this.showSuccessModale = true;
                 })
                 .catch(error =>{
                     console.log(error)
@@ -98,7 +100,7 @@ export default {
                 .then(response => {
                     console.log(response.data.message)
                     this.apiResponseMessage = response.data.message
-                    this.reveal = true;
+                    this.showSuccessModale = true;
                 })
                 .catch(error => {
                     console.log(error)
