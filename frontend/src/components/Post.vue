@@ -7,7 +7,7 @@
                 <i class="fa-solid fa-ellipsis"></i>
             </div>
             <div v-if="isVisible" class="post__management__container">
-                <div class="btn__bloc">
+                <div v-if="user_Id === loggedUserId" class="btn__bloc">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </div>
                 <div v-on:click="toPostDeletion" class="btn__bloc">
@@ -232,6 +232,7 @@ export default {
         width:50%;
         height:40px;
         font-size: 25px;
+        margin:0 auto;
     }
 
     .btn__bloc i {
