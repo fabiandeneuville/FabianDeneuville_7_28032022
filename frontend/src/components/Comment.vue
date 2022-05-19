@@ -115,11 +115,14 @@ export default {
 .comment__btn {
     display:inline-block;
     width:15%;
-    transition:all 0.3s ease;
     cursor: pointer;
 }
 
-.comment__btn:hover {
+.comment__btn i {
+    transition:all 0.3s ease;
+}
+
+.comment__btn:hover i {
     color: rgb(233, 68, 37);
     transform: scale(1.2);
 }
