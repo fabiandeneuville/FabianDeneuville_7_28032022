@@ -1,11 +1,10 @@
+/********** FOOTER **********/
+
 <template>
-    
     <div class="footer__bloc">
         <p>©️ Groupomania - {{ year }}</p>
     </div>
-
 </template>
-
 
 <script>
 export default {

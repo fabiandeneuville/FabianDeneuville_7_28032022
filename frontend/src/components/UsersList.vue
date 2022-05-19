@@ -1,3 +1,5 @@
+/********** USER LIST **********/
+
 <template>
     <div>
         <ul class="usersList">
@@ -18,7 +20,6 @@
         </ul>
     </div>
 </template>
-
 
 <script>
 
@@ -72,7 +73,5 @@ export default {
         width:95%;
         max-width: 600px;
     }
-
-
 
 </style>

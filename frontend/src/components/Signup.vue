@@ -1,3 +1,5 @@
+/********** SIGNUP **********/
+
 <template>
     <div class="signup">
         <form class="signup__form">
@@ -7,8 +9,6 @@
                 <p>Déjà inscrit ?</p>
                 <router-link to="/login">Connexion</router-link>
             </div>
-
-
             <label class="signup__form__label" for="username">Nom d'utilisateur</label>
             <input class="signup__form__input" v-model="username" type="text" id="username" required>
 
@@ -24,7 +24,6 @@
             <button class="signup__form__submit-btn" v-on:click.prevent="signingUp">Inscription</button>
 
             <p class="msg">{{ apiResponseMessage }}</p>
-
         </form>
     </div>
 </template>
@@ -67,8 +66,7 @@
 
 </script>
 
-
-<style>
+<style scoped>
 
     .signup {
         background: white;
@@ -115,6 +113,5 @@
         box-shadow: 2px 2px 5px lightgray;
 
     }
-
 
 </style>

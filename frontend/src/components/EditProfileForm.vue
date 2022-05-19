@@ -1,3 +1,5 @@
+/********** EDIT PROFILE FORM **********/
+
 <template>
     <div>
         <div class="edit__form__container">
@@ -7,13 +9,10 @@
                     <label class="edit__form__label" for="username">Nouveau nom d'utilisateur :</label>
                     <input v-model="newUsername" class="edit__form__input" type="text" id="username" v-bind:placeholder="username">
                 </div>
-
                 <div class="edit__form__bloc">
                     <label class="edit__form__label" for="content">Bio :</label>
                     <textarea v-model="newBio" class="edit__form__textarea" type="text" id="bio" v-bind:placeholder="bio"></textarea>
                 </div>
-
-
                 <div class="edit__form__bloc btn__bloc__container">
                     <div class="btn__bloc">
                         <label tabindex=0 role="button" class="edit__form__file__label" for="file"><i class="fa-solid fa-image"></i></label>

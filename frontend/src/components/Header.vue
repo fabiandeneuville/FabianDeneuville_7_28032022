@@ -1,3 +1,5 @@
+/********** HEADER **********/
+
 <template>
     <div class="header-top">
         <router-link to="/fil" class="header__logo__desktop__container">
@@ -29,7 +31,6 @@
     </div>
 </template>
 
-
 <script>
 
     export default {
@@ -56,6 +57,7 @@
 </script>
 
 <style scoped>
+
     .header-top {
         position: fixed;
         z-index:9999;

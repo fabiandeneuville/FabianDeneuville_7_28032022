@@ -1,3 +1,5 @@
+/********** POST FEED **********/
+
 <template>
     <div class="feed">
         <ul>
@@ -35,9 +37,7 @@ export default {
         'post': Post
     },
     mounted(){
-
         const token = JSON.parse(localStorage.getItem('user')).token
-        
         const config = {
         headers: { Authorization: `Bearer ${token}` }
         }
@@ -56,7 +56,8 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+
     .feed {
         width: 95%;
         max-width: 600px;

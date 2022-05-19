@@ -1,3 +1,5 @@
+/********** USER POST FEED **********/
+
 <template>
     <div class="feed">
         <h3>{{ apiResponseMessage }}</h3>
@@ -64,7 +66,8 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+
     .feed {
         width: 95%;
         max-width: 600px;

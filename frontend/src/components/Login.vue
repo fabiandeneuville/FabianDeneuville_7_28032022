@@ -1,30 +1,22 @@
+/********** LOGIN **********/
+
 <template>
     <div class="login">
         <form class="login__form">
             <h2>Connectez-vous</h2>
-
             <div>
                 <p>Pas encore inscrit ?</p>
                 <router-link to="/signup">Inscription</router-link>
             </div>
-
             <label class="login__form__label" for="email">Email</label>
             <input class="login__form__input" v-model="email" type="email" id="email" required>
-
             <label class="login__form__label" for="password">Mot de passe</label>
             <input class="login__form__input" v-model="password" type="password" id="password" required>
-
             <button class="login__form__submit-btn" v-on:click.prevent="logingIn">Connexion</button>
-
             <p class="msg">{{ apiResponseMessage }}</p>
-
         </form>
     </div>
-
-
 </template>
-
-
 
 <script>
 
@@ -62,9 +54,7 @@
                     this.role = response.data.role
                     this.token = response.data.token
                     this.apiResponseMessage = "Connexion réussie"
-
                     this.toLocalStorage();
-
                     this.$router.push('/fil')
                 })
                 .catch(error => {
@@ -77,8 +67,7 @@
 
 </script>
 
-
-<style>
+<style scoped>
 
     .login {
         background: white;

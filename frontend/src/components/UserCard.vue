@@ -1,3 +1,5 @@
+/********** USER CARD **********/
+
 <template>
     <div class="userCard">
         <div class="userCard__avatar__container">
@@ -204,7 +206,5 @@ export default {
             grid-column: 4/5;
         }
     }
-
-
 
 </style>

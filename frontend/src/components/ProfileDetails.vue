@@ -1,3 +1,5 @@
+/********** PROFILE DETAILS **********/
+
 <template>
     <div>
         <div class="profile__container">
@@ -35,7 +37,6 @@
         v-bind:token="token"
         v-if="passwordFormIsVisible">
         </changePasswordForm>
-
 
         <profileDeletionModale
         v-bind:userId="userId"
@@ -186,6 +187,5 @@ export default {
     .btn:hover .tooltiptext {
         opacity: 1;
     }
-
 
 </style>

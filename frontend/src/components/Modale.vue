@@ -1,14 +1,14 @@
+/********** MODALE **********/
+
 <template>
     <div v-if="reveal" class="bloc-modale">
         <div v-on:click="closeModale" class="overlay"></div>
-        
         <div class="modale">
             <div v-on:click="closeModale" class="btn-modale"><i class="fa-solid fa-xmark"></i></div>
             <h3>{{ apiResponseMessage }}</h3>
         </div>
     </div>
 </template>
-
 
 <script>
 
@@ -24,7 +24,6 @@ export default {
 }
 
 </script>
-
 
 <style scoped>
 
@@ -75,6 +74,5 @@ export default {
         left:0;
         right:0;
     }
-
 
 </style>

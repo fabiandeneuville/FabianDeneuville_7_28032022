@@ -1,3 +1,5 @@
+/********** CHANGE PASSWORD FORM **********/
+
 <template>
     <div class="form__container">
         <form class="password__change__form">
@@ -62,7 +64,6 @@ export default {
         }
     }
 }
-
 
 </script>
 

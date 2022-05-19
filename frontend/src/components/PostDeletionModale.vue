@@ -1,17 +1,15 @@
+/********** POST DELETION MODALE **********/
+
 <template>
     <div v-if="reveal" class="bloc-modale">
         <div v-on:click="closeModale" class="overlay"></div>
-        
         <div class="modale">
             <h3 class="modale-title">Êtes-vous sûr ?</h3>
             <div v-on:click="closeModale" class="modale-btn cancel-btn">ANNULER</div>
             <div v-on:click="deletePost" class="modale-btn validate-btn">CONFIRMER</div>
         </div>
     </div>
-
-
 </template>
-
 
 <script>
 
@@ -40,9 +38,6 @@ export default {
         }
     }
 }
-
-
-
 
 </script>
 
@@ -106,6 +101,5 @@ export default {
         left:0;
         right:0;
     }
-
 
 </style>

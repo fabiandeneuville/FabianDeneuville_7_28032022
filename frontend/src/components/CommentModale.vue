@@ -1,7 +1,8 @@
+/********** COMMENT MODALE **********/
+
 <template>
     <div v-if="showCommentModale" class="comment__modale__container">
         <div v-on:click="closeCommentModale" class="comment__modale__overlay"></div>
-        
         <div class="comment__modale">
             <div v-on:click="closeCommentModale" class="btn-modale"><i class="fa-solid fa-xmark"></i></div>
             <h3 class="comment__form__heading">{{ heading }}</h3>
@@ -106,8 +107,7 @@ export default {
     },
     mounted(){
         this.getFromLocalStotage()
-        this.getAllComments()
-        
+        this.getAllComments()       
     },
 }
 

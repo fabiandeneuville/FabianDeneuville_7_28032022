@@ -1,3 +1,5 @@
+/********** POST **********/
+
 <template>
     <div class="post">
         <div class="post__management" v-if="user_Id === loggedUserId || loggedUserRole === 'admin' || loggedUserRole === 'modérateur' " post__management>
@@ -140,7 +142,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 
     .post{
         width: 100%;

@@ -1,3 +1,5 @@
+/********** USER DELETION MODALE **********/
+
 <template>
     <div v-if="reveal" class="bloc-modale">
         <div v-on:click="closeModale" class="overlay"></div>
@@ -9,10 +11,7 @@
             <div v-on:click="deletePost" class="modale-btn validate-btn">CONFIRMER</div>
         </div>
     </div>
-
-
 </template>
-
 
 <script>
 
@@ -49,14 +48,11 @@ export default {
     }
 }
 
-
-
-
 </script>
 
 <style scoped>
 
-.bloc-modale {
+    .bloc-modale {
         position: fixed;
         top:0;
         bottom:0;
@@ -114,6 +110,5 @@ export default {
         left:0;
         right:0;
     }
-
 
 </style>

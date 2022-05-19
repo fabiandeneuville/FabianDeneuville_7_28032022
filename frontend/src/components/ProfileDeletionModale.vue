@@ -1,7 +1,8 @@
+/********** PROFILE DELETION MODALE **********/
+
 <template>
     <div v-if="reveal" class="bloc-modale">
         <div v-on:click="closeModale" class="overlay"></div>
-        
         <div class="modale">
             <h3 class="modale-title">Êtes-vous sûr ?</h3>
             <p>La suppression du profil est irréversible !</p>
@@ -9,10 +10,7 @@
             <div v-on:click="deletePost" class="modale-btn validate-btn">CONFIRMER</div>
         </div>
     </div>
-
-
 </template>
-
 
 <script>
 
@@ -49,14 +47,11 @@ export default {
     }
 }
 
-
-
-
 </script>
 
 <style scoped>
 
-.bloc-modale {
+    .bloc-modale {
         position: fixed;
         top:0;
         bottom:0;
@@ -114,6 +109,5 @@ export default {
         left:0;
         right:0;
     }
-
 
 </style>

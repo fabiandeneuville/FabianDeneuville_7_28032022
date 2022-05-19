@@ -1,5 +1,6 @@
-<template>
+/********** POST FORM **********/
 
+<template>
     <div>
         <div class="post__form__container">
             <div class="post__form__header">
@@ -10,9 +11,7 @@
                 <div v-if="!isVisible" v-on:click="isVisible = !isVisible" class="post__form__header__btn"><i class="fa-solid fa-pen"></i></div>
                 <div v-if="isVisible" v-on:click="isVisible = !isVisible" class="post__form__header__btn"><i class="fa-solid fa-xmark"></i></div>
             </div>
-
             <form v-if="isVisible" class="post__form">
-
                 <div class="post__form__bloc">
                     <label class="post__form__label" for="title">Titre :</label>
                     <input v-model="title" class="post__form__input" type="text" id="title" required>
@@ -22,8 +21,6 @@
                     <label class="post__form__label" for="content">Message :</label>
                     <textarea v-model="content" class="post__form__textarea" type="text" id="content" required></textarea>
                 </div>
-
-
                 <div class="post__form__bloc btn__bloc__container">
                     <div class="btn__bloc">
                         <label tabindex=0 role="button" class="post__form__file__label" for="file"><i class="fa-solid fa-image"></i></label>
@@ -33,9 +30,7 @@
                         <button v-on:click.prevent="postPublication" class="post__form__submit-btn"><i class="fa-solid fa-paper-plane"></i></button>
                     </div>
                 </div>
-
                 <p class="fileMessage" v-if="this.file != ''">Fichier sélectionné : {{ this.file.name }}</p>
-
             </form>
         </div>
 

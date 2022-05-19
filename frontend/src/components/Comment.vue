@@ -1,3 +1,5 @@
+/********** COMMENT **********/
+
 <template>
     <div v-bind:class="{ hide : commentDeleted }" class="comment">
         <div class="comment__bloc">
@@ -13,10 +15,7 @@
             </div>
         </div>
     </div>
-
-
 </template>
-
 
 <script>
 
