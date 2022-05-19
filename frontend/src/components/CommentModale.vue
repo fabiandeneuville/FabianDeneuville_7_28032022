@@ -25,8 +25,8 @@
             </ul>
             <hr>
             <form class="comment__form">
-                <label class="comment__form__label" for="comment">Votre commentaire :</label>
-                <input v-model="comment" class="comment__form__input" type="text" id="comment" required>
+                <label class="comment__form__label" for="comment"></label>
+                <input v-model="comment" class="comment__form__input" type="text" id="comment" placeholder="Écrivez un commentaire ..." required>
                 <button v-on:click.prevent="commentPost" class="comment__btn"><i class="fa-solid fa-paper-plane"></i></button>
             </form>
         </div>
@@ -159,7 +159,7 @@ export default {
     .comment__form {
         width:100%;
         display:flex;
-        flex-direction: column;
+        flex-direction: row;
     }
 
     .comment__form__heading {
@@ -171,7 +171,7 @@ export default {
     }
 
     .comment__form__input {
-        width:100%;
+        width:calc(100% - 30px);
         margin: 5px auto;
         padding: 10px;
         height:30px;
@@ -201,7 +201,8 @@ export default {
     }
 
     .comment__btn {
-        font-size: 30px;
+        width:30px;
+        font-size: 18px;
         line-height: 40px;
         border-radius:50px;
         border:none;
