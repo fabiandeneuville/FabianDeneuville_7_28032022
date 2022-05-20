@@ -2,11 +2,11 @@
 
 <template>
     <div class="post">
-        <div class="post__management" v-if="user_Id === loggedUserId || loggedUserRole === 'admin' || loggedUserRole === 'modérateur' " post__management>
-            <div v-on:click="isVisible = !isVisible" class="post__management__btn">
+        <div class="post__management" v-if="user_Id === loggedUserId || loggedUserRole === 'admin' || loggedUserRole === 'modérateur' ">
+            <div v-on:click="showPostManagment = !showPostManagment" class="post__management__btn">
                 <i class="fa-solid fa-ellipsis"></i>
             </div>
-            <div v-if="isVisible" class="post__management__container">
+            <div v-if="showPostManagment" class="post__management__container">
                 <div v-on:click="showEditModale = !showEditModale" v-if="user_Id === loggedUserId" class="btn__bloc">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </div>
@@ -70,7 +70,7 @@ export default {
             loggedUserId: null,
             loggedUserRole: null,
             token: null,
-            isVisible: false,
+            showPostManagment: false,
             reveal: false,
             showEditModale: false,
             showCommentModale: false,
@@ -111,6 +111,7 @@ export default {
         },
         closeEditModale: function(){
             this.showEditModale = false;
+            this.showPostManagment = false;
         },
         editPost: function(){
 
