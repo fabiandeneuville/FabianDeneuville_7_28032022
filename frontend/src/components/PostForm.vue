@@ -14,12 +14,12 @@
             <form v-if="isVisible" class="post__form">
                 <div class="post__form__bloc">
                     <label class="post__form__label" for="title">Titre :</label>
-                    <input v-model="title" class="post__form__input" type="text" id="title" required>
+                    <input v-model="title" class="post__form__input" type="text" id="title" contenteditable spellcheck="false" required>
                 </div>
 
                 <div class="post__form__bloc">
                     <label class="post__form__label" for="content">Message :</label>
-                    <textarea v-model="content" class="post__form__textarea" type="text" id="content" required></textarea>
+                    <textarea v-model="content" class="post__form__textarea" type="text" id="content" contenteditable spellcheck="false" required></textarea>
                 </div>
                 <div class="post__form__bloc btn__bloc__container">
                     <div class="btn__bloc">
@@ -65,7 +65,6 @@ export default {
     methods: {
         previewFile(event){
             this.file = event.target.files[0]
-            console.log(this.file)
         },
         postPublication: function(){
 

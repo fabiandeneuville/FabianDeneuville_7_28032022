@@ -17,7 +17,7 @@ export default {
     props: ['showSuccessModale', 'username', 'apiResponseMessage'],
     methods: {
         closeModale: function(){
-            this.showSuccessModale = false;
+            this.$emit('closeSuccessModale')
             location.reload();
         }
     }

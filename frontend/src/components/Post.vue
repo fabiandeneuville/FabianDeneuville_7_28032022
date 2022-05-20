@@ -7,7 +7,7 @@
                 <i class="fa-solid fa-ellipsis"></i>
             </div>
             <div v-if="isVisible" class="post__management__container">
-                <div v-if="user_Id === loggedUserId" class="btn__bloc">
+                <div v-on:click="showEditModale = !showEditModale" v-if="user_Id === loggedUserId" class="btn__bloc">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </div>
                 <div v-on:click="toPostDeletion" class="btn__bloc">
@@ -31,6 +31,13 @@
                 <i v-on:click="showCommentModale = !showCommentModale" class="fa-solid fa-comment"></i><span class="count">{{ commentsCount }}</span>
             </div>
         </div>
+
+        <editPostForm
+        @closeEditModale="closeEditModale"
+        v-bind:showEditModale="showEditModale"
+        v-bind:id="id">
+        </editPostForm>
+
         <postDeletionModale
         v-bind:reveal="reveal"
         v-bind:token="token"
@@ -51,7 +58,8 @@
 <script>
 
 import PostDeletionModale from './PostDeletionModale'
-import CommentModale from './CommentModale.vue'
+import EditPostForm from './EditPostForm'
+import CommentModale from './CommentModale'
 
 import axios from 'axios'
 
@@ -64,6 +72,7 @@ export default {
             token: null,
             isVisible: false,
             reveal: false,
+            showEditModale: false,
             showCommentModale: false,
             likesCount: 0,
             postLiked: false,
@@ -72,7 +81,8 @@ export default {
     },
     components: {
         'postDeletionModale': PostDeletionModale,
-        'commentModale': CommentModale
+        'commentModale': CommentModale,
+        'editPostForm' : EditPostForm
     },
     props: ['id', 'user_Id', 'title', 'content', 'imageUrl', 'username', 'date', 'likes'],
     mounted: function(){
@@ -98,6 +108,9 @@ export default {
         },
         closeCommentModale: function(){
             this.showCommentModale = false;
+        },
+        closeEditModale: function(){
+            this.showEditModale = false;
         },
         editPost: function(){
 
