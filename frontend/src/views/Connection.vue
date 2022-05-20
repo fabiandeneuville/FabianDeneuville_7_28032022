@@ -1,3 +1,5 @@
+/********** CONNECTION **********/
+
 <template>
     <div>
         <img class="connexion__page__logo" src="../assets/icon-left-font-monochrome-black.png" alt="Logo de Groupomania">
@@ -5,8 +7,6 @@
         <footerBottom></footerBottom>
     </div>
 </template>
-
-
 
 <script>
 
@@ -24,7 +24,7 @@
 </script>
 
 
-<style>
+<style scoped>
 
     .connexion__page__logo {
         width:60%;

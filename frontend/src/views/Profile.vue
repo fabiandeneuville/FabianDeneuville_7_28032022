@@ -1,3 +1,5 @@
+/********** PROFILE **********/
+
 <template>
     <div>
         <headerTop> </headerTop>
@@ -8,10 +10,7 @@
         </profileDetails>
         <footerBottom></footerBottom>
     </div>
-
-
 </template>
-
 
 <script>
 

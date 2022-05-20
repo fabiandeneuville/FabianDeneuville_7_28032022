@@ -1,3 +1,5 @@
+/********** USER **********/
+
 <template>
     <div>
         <headerTop></headerTop>
@@ -16,7 +18,6 @@
         <footerBottom></footerBottom>
     </div>
 </template>
-
 
 <script>
 
@@ -67,7 +68,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
     .user__container {
         margin:110px auto 0 auto;
