@@ -1,7 +1,7 @@
 /********** POST DELETION MODALE **********/
 
 <template>
-    <div v-if="reveal" class="bloc-modale">
+    <div v-if="showDeletionModale" class="bloc-modale">
         <div v-on:click="closeModale" class="overlay"></div>
         <div class="modale">
             <h3 class="modale-title">Êtes-vous sûr ?</h3>
@@ -17,7 +17,7 @@ import axios from 'axios'
 
 export default {
     name: 'Validation',
-    props: ['reveal', 'token', 'id'],
+    props: ['showDeletionModale', 'token', 'id'],
     methods: {
         deletePost: function(){
             const config = {

@@ -39,7 +39,7 @@
         </editPostForm>
 
         <postDeletionModale
-        v-bind:reveal="reveal"
+        v-bind:showDeletionModale="showDeletionModale"
         v-bind:token="token"
         v-bind:id="id"
         v-on:closeModale="closeModale"
@@ -71,7 +71,7 @@ export default {
             loggedUserRole: null,
             token: null,
             showPostManagment: false,
-            reveal: false,
+            showDeletionModale: false,
             showEditModale: false,
             showCommentModale: false,
             likesCount: 0,
@@ -101,10 +101,10 @@ export default {
             this.token = user.token
         },
         toPostDeletion: function(){
-            this.reveal = true;
+            this.showDeletionModale = true;
         },
         closeModale: function(){
-            this.reveal = false;
+            this.showDeletionModale = false;
         },
         closeCommentModale: function(){
             this.showCommentModale = false;
