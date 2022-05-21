@@ -24,6 +24,7 @@
             </div>
         </div>
         <editProfileForm
+        @reloadProfile="reloadProfile"
         v-if="editFormIsVisible"
         v-bind:username="username"
         v-bind:bio="bio"
@@ -98,6 +99,10 @@ export default {
         },
         closeModale: function(){
             this.reveal = false
+        },
+        reloadProfile: function(){
+            this.getProfile()
+            this.editFormIsVisible = false
         }
     }
 }

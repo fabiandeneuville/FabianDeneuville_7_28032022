@@ -7,11 +7,11 @@
                 <h3 class="edit__form__heading">Edition du profil</h3>
                 <div class="edit__form__bloc">
                     <label class="edit__form__label" for="username">Nouveau nom d'utilisateur :</label>
-                    <input v-model="newUsername" class="edit__form__input" type="text" id="username" v-bind:placeholder="username">
+                    <input v-model="newUsername" class="edit__form__input" type="text" id="username" contenteditable spellcheck="false">
                 </div>
                 <div class="edit__form__bloc">
                     <label class="edit__form__label" for="content">Bio :</label>
-                    <textarea v-model="newBio" class="edit__form__textarea" type="text" id="bio" v-bind:placeholder="bio"></textarea>
+                    <textarea v-model="newBio" class="edit__form__textarea" type="text" id="bio" contenteditable spellcheck="false"></textarea>
                 </div>
                 <div class="edit__form__bloc btn__bloc__container">
                     <div class="btn__bloc">
@@ -60,7 +60,7 @@ export default {
                 }
                 , config)
                 .then(response => {
-                    location.reload()
+                    this.$emit('reloadProfile')
                 })
                 .catch(error =>{
                     console.log(error)
@@ -77,7 +77,7 @@ export default {
                 axios
                 .put(`http://localhost:3000/api/user/${this.userId}`, postData, config)
                 .then(response => {
-                    location.reload()
+                    this.$emit('reloadProfile')
                 })
                 .catch(error => {
                     console.log(error)
@@ -168,7 +168,7 @@ export default {
         transform: scale(1.2);
     }
 
-    .post__form__file__label{
+    .edit__form__file__label{
         cursor: pointer;
         font-size: 30px;
         line-height: 40px;
