@@ -36,8 +36,8 @@ export default {
     name:'EditProfileForm',
     data(){
         return {
-            newUsername:'',
-            newBio:'',
+            newUsername:this.username,
+            newBio:this.bio,
             file:'',
         }
     },
@@ -51,30 +51,15 @@ export default {
             const config = {
                 headers: { Authorization: `Bearer ${this.token}` }
             }
-            let username = undefined
-            let bio = undefined
-            if(this.newUsername != ''){
-                username = this.newUsername;
-            } else {
-                username = this.username;
-            }
-            if (this.newBio != ''){
-                bio = this.newBio;
-            } else {
-                bio = this.bio;
-            }
-            const newProfile = {
-                'username': username,
-                'bio': bio
-            }
+            
             if (this.file === ''){
                 axios
                 .put(`http://localhost:3000/api/user/${this.userId}`, {
-                    'username': username,
-                    'bio': bio
-                }, config)
+                    'username': this.newUsername,
+                    'bio': this.newBio
+                }
+                , config)
                 .then(response => {
-                    console.log(response.data.message)
                     location.reload()
                 })
                 .catch(error =>{
@@ -82,14 +67,16 @@ export default {
                 })
             } else {
                 let postData = new FormData();
-                const user = JSON.stringify({username, bio})
+                const user = JSON.stringify({
+                    'username': this.newUsername,
+                    'bio': this.newBio
+                })
                 const image = this.file
                 postData.append('user', user)
                 postData.append('image', image)
                 axios
                 .put(`http://localhost:3000/api/user/${this.userId}`, postData, config)
                 .then(response => {
-                    console.log(response.data.message)
                     location.reload()
                 })
                 .catch(error => {
