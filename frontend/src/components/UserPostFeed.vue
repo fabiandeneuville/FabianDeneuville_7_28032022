@@ -49,15 +49,17 @@ export default {
         axios
         .get(`http://localhost:3000/api/post/user/${this.userId}`, config)
         .then(response => {
-            for (let post of response.data){
-                this.userPosts.push(post);
-                this.apiResponseMessage = 'Les publications :'
+            if(response.data.message === 'Aucun posts !'){
+                this.apiResponseMessage = 'Aucune publication !'
+            } else {
+                for (let post of response.data){
+                    this.userPosts.push(post);
+                    this.apiResponseMessage = 'Les publications :'
+                }
             }
         })
         .catch(error => {
-            if(error.response.data.message = 'Aucune publication !'){
-                this.apiResponseMessage = error.response.data.message;
-            } else if(error.response.data.error.name === "TokenExpiredError"){
+            if(error.response.data.error.name === "TokenExpiredError"){
                 this.$router.push('/login')
             } else {
                 console.log(error)
