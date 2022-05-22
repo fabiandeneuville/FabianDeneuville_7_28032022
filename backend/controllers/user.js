@@ -115,7 +115,7 @@ exports.getOneUser = (req, res, next) => {
     let userId = req.params.id;
     mysql.query(`SELECT user.id, user.username, user.email, user.imageUrl, user.bio, role.role FROM user JOIN role ON user.role_id = role.id WHERE user.id = ${userId}`, (err, result, fields) => {
         if(err){
-            return res.status(404).json({err});
+            return res.status(500).json({err});
         }
         if(result.length === 0){
             return res.status(404).json({message: "Utilisateur introuvable !"})
