@@ -62,11 +62,14 @@ export default {
             this.imageUrl = response.data.imageUrl;
         })
         .catch(error => {
-            if(error.response.data.error.name === "TokenExpiredError"){
+            if(error.response.request.status === 404){
+                this.$router.push('/introuvable')
+            } else if (error.response.data.error.name === "TokenExpiredError"){
                 this.$router.push('/login')
             } else {
                 console.log(error)
             }
+            
         })
     }
 }

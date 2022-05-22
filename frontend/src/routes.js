@@ -4,6 +4,7 @@ import MainPage from './views/Main-page'
 import Profile from './views/Profile'
 import Users from './views/Users'
 import User from './views/User'
+import Page404 from './views/Page404'
 
 export default [
     {path: '/', component: Landing},
@@ -12,5 +13,6 @@ export default [
     {path: '/fil', component: MainPage},
     {path: '/profile', component: Profile},
     {path: '/utilisateurs', component: Users},
-    {path: '/utilisateur/:id', component: User}
+    {path: '/utilisateur/:id', component: User},
+    {path: '/introuvable', component: Page404}
 ]
