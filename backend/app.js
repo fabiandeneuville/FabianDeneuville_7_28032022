@@ -43,7 +43,7 @@ app.use('/api/user', userRoutes);
 const postRoutes = require('./routes/post')
 app.use('/api/post', postRoutes);
 
-/* Creating a middleware to handle requests thad add images to the images folder */
+/* Creating a middleware to handle requests that add images to the images folder */
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 /* Exporting the express app to be used on other files */
