@@ -85,7 +85,11 @@ export default {
                 }
             })
             .catch(error => {
-                console.log(error)
+                if(error.response.data.error.name === "TokenExpiredError"){
+                this.$router.push('/login')
+                } else {
+                    console.log(error)
+                }
             })
         },
         commentPost: function(){

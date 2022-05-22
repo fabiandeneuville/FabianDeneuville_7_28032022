@@ -57,9 +57,11 @@ export default {
         .catch(error => {
             if(error.response.data.message = 'Aucune publication !'){
                 this.apiResponseMessage = error.response.data.message;
-            } else {{
+            } else if(error.response.data.error.name === "TokenExpiredError"){
+                this.$router.push('/login')
+            } else {
                 console.log(error)
-            }}
+            }
         })
     },
 }

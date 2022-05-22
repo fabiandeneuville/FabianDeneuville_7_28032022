@@ -91,7 +91,11 @@ export default {
                 this.bio = response.data.bio;
             })
             .catch(error => {
-                console.log(error)
+                if(error.response.data.error.name === "TokenExpiredError"){
+                this.$router.push('/login')
+                } else {
+                    console.log(error)
+                }
             })
         },
         deleteProfile: function(){

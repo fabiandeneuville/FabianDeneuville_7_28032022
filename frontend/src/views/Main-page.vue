@@ -67,7 +67,13 @@
                     this.username = response.data.username
                     this.imageUrl = response.data.imageUrl
                 })
-
+                .catch(error => {
+                    if(error.response.data.error.name === "TokenExpiredError"){
+                        this.$router.push('/login')
+                    } else {
+                        console.log(error)
+                    }
+                })
             }
         }
     }

@@ -62,7 +62,11 @@ export default {
             this.imageUrl = response.data.imageUrl;
         })
         .catch(error => {
-            console.log(error)
+            if(error.response.data.error.name === "TokenExpiredError"){
+                this.$router.push('/login')
+            } else {
+                console.log(error)
+            }
         })
     }
 }
