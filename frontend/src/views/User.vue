@@ -45,32 +45,38 @@ export default {
         'userPostFeed': UserPostFeed,
         'footerBottom': Footer
     },
+    methods: {
+        getUser: function(){
+            const config = {
+                headers: { Authorization: `Bearer ${this.token}` }
+            }
+            axios
+            .get(`http://localhost:3000/api/user/${this.userId}`, config)
+            .then(response => {
+                this.username = response.data.username;
+                this.bio = response.data.bio;
+                this.email = response.data.email;
+                this.imageUrl = response.data.imageUrl;
+            })
+            .catch(error => {
+                console.log(error)
+                console.log(error.status)
+                if(error.response.request.status === 404){
+                    this.$router.push('/introuvable')
+                } else if (error.response.data.error.name === "TokenExpiredError"){
+                    this.$router.push('/login')
+                } else {
+                    console.log(error)
+                }     
+            })
+        }
+    },
     created(){
         this.token = JSON.parse(localStorage.getItem('user')).token;
         this.loggedUserId = JSON.parse(localStorage.getItem('user')).userId;
     },
     mounted(){
-        const config = {
-            headers: { Authorization: `Bearer ${this.token}` }
-        }
-        axios
-        .get(`http://localhost:3000/api/user/${this.userId}`, config)
-        .then(response => {
-            this.username = response.data.username;
-            this.bio = response.data.bio;
-            this.email = response.data.email;
-            this.imageUrl = response.data.imageUrl;
-        })
-        .catch(error => {
-            if(error.response.request.status === 404){
-                this.$router.push('/introuvable')
-            } else if (error.response.data.error.name === "TokenExpiredError"){
-                this.$router.push('/login')
-            } else {
-                console.log(error)
-            }
-            
-        })
+        this.getUser()
     }
 }
 </script>
