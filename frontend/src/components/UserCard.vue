@@ -21,6 +21,7 @@
         </div>
 
         <userDeletionModale
+        @deleteUser="updateUsersList" 
         v-bind:id="id"
         v-bind:reveal="reveal"
         v-bind:token="token"
@@ -70,6 +71,9 @@ export default {
         },
         closeModale: function(){
             this.reveal = false
+        },
+        updateUsersList: function(){
+            this.$emit('updateUsersList')
         }  
     }
 }

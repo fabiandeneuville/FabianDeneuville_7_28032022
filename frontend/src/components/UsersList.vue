@@ -4,7 +4,8 @@
     <div>
         <ul class="usersList">
             <li v-bind:key="index" v-for="(user, index) in allUsers">
-                <userCard 
+                <userCard
+                @updateUsersList="updateUsersList" 
                 v-bind:id="user.id"
                 v-bind:username="user.username"
                 v-bind:role="user.role"
@@ -40,32 +41,37 @@ export default {
     components: {
         'userCard': UserCard
     },
-    mounted(){
-
-        const token = JSON.parse(localStorage.getItem('user')).token
-
-        this.token = JSON.parse(localStorage.getItem('user')).token
-        this.loggedUserRole = JSON.parse(localStorage.getItem('user')).role
-        this.loggedUserId = JSON.parse(localStorage.getItem('user')).userId
+    methods: {
+        getAllUsers: function(){
+            this.token = JSON.parse(localStorage.getItem('user')).token
+            this.loggedUserRole = JSON.parse(localStorage.getItem('user')).role
+            this.loggedUserId = JSON.parse(localStorage.getItem('user')).userId
         
-        const config = {
-        headers: { Authorization: `Bearer ${token}` }
+            const config = {
+                headers: { Authorization: `Bearer ${this.token}` }
+            }
+            axios
+            .get('http://localhost:3000/api/user', config)
+            .then(response => {
+                for(let user of response.data){
+                    this.allUsers.push(user)
+                }
+            })
+            .catch(error => {
+                if(error.response.data.error.name === "TokenExpiredError"){
+                    this.$router.push('/login')
+                } else {
+                    console.log(error)
+                }
+            })
+        },
+        updateUsersList: function(){
+            this.allUsers = []
+            this.getAllUsers()
         }
-        axios
-        .get('http://localhost:3000/api/user', config)
-        .then(response => {
-            for(let user of response.data){
-                this.allUsers.push(user)
-                console.log(user)
-            }
-        })
-        .catch(error => {
-            if(error.response.data.error.name === "TokenExpiredError"){
-                this.$router.push('/login')
-            } else {
-                console.log(error)
-            }
-        })
+    },
+    mounted(){
+        this.getAllUsers()
     }
 }
 

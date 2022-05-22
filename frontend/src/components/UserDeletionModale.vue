@@ -8,7 +8,7 @@
             <h3 class="modale-title">Êtes-vous sûr ?</h3>
             <p>La suppression du profil est irréversible !</p>
             <div v-on:click="closeModale" class="modale-btn cancel-btn">ANNULER</div>
-            <div v-on:click="deletePost" class="modale-btn validate-btn">CONFIRMER</div>
+            <div v-on:click="deleteUser" class="modale-btn validate-btn">CONFIRMER</div>
         </div>
     </div>
 </template>
@@ -24,19 +24,19 @@ export default {
 
         }
     },
-    props: ['reveal', 'token', 'userId'],
+    props: ['reveal', 'token', 'id'],
     methods: {
-        deletePost: function(){
+        deleteUser: function(){
             const config = {
                 headers: { Authorization: `Bearer ${this.token}` }
             };
 
             axios
-            .delete(`http://localhost:3000/api/user/${this.userId}`, 
+            .delete(`http://localhost:3000/api/user/${this.id}`, 
             config)
             .then(response => {
                 console.log(response.data.message)
-                location.reload()
+                this.$emit('deleteUser')
             })
             .catch(error => {
                 console.log(error)
