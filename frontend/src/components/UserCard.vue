@@ -60,7 +60,7 @@ export default {
             .then(response => {
                 console.log(response.data.message)
                 this.apiResponseMessage = response.data.message
-                location.reload()
+                this.$emit('updateUsersList')
             })
             .catch(error => {
                 console.log(error)
