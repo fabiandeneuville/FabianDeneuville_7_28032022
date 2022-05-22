@@ -2,6 +2,7 @@
 
 <template>
     <div class="feed">
+        <h3 class="feed__heading">{{ apiResponseMessage }}</h3>
         <ul>
             <li v-bind:key="index" v-for="(post, index) in allPosts">
                 <post  
@@ -31,6 +32,7 @@ export default {
     data(){
         return {
             allPosts: [],
+            apiResponseMessage: ''
         }
     },
     components: {
@@ -44,8 +46,12 @@ export default {
         axios
         .get('http://localhost:3000/api/post', config)
         .then(response => {
-            for (let post of response.data){
-                this.allPosts.push(post)
+            if(response.data.message === 'Aucun posts !'){
+                this.apiResponseMessage = 'Soyez le premier à publier quelque chose !'
+            } else {
+                for (let post of response.data){
+                    this.allPosts.push(post)
+                }
             }
         })
         .catch(error => {
@@ -66,6 +72,10 @@ export default {
         width: 95%;
         max-width: 600px;
         margin: 0 auto;
+    }
+
+    .feed__heading {
+        padding:15px;
     }
 
     li {

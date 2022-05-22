@@ -42,9 +42,10 @@ exports.getAllPosts = (req, res, next) => {
             res.status(500).json({err});
         }
         if(result.length === 0){
-            return res.status(404).json({message: "Aucun posts !"})
+            return res.status(200).json({message: "Aucun posts !"})
+        } else if (result.length !== 0){
+            return res.status(200).json(result);
         }
-        return res.status(200).json(result);
     })
 };
 
