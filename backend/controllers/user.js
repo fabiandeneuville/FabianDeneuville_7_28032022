@@ -47,7 +47,7 @@ exports.signup = (req, res, next) => {
     if(!emailValidator.validate(email)){
         return res.status(401).json({message: `L'adresse email "${email}" est NON valide !`});
     } else if (!schema.validate(password)){
-        return res.status(401).json({message: "Le mot de passe NON valide. Utilisez des majuscules, minuscules, chiffres et symboles, aucun espace, pour 8(min) à 16(max) caractères"})
+        return res.status(401).json({message: "Le mot de passe est NON valide."})
     } else if (passwordConfirm !== password){
         return res.status(401).json({message: "Les mots de passe ne sont pas identiques !"})
     }
