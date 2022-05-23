@@ -3,12 +3,12 @@
 <template>
     <div>
         <headerTop> </headerTop>
-        <postForm 
-            v-bind:username="username" 
-            v-bind:imageUrl="imageUrl"
-            v-bind:token="token">
-        </postForm>
-        <postFeed> </postFeed>
+        <postFeed
+        v-bind:userId="userId"
+        v-bind:role="role"
+        v-bind:imageUrl="imageUrl"
+        v-bind:username="username"
+        > </postFeed>
         <footerBottom> </footerBottom>
     </div>
 
@@ -19,7 +19,6 @@
     import axios from 'axios'
 
     import Header from '../components/Header'
-    import PostForm from '../components/PostForm'
     import PostFeed from '../components/PostFeed'
     import Footer from '../components/Footer.vue'
 
@@ -30,8 +29,8 @@
                 userId: null,
                 role: null,
                 token: null,
-                username: null,
-                imageUrl: null
+                username:undefined,
+                imageUrl:undefined
             }
         },
         mounted: function(){
@@ -40,7 +39,6 @@
         },
         components: {
             'headerTop' : Header,
-            'postForm' : PostForm,
             'postFeed' : PostFeed,
             'footerBottom' : Footer
         },
@@ -79,8 +77,6 @@
     }
 
 </script>
-
-
 
 <style scoped>
 

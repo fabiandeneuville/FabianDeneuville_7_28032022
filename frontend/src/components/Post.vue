@@ -39,6 +39,7 @@
         </editPostForm>
 
         <postDeletionModale
+        @updatePostList="updatePostList"
         v-bind:showDeletionModale="showDeletionModale"
         v-bind:token="token"
         v-bind:id="id"
@@ -113,9 +114,6 @@ export default {
             this.showEditModale = false;
             this.showPostManagment = false;
         },
-        editPost: function(){
-
-        },
         checkLike: function(){
             const config = {
                 headers: { Authorization: `Bearer ${this.token}` }
@@ -150,6 +148,9 @@ export default {
         getCommentsCount(commentsCount){
             this.commentsCount = commentsCount;
         },
+        updatePostList: function(){
+            this.$emit('updatePostList')
+        }
     },
 }
 

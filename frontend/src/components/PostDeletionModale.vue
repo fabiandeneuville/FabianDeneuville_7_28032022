@@ -26,8 +26,7 @@ export default {
             axios
             .delete(`http://localhost:3000/api/post/${this.id}`, config)
             .then(response => {
-                console.log(response.data.message)
-                location.reload()
+                this.$emit('updatePostList')
             })
             .catch(error => {
                 console.log(error)

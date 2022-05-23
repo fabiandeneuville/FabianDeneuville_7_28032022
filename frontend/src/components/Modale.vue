@@ -18,7 +18,6 @@ export default {
     methods: {
         closeModale: function(){
             this.$emit('closeSuccessModale')
-            location.reload();
         }
     }
 }

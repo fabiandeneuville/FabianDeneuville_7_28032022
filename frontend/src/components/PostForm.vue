@@ -33,11 +33,6 @@
                 <p class="fileMessage" v-if="this.file != ''">Fichier sélectionné : {{ this.file.name }}</p>
             </form>
         </div>
-
-        <modale 
-        v-bind:showSuccessModale="showSuccessModale"
-        v-bind:apiResponseMessage="apiResponseMessage">
-        </modale>
     </div>
 </template>
 
@@ -55,7 +50,6 @@ export default {
             content: null,
             file: '',
             apiResponseMessage: '',
-            showSuccessModale: false
         }
     },
     props: ['username', 'imageUrl', 'token'],
@@ -82,7 +76,8 @@ export default {
                     this.apiResponseMessage = response.data.message
                     this.title = null;
                     this.content = null;
-                    this.showSuccessModale = true;
+                    this.isVisible = false;
+                    this.$emit('updatePostList')
                 })
                 .catch(error =>{
                     console.log(error)
@@ -100,6 +95,7 @@ export default {
                     console.log(response.data.message)
                     this.apiResponseMessage = response.data.message
                     this.showSuccessModale = true;
+                    this.$emit('updatePostList')
                 })
                 .catch(error => {
                     console.log(error)
