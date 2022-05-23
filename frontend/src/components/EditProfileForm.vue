@@ -45,7 +45,6 @@ export default {
     methods: {
         previewFile(event){
             this.file = event.target.files[0]
-            console.log(this.file)
         },
         editProfile: function(){
             const config = {
