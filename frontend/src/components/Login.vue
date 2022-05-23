@@ -9,9 +9,11 @@
                 <router-link to="/signup">Inscription</router-link>
             </div>
             <label class="login__form__label" for="email">Email</label>
-            <input class="login__form__input" v-model="email" type="email" id="email" required>
+            <input class="login__form__input" v-model="email" type="email" id="email" contenteditable spellcheck="false" required>
+
             <label class="login__form__label" for="password">Mot de passe</label>
-            <input class="login__form__input" v-model="password" type="password" id="password" required>
+            <input class="login__form__input" v-model="password" type="password" id="password" contenteditable spellcheck="false" required>
+
             <button class="login__form__submit-btn" v-on:click.prevent="logingIn">Connexion</button>
             <p class="msg">{{ apiResponseMessage }}</p>
         </form>
