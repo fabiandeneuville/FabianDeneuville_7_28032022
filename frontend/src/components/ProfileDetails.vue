@@ -41,9 +41,9 @@
 
         <profileDeletionModale
         v-bind:userId="userId"
-        v-bind:reveal="reveal"
+        v-bind:showDeletionModale="showDeletionModale"
         v-bind:token="token"
-        v-on:closeModale="closeModale()"
+        v-on:closeModale="closeModale"
         >
         </profileDeletionModale>
     </div>
@@ -64,7 +64,7 @@ export default {
             username: '',
             imageUrl: '',
             bio: '', 
-            reveal: false,
+            showDeletionModale: false,
             editFormIsVisible:false,
             passwordFormIsVisible: false
         }
@@ -99,10 +99,10 @@ export default {
             })
         },
         deleteProfile: function(){
-            this.reveal = true
+            this.showDeletionModale = true
         },
         closeModale: function(){
-            this.reveal = false
+            this.showDeletionModale = false
         },
         reloadProfile: function(){
             this.getProfile()

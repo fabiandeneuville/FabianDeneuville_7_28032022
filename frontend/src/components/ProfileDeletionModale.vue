@@ -1,7 +1,7 @@
 /********** PROFILE DELETION MODALE **********/
 
 <template>
-    <div v-if="reveal" class="bloc-modale">
+    <div v-if="showDeletionModale" class="bloc-modale">
         <div v-on:click="closeModale" class="overlay"></div>
         <div class="modale">
             <h3 class="modale-title">Êtes-vous sûr ?</h3>
@@ -23,7 +23,7 @@ export default {
 
         }
     },
-    props: ['reveal', 'token', 'userId'],
+    props: ['showDeletionModale', 'token', 'userId'],
     methods: {
         deletePost: function(){
             const config = {
@@ -34,7 +34,6 @@ export default {
             .delete(`http://localhost:3000/api/user/${this.userId}`, 
             config)
             .then(response => {
-                console.log(response.data.message)
                 this.$router.push('/')
             })
             .catch(error => {
