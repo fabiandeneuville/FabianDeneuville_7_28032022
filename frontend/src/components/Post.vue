@@ -34,6 +34,7 @@
 
         <editPostForm
         @closeEditModale="closeEditModale"
+        @updatePostList="updatePostList"
         v-bind:showEditModale="showEditModale"
         v-bind:id="id">
         </editPostForm>

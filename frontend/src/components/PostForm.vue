@@ -92,9 +92,8 @@ export default {
                 axios
                 .post('http://localhost:3000/api/post', postData, config)
                 .then(response => {
-                    console.log(response.data.message)
                     this.apiResponseMessage = response.data.message
-                    this.showSuccessModale = true;
+                    this.isVisible = false;
                     this.$emit('updatePostList')
                 })
                 .catch(error => {

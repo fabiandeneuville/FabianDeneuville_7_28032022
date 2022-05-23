@@ -27,12 +27,6 @@
                 </div>
                 <p class="fileMessage" v-if="this.file != ''">Fichier sélectionné : {{ this.file.name }}</p>
             </form>
-
-            <modale
-            @closeSuccessModale="closeSuccessModale"
-            v-bind:showSuccessModale="showSuccessModale"
-            v-bind:apiResponseMessage="apiResponseMessage">
-            </modale>
         </div>
     </div>
 
@@ -40,8 +34,6 @@
 </template>
 
 <script>
-
-import Modale from './Modale'
 
 import axios from 'axios'
 
@@ -54,11 +46,7 @@ export default {
             title:undefined,
             content:undefined,
             file:'',
-            showSuccessModale: false
         }
-    },
-    components: {
-        'modale': Modale
     },
     props: ['showEditModale', 'id'],
     methods: {
@@ -103,10 +91,8 @@ export default {
                     content: this.content
                 }, config)
                 .then(response => {
-                    this.apiResponseMessage = response.data.message
-                    this.title = null;
-                    this.content = null;
-                    this.showSuccessModale = true;
+                    this.$emit('closeEditModale')
+                    this.$emit('updatePostList')
                 })
                 .catch(error =>{
                     console.log(error)
@@ -121,9 +107,8 @@ export default {
                 axios
                 .put(`http://localhost:3000/api/post/${this.id}`, postData, config)
                 .then(response => {
-                    console.log(response.data.message)
-                    this.apiResponseMessage = response.data.message
-                    this.showSuccessModale = true;
+                    this.$emit('closeEditModale')
+                    this.$emit('updatePostList')
                 })
                 .catch(error => {
                     console.log(error)
