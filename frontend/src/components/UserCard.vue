@@ -58,7 +58,6 @@ export default {
             axios
             .put(`http://localhost:3000/api/user/${this.id}/role`, data, config)
             .then(response => {
-                console.log(response.data.message)
                 this.apiResponseMessage = response.data.message
                 this.$emit('updateUsersList')
             })
