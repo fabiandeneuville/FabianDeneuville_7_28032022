@@ -2,7 +2,7 @@
 
 <template>
     <div class="feed">
-        <h3 class="feed__heading">{{ apiResponseMessage }}</h3>
+        <h3 v-if="apiResponseMessage !== ''" class="feed__heading">{{ apiResponseMessage }}</h3>
         <ul>
             <li v-bind:key="index" v-for="(post, index) in allPosts">
                 <post  
