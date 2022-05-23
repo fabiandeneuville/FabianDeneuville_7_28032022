@@ -11,7 +11,7 @@
                 </div>
                 <div class="edit__form__bloc">
                     <label class="edit__form__label" for="content">Bio :</label>
-                    <textarea v-model="newBio" class="edit__form__textarea" type="text" id="bio" contenteditable spellcheck="false"></textarea>
+                    <textarea v-model="newBio" class="edit__form__textarea" type="text" id="bio" contenteditable spellcheck="false" placeholder="Dites-nous en plus sur vous."></textarea>
                 </div>
                 <div class="edit__form__bloc btn__bloc__container">
                     <div class="btn__bloc">

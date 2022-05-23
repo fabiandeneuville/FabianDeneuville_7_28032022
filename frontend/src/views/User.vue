@@ -14,7 +14,8 @@
             </a>
         </div>
         <userPostFeed
-        v-bind:userId="this.userId"></userPostFeed>
+        v-bind:userId="this.userId">
+        </userPostFeed>
         <footerBottom></footerBottom>
     </div>
 </template>
