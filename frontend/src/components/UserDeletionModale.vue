@@ -1,7 +1,7 @@
 /********** USER DELETION MODALE **********/
 
 <template>
-    <div v-if="reveal" class="bloc-modale">
+    <div v-if="showDeletionModale" class="bloc-modale">
         <div v-on:click="closeModale" class="overlay"></div>
         
         <div class="modale">
@@ -24,7 +24,7 @@ export default {
 
         }
     },
-    props: ['reveal', 'token', 'id'],
+    props: ['showDeletionModale', 'token', 'id'],
     methods: {
         deleteUser: function(){
             const config = {
@@ -35,7 +35,6 @@ export default {
             .delete(`http://localhost:3000/api/user/${this.id}`, 
             config)
             .then(response => {
-                console.log(response.data.message)
                 this.$emit('deleteUser')
             })
             .catch(error => {

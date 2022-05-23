@@ -23,7 +23,7 @@
         <userDeletionModale
         @deleteUser="updateUsersList" 
         v-bind:id="id"
-        v-bind:reveal="reveal"
+        v-bind:showDeletionModale="showDeletionModale"
         v-bind:token="token"
         v-on:closeModale="closeModale()"
         >
@@ -41,7 +41,7 @@ export default {
     name:'UserCard',
     data(){
         return {
-            reveal: false,
+            showDeletionModale: false,
             apiResponseMessage: undefined
         }
     },
@@ -66,10 +66,10 @@ export default {
             })
         },
         deleteProfile: function(){
-            this.reveal = true
+            this.showDeletionModale = true
         },
         closeModale: function(){
-            this.reveal = false
+            this.showDeletionModale = false
         },
         updateUsersList: function(){
             this.$emit('updateUsersList')

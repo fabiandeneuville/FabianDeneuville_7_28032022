@@ -16,17 +16,10 @@
             <button v-on:click.prevent="changePassword" class="password__change__form-btn">Valider</button>
 
         </form>
-        <successModale 
-        v-bind:reveal="reveal"
-        v-bind:apiResponseMessage="apiResponseMessage"
-        >
-        </successModale>
     </div>
 </template>
 
 <script>
-
-import Modale from './Modale'
 
 import axios from 'axios'
 
@@ -37,11 +30,7 @@ export default {
             password:'',
             passwordConfirm:'',
             apiResponseMessage:'',
-            reveal: false
         }
-    },
-    components: {
-        'successModale': Modale
     },
     props: ['userId', 'token'],
     methods: {
@@ -56,7 +45,8 @@ export default {
             }, config)
             .then(response => {
                 this.apiResponseMessage = response.data.message
-                this.reveal = true;
+                this.password = ''
+                this.passwordConfirm = ''
             })
             .catch(error => {
                 this.apiResponseMessage = error.response.data.message
