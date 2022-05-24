@@ -7,6 +7,7 @@
 </template>
 
 <script>
+
 export default {
     name: 'Footer',
     data(){
@@ -20,19 +21,5 @@ export default {
         this.year = currentYear;
     }
 }
+
 </script>
-
-<style scoped>
-
-    .footer__bloc {
-        display: block;
-        margin-top: 10px;
-        height: 100px;
-        width: 100%;
-        color: #332;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-</style>
