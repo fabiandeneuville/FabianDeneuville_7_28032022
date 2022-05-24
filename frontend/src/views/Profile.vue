@@ -22,8 +22,8 @@ export default {
     name: 'Profile',
     data(){
         return {
-            userId:'',
-            token:''
+            userId:this.$store.state.userId,
+            token:this.$store.state.token
         }
     },
     components: {
@@ -31,11 +31,6 @@ export default {
         'footerBottom': Footer,
         'profileDetails': ProfileDetails
     },
-    created(){
-        const user = JSON.parse(localStorage.getItem('user'));
-        this.userId = user.userId;
-        this.token = user.token;
-    }
 }
 </script>
 

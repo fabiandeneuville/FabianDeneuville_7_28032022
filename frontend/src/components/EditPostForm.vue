@@ -42,7 +42,7 @@ export default {
     name:'EditPostForm',
     data(){
         return {
-            token:undefined,
+            token:this.$store.state.token,
             apiResponseMessage:'',
             title:'',
             content:'',
@@ -51,9 +51,6 @@ export default {
     },
     props: ['showEditModale', 'id'],
     methods: {
-        getFromLocalStorage: function(){
-            this.token = JSON.parse(localStorage.getItem('user')).token
-        },
         closeEditModale: function(){
             this.$emit('closeEditModale')
         },
@@ -123,7 +120,6 @@ export default {
         }
     },
     mounted(){
-        this.getFromLocalStorage()
         this.getPost()
     }
 }

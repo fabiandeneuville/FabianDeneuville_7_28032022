@@ -45,9 +45,9 @@ export default {
     data(){
         return {
             allComments: [],
-            token: undefined,
-            loggedUserRole: undefined,
-            loggedUserId: undefined,
+            token: this.$store.state.token,
+            loggedUserRole: this.$store.state.role,
+            loggedUserId: this.$store.state.userId,
             heading: "Tous les commentaires",
             comment: '',
             commentsCounts: 0,
@@ -61,11 +61,6 @@ export default {
     methods: {
         closeCommentModale: function(){
             this.$emit('closeCommentModale')
-        },
-        getFromLocalStotage: function(){
-            this.token = JSON.parse(localStorage.getItem('user')).token
-            this.loggedUserRole = JSON.parse(localStorage.getItem('user')).role
-            this.loggedUserId = JSON.parse(localStorage.getItem('user')).userId
         },
         getAllComments: function(){
 
@@ -95,9 +90,8 @@ export default {
             })
         },
         commentPost: function(){
-            const token = JSON.parse(localStorage.getItem('user')).token
             const config = {
-                headers: { Authorization: `Bearer ${token}` }
+                headers: { Authorization: `Bearer ${this.token}` }
             }
 
             axios
@@ -121,7 +115,6 @@ export default {
         }
     },
     mounted(){
-        this.getFromLocalStotage()
         this.getAllComments()       
     },
 }

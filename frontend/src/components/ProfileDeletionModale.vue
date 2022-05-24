@@ -18,11 +18,6 @@ import axios from 'axios'
 
 export default {
     name: 'ProfileDeletion',
-    data(){
-        return {
-
-        }
-    },
     props: ['showDeletionModale', 'token', 'userId'],
     methods: {
         deletePost: function(){

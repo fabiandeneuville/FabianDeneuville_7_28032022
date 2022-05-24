@@ -69,9 +69,9 @@ export default {
     name:'Post',
     data(){
         return {
-            loggedUserId: null,
-            loggedUserRole: null,
-            token: null,
+            loggedUserId: this.$store.state.userId,
+            loggedUserRole: this.$store.state.role,
+            token: this.$store.state.token,
             showPostManagment: false,
             showDeletionModale: false,
             showEditModale: false,
@@ -88,7 +88,6 @@ export default {
     },
     props: ['id', 'user_Id', 'title', 'content', 'imageUrl', 'username', 'date', 'likes'],
     mounted: function(){
-        this.getFromLocalStorage()
         this.checkLike()
         this.getCommentsCount()
     },
@@ -96,12 +95,6 @@ export default {
         this.checkLike()
     },
     methods: {
-        getFromLocalStorage(){
-            const user = JSON.parse(localStorage.getItem('user'))
-            this.loggedUserId = user.userId;
-            this.loggedUserRole = user.role;
-            this.token = user.token
-        },
         toPostDeletion: function(){
             this.showDeletionModale = true;
         },

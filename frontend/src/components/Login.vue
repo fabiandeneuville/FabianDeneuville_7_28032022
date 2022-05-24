@@ -37,14 +37,6 @@
             }
         },
         methods: {
-            toLocalStorage: function(){
-                const user = {
-                    'userId': this.userId,
-                    'role': this.role,
-                    'token': this.token
-                }
-                localStorage.setItem('user', JSON.stringify(user));
-            },
             logingIn: function(){
                 axios
                 .post('http://localhost:3000/api/user/login', {
@@ -52,11 +44,9 @@
                     password: this.password,
                 })
                 .then(response => {
-                    this.userId = response.data.userId
-                    this.role = response.data.role
-                    this.token = response.data.token
-                    this.apiResponseMessage = "Connexion réussie"
-                    this.toLocalStorage();
+                    this.$store.commit('SET_USER_ROLE', response.data.role)
+                    this.$store.commit('SET_USER_ID', response.data.userId)
+                    this.$store.commit('SET_USER_TOKEN', response.data.token)
                     this.$router.push('/fil')
                 })
                 .catch(error => {

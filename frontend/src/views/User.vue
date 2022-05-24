@@ -33,12 +33,12 @@ export default {
     data(){
         return {
             userId: this.$route.params.id,
-            token: undefined,
+            token: this.$store.state.token,
             username: undefined,
             bio: undefined,
             email: undefined,
             imageUrl: undefined,
-            loggedUserId: undefined,
+            loggedUserId: this.$store.state.userId,
         }
     },
     components: {
@@ -71,10 +71,6 @@ export default {
                 }     
             })
         }
-    },
-    created(){
-        this.token = JSON.parse(localStorage.getItem('user')).token;
-        this.loggedUserId = JSON.parse(localStorage.getItem('user')).userId;
     },
     mounted(){
         this.getUser()

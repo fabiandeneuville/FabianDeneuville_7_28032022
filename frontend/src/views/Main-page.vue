@@ -26,33 +26,22 @@
         name: 'MainPage',
         data(){
             return {
-                userId: null,
-                role: null,
-                token: null,
+                userId: this.$store.state.userId,
+                role: this.$store.state.role,
+                token: this.$store.state.token,
                 username:undefined,
                 imageUrl:undefined
             }
-        },
-        mounted: function(){
-            this.fromLocalStorage()
-            this.getOneUser()
         },
         components: {
             'headerTop' : Header,
             'postFeed' : PostFeed,
             'footerBottom' : Footer
         },
+        mounted: function(){
+            this.getOneUser()
+        },
         methods: {
-            fromLocalStorage: function(){
-                const user = JSON.parse(localStorage.getItem('user'))
-                if(user){
-                    this.userId = user.userId
-                    this.role = user.role
-                    this.token = user.token
-                } else {
-                    this.$router.push('/login')
-                }
-            },
             getOneUser: function(){
 
                 const config = {

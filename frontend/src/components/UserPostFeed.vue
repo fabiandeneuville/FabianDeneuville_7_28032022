@@ -32,6 +32,7 @@ export default {
     data(){
         return {
             userPosts: [],
+            token: this.$store.state.token,
             apiResponseMessage: undefined
         }
     },
@@ -40,11 +41,9 @@ export default {
         'post': Post
     },
     mounted(){
-
-        const token = JSON.parse(localStorage.getItem('user')).token
         
         const config = {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${this.token}` }
         }
         axios
         .get(`http://localhost:3000/api/post/user/${this.userId}`, config)

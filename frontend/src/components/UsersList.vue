@@ -33,9 +33,9 @@ export default {
     data(){
         return {
             allUsers: [],
-            loggedUserRole: undefined,
-            loggedUserId: undefined,
-            token: undefined
+            loggedUserRole: this.$store.state.role,
+            loggedUserId: this.$store.state.userId,
+            token: this.$store.state.token
         }
     },
     components: {
@@ -43,10 +43,7 @@ export default {
     },
     methods: {
         getAllUsers: function(){
-            this.token = JSON.parse(localStorage.getItem('user')).token
-            this.loggedUserRole = JSON.parse(localStorage.getItem('user')).role
-            this.loggedUserId = JSON.parse(localStorage.getItem('user')).userId
-        
+                 
             const config = {
                 headers: { Authorization: `Bearer ${this.token}` }
             }

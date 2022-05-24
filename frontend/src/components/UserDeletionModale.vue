@@ -19,11 +19,6 @@ import axios from 'axios'
 
 export default {
     name: 'UserDeletion',
-    data(){
-        return {
-
-        }
-    },
     props: ['showDeletionModale', 'token', 'id'],
     methods: {
         deleteUser: function(){

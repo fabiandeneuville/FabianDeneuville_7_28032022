@@ -6,7 +6,8 @@
             @updatePostList="updatePostList" 
             v-bind:username="username" 
             v-bind:imageUrl="imageUrl"
-            v-bind:token="token">
+            v-bind:token="token"
+            >
         </postForm>
         <div class="feed">
             <h3 v-if="apiResponseMessage !== ''" class="feed__heading">{{ apiResponseMessage }}</h3>
@@ -43,7 +44,7 @@ export default {
         return {
             allPosts: [],
             apiResponseMessage: '',
-            token: undefined
+            token: this.$store.state.token
         }
     },
     props:['userId', 'imageUrl', 'username'],
@@ -53,7 +54,7 @@ export default {
     },
     methods: {
         getAllPosts: function(){
-            this.token = JSON.parse(localStorage.getItem('user')).token
+            
             const config = {
                 headers: { Authorization: `Bearer ${this.token}` }
             }

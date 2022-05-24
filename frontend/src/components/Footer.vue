@@ -11,7 +11,7 @@ export default {
     name: 'Footer',
     data(){
         return {
-            year: null
+            year: null,
         }
     }, 
     mounted(){

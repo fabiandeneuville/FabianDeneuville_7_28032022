@@ -44,8 +44,8 @@
         
         methods: {
             logOut: function(){
-                localStorage.removeItem('user')
                 this.$router.push('/login')
+                localStorage.clear()
             }
         },
         created(){
