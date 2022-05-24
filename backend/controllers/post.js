@@ -142,21 +142,29 @@ exports.modifyPost = (req, res, next) => {
                 const newTitle = post.title;
                 const newContent = post.content;
                 const imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
-                mysql.query(`UPDATE post SET title = '${newTitle}', content = '${newContent}', imageUrl = '${imageUrl}' WHERE id = ${id}`, (err, result, fields) => {
-                    if(err){
-                        return res.status(500).json({err});
-                    }
-                    return res.status(201).json({message: "Post mis à jour !"});
-                })
+                if(newTitle === '' || newContent === ''){
+                    return res.status(403).json({message: "Veuillez renseigner un titre et un message !"})
+                } else {
+                    mysql.query(`UPDATE post SET title = '${newTitle}', content = '${newContent}', imageUrl = '${imageUrl}' WHERE id = ${id}`, (err, result, fields) => {
+                        if(err){
+                            return res.status(500).json({err});
+                        }
+                        return res.status(201).json({message: "Post mis à jour !"});
+                    })
+                }
             } else {
                 const newTitle = req.body.title;
                 const newContent = req.body.content;
-                mysql.query(`UPDATE post SET title = '${newTitle}', content = '${newContent}' WHERE id = ${id}`, (err, result, fields) => {
-                    if(err){
-                        return res.status(500).json({err});
-                    }
-                    return res.status(201).json({message: "Post mis à jour !"});
-                })
+                if(newTitle === '' || newContent === ''){
+                    return res.status(403).json({message: "Veuillez renseigner un titre et un message !"})
+                } else {
+                    mysql.query(`UPDATE post SET title = '${newTitle}', content = '${newContent}' WHERE id = ${id}`, (err, result, fields) => {
+                        if(err){
+                            return res.status(500).json({err});
+                        }
+                        return res.status(201).json({message: "Post mis à jour !"});
+                    })
+                }
             }
         } else {
             if(req.file){
@@ -165,23 +173,31 @@ exports.modifyPost = (req, res, next) => {
                 const newContent = post.content;
                 const imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
                 const filename = result[0].imageUrl.split('/images/')[1];
-                fs.unlink(`images/${filename}`, () => {
-                    mysql.query(`UPDATE post SET title = '${newTitle}', content = '${newContent}', imageUrl = '${imageUrl}' WHERE id = ${id}`, (err, result, fields) => {
+                if(newTitle === '' || newContent === ''){
+                    return res.status(403).json({message: "Veuillez renseigner un titre et un message !"})
+                } else {
+                    fs.unlink(`images/${filename}`, () => {
+                        mysql.query(`UPDATE post SET title = '${newTitle}', content = '${newContent}', imageUrl = '${imageUrl}' WHERE id = ${id}`, (err, result, fields) => {
+                            if(err){
+                                return res.status(500).json({err});
+                            }
+                            return res.status(201).json({message: "Post mis à jour !"})
+                        })
+                    })
+                }
+            } else {
+                const newTitle = req.body.title;
+                const newContent = req.body.content;
+                if(newTitle === '' || newContent === ''){
+                    return res.status(403).json({message: "Veuillez renseigner un titre et un message !"})
+                } else {
+                    mysql.query(`UPDATE post SET title = '${newTitle}', content = '${newContent}' WHERE id = ${id}`, (err, result, fields) => {
                         if(err){
                             return res.status(500).json({err});
                         }
                         return res.status(201).json({message: "Post mis à jour !"})
                     })
-                })
-            } else {
-                const newTitle = req.body.title;
-                const newContent = req.body.content;
-                mysql.query(`UPDATE post SET title = '${newTitle}', content = '${newContent}' WHERE id = ${id}`, (err, result, fields) => {
-                    if(err){
-                        return res.status(500).json({err});
-                    }
-                    return res.status(201).json({message: "Post mis à jour !"})
-                })
+                }
             }
         }
     })

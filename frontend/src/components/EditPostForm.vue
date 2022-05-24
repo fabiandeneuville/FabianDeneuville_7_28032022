@@ -26,6 +26,7 @@
                     </div>
                 </div>
                 <p class="fileMessage" v-if="this.file != ''">Fichier sélectionné : {{ this.file.name }}</p>
+                <p class="error__message">{{ apiResponseMessage }}</p> 
             </form>
         </div>
     </div>
@@ -42,9 +43,9 @@ export default {
     data(){
         return {
             token:undefined,
-            apiResponseMessage:undefined,
-            title:undefined,
-            content:undefined,
+            apiResponseMessage:'',
+            title:'',
+            content:'',
             file:'',
         }
     },
@@ -94,7 +95,8 @@ export default {
                     this.$emit('closeEditModale')
                     this.$emit('updatePostList')
                 })
-                .catch(error =>{
+                .catch(error => {
+                    this.apiResponseMessage = error.response.data.message
                     console.log(error)
                 })
             } else {
@@ -112,7 +114,7 @@ export default {
                 })
                 .catch(error => {
                     console.log(error)
-                    this.apiResponseMessage = 'Une erreur est survenue !'
+                    this.apiResponseMessage = error.response.data.message
                 })
             }
         },
