@@ -17,21 +17,29 @@ exports.createPost = (req, res, next) => {
         const title = post.title;
         const content = post.content;
         const imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
-        mysql.query(`INSERT INTO post (title, content, imageUrl, date, user_Id) VALUES (?, ?, ?, NOW(), ?)`, [title, content, imageUrl, userId], (err, result, fields) => {
-            if(err){
-                return res.status(500).json({err});
-            }
-            return res.status(201).json({message: "Post publié !"})
-        })
+        if(post.title === '' || post.content === ''){
+            return res.status(403).json({message: "Veuillez renseigner un titre et un message !"})
+        } else {
+            mysql.query(`INSERT INTO post (title, content, imageUrl, date, user_Id) VALUES (?, ?, ?, NOW(), ?)`, [title, content, imageUrl, userId], (err, result, fields) => {
+                if(err){
+                    return res.status(500).json({err});
+                }
+                return res.status(201).json({message: "Post publié !"})
+            })
+        }
     } else {
         const title = req.body.title;
         const content = req.body.content;
-        mysql.query(`INSERT INTO post (title, content, date, user_Id) VALUES (?, ?, NOW(), ?)`, [title, content, userId], (err, result, fields) => {
-            if(err){
-                return res.status(500).json({err});
-            }
-            return res.status(201).json({message: "Post publié !"})
-        });
+        if(title === '' || content === ''){
+            return res.status(403).json({message: "Veuillez renseigner un titre et un message !"})
+        } else {
+            mysql.query(`INSERT INTO post (title, content, date, user_Id) VALUES (?, ?, NOW(), ?)`, [title, content, userId], (err, result, fields) => {
+                if(err){
+                    return res.status(500).json({err});
+                }
+                return res.status(201).json({message: "Post publié !"})
+            });
+        }
     }
 };
 

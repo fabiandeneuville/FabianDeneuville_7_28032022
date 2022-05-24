@@ -31,6 +31,7 @@
                     </div>
                 </div>
                 <p class="fileMessage" v-if="this.file != ''">Fichier sélectionné : {{ this.file.name }}</p>
+                <p class="error__message">{{ apiResponseMessage }}</p> 
             </form>
         </div>
     </div>
@@ -46,8 +47,8 @@ export default {
     data(){
         return {
             isVisible: false,
-            title: null,
-            content: null,
+            title: '',
+            content: '',
             file: '',
             apiResponseMessage: '',
         }
@@ -73,13 +74,14 @@ export default {
                     content: this.content
                 }, config)
                 .then(response => {
-                    this.apiResponseMessage = response.data.message
-                    this.title = null;
-                    this.content = null;
+                    this.apiResponseMessage = ''
+                    this.title = '';
+                    this.content = '';
                     this.isVisible = false;
                     this.$emit('updatePostList')
                 })
-                .catch(error =>{
+                .catch(error => {
+                    this.apiResponseMessage = error.response.data.message
                     console.log(error)
                 })
             } else {
@@ -92,13 +94,16 @@ export default {
                 axios
                 .post('http://localhost:3000/api/post', postData, config)
                 .then(response => {
-                    this.apiResponseMessage = response.data.message
+                    this.title = '';
+                    this.content = '';
+                    this.file = '';
+                    this.apiResponseMessage = ''
                     this.isVisible = false;
                     this.$emit('updatePostList')
                 })
                 .catch(error => {
                     console.log(error)
-                    this.apiResponseMessage = 'Une erreur est survenue !'
+                    this.apiResponseMessage = error.response.data.message
                 })
             }
         }
@@ -249,6 +254,10 @@ export default {
 
     .fileMessage {
         padding: 10px;
+    }
+
+    .error__message {
+        padding:10px;
     }
 
 </style>
