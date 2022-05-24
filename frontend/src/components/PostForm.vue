@@ -158,20 +158,16 @@ export default {
     }
 
     .avatar__container {
-        border:2px solid #333;
+        border:3px solid #333;
         border-radius:50%;
         height:50px;
         width:50px;
         overflow: hidden;
-        object-fit: cover;
     }
     .avatar {
-        width:auto;
         height: 100%;
-        position: relative;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,-50%);
+        width: 100%;
+        object-fit: cover;
     }
 
     .post__form {

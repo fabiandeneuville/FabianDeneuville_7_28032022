@@ -141,7 +141,6 @@ export default {
     .profile__img__container {
         width:150px;
         height:150px;
-        object-fit: cover;
         border-radius:50%;
         border:4px solid rgb(233, 68, 37);
         overflow: hidden;
@@ -149,10 +148,8 @@ export default {
 
     .profile__img {
         height:100%;
-        position:relative;
-        top:50%;
-        left:50%;
-        transform:translate(-50%, -50%)
+        width: 100%;
+        object-fit: cover;
     }
 
     .profile__username {
