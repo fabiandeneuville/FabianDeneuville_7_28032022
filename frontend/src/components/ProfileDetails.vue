@@ -24,6 +24,7 @@
             </div>
         </div>
         <editProfileForm
+        @closeForm="closeEditForm"
         @reloadProfile="reloadProfile"
         v-if="editFormIsVisible"
         v-bind:username="username"
@@ -34,6 +35,7 @@
         >
         </editProfileForm>
         <changePasswordForm
+        @closeForm="closePasswordForm"
         v-bind:userId="userId"
         v-bind:token="token"
         v-if="passwordFormIsVisible">
@@ -103,6 +105,12 @@ export default {
         },
         closeModale: function(){
             this.showDeletionModale = false
+        },
+        closeEditForm: function(){
+            this.editFormIsVisible = false
+        },
+        closePasswordForm: function(){
+            this.passwordFormIsVisible = false
         },
         reloadProfile: function(){
             this.getProfile()

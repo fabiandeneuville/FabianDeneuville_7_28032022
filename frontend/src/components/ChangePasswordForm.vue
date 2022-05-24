@@ -2,6 +2,7 @@
 
 <template>
     <div class="form__container">
+        <div v-on:click="closeForm" class="close-btn"><i class="fa-solid fa-xmark"></i></div>
         <form class="password__change__form">
             <h3 class="password__change__form__heading">Changement du mot de passe</h3>
             <div class="password__change__form__bloc">
@@ -51,6 +52,9 @@ export default {
             .catch(error => {
                 this.apiResponseMessage = error.response.data.message
             })
+        },
+        closeForm: function(){
+            this.$emit('closeForm')
         }
     }
 }
@@ -60,6 +64,7 @@ export default {
 <style scoped>
 
     .form__container{
+        position:relative;
         display: block;
         width:95%;
         max-width: 600px;
@@ -113,6 +118,19 @@ export default {
         color: green;
         border: 2px solid green;
         box-shadow: 2px 2px 5px lightgray;
+    }
+
+    .close-btn {
+        position:absolute;
+        top:10px;
+        right:15px;
+        color: red;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .close-btn:hover {
+        transform: scale(1.2);
     }
 
 </style>

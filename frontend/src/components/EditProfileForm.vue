@@ -3,6 +3,7 @@
 <template>
     <div>
         <div class="edit__form__container">
+            <div v-on:click="closeForm" class="close-btn"><i class="fa-solid fa-xmark"></i></div>
             <form class="edit__form">
                 <h3 class="edit__form__heading">Edition du profil</h3>
                 <div class="edit__form__bloc">
@@ -88,6 +89,9 @@ export default {
                     console.log(error)
                 })
             }
+        },
+        closeForm: function(){
+            this.$emit('closeForm')
         }
     }
 }
@@ -97,6 +101,7 @@ export default {
 <style scoped>
 
     .edit__form__container {
+        position:relative;
         margin:20px auto 10px auto;
         width:95%;
         max-width: 600px;
@@ -194,6 +199,19 @@ export default {
 
     .fileMessage {
         padding: 10px;
+    }
+
+    .close-btn {
+        position:absolute;
+        top:10px;
+        right:15px;
+        color: red;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .close-btn:hover {
+        transform: scale(1.2);
     }
 
 </style>
