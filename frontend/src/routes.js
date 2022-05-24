@@ -14,5 +14,6 @@ export default [
     {path: '/profile', component: Profile},
     {path: '/utilisateurs', component: Users},
     {path: '/utilisateur/:id', component: User},
-    {path: '/introuvable', component: Page404}
+    {path: '/introuvable', component: Page404},
+    {path: '*', component: Page404}
 ]
