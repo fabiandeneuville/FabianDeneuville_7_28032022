@@ -6,6 +6,8 @@
 
 <script>
 
+import '../public/style/main.scss'
+
 import Landing from './views/Landing'
 
 export default {
