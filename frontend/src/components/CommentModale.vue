@@ -29,6 +29,7 @@
                 <input v-model="comment" class="comment__form__input" type="text" id="comment" placeholder="Écrivez un commentaire ..." required>
                 <button v-on:click.prevent="commentPost" class="comment__btn"><i class="fa-solid fa-paper-plane"></i></button>
             </form>
+            <p class="error__message">{{ apiResponseMessage }}</p>
         </div>
     </div>
 </template>
@@ -48,8 +49,9 @@ export default {
             loggedUserRole: undefined,
             loggedUserId: undefined,
             heading: "Tous les commentaires",
-            comment: undefined,
-            commentsCounts: 0
+            comment: '',
+            commentsCounts: 0,
+            apiResponseMessage:''
         }
     },
     components: {
@@ -103,12 +105,14 @@ export default {
                 content: this.comment
             }, config)
             .then(response => {
+                this.apiResponseMessage = ''
                 this.allComments = []
                 this.comment = ''
                 this.getAllComments()
             })
             .catch(error => {
                 console.log(error)
+                this.apiResponseMessage = error.response.data.message
             })
         },
         commentDeleted: function(){
@@ -220,6 +224,10 @@ export default {
     .comment__btn:hover {
         color: rgb(233, 68, 37);
         transform: scale(1.2);
+    }
+
+    .error__message {
+        padding:10px;
     }
 
 </style>

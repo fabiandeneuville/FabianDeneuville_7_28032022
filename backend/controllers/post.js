@@ -210,12 +210,16 @@ exports.createComment = (req, res, next) => {
     const userId = req.auth.userId;
     const postId = req.params.id;
     const content = req.body.content;
-    mysql.query(`INSERT INTO comment (content, date, post_id, user_id) VALUES (?, NOW(), ?, ?)`, [content, postId, userId] , (err, result, fields) => {
-        if(err){
-            return res.status(500).json({err});
-        }
-        return res.status(201).json({message: "Commentaire publié !"})
-    });
+    if(content === ''){
+        return res.status(403).json({message: "Veuillez renseigner un commentaire !"})
+    } else {
+        mysql.query(`INSERT INTO comment (content, date, post_id, user_id) VALUES (?, NOW(), ?, ?)`, [content, postId, userId] , (err, result, fields) => {
+            if(err){
+                return res.status(500).json({err});
+            }
+            return res.status(201).json({message: "Commentaire publié !"})
+        });
+    }
 };
 
 /***** GET ALL COMMENTS FROM ONE POST *****/
