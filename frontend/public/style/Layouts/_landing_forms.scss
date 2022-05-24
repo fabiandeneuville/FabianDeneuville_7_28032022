@@ -1,0 +1,44 @@
+.signup, .login{
+    background: white;
+    width:80%;
+    max-width: 500px;
+    margin: auto;
+    border-radius:15px;
+    box-shadow: 5px 2px 25px 5px #333;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        width:90%;
+        margin: 0 auto;
+        padding:20px;
+
+        &__label {
+            margin: 15px 0px 5px;
+        }
+
+        &__input {
+            width:90%;
+            margin: 5px auto;
+            padding: 5px;
+            height:30px;
+            border: 2px solid $color-secondary;
+        }
+
+        &__submit-btn {
+            margin: 15px auto 25px;
+            width:120px;
+            font-size: 20px;
+            border-radius:50px;
+            border: 2px solid #333;
+            color: #333;
+            cursor: pointer;
+
+            &:hover {
+                color: $color-primary;
+                background-color: $color-tertiary;
+                box-shadow: 2px 2px 5px $color-tertiary;
+            }
+        }
+    }
+}
