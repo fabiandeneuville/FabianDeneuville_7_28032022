@@ -251,55 +251,63 @@ exports.modifyUser = (req, res, next) => {
         const newUsername = user.username;
         const newBio = user.bio;
         const newImageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
-        mysql.query(`SELECT * FROM user WHERE id = ${userId}`, (err, result, fields) => {
-            if(err){
-                return res.status(404).json({err})
-            }
-            if(result.length === 0){
-                return res.status(404).json({message: "Utilisateur introuvable !"});
-            }
-            if(id != userId){
-                return res.status(403).json({message: "Requête non autorisée !"})
-            }
-            const filename = result[0].imageUrl.split('/images/')[1];
-            if(filename != "default_avatar.png"){
-                fs.unlink(`images/${filename}`, () => {
-                    mysql.query(`UPDATE user SET username = ?, bio = ?, imageUrl = ? WHERE id = ${userId}`, [newUsername, newBio, newImageUrl], (err, result, fields) => {
+        if(newUsername === '' || newBio === ''){
+            return res.status(403).json({message: "Veuillez renseigner un nom d'utilisateur et une bio !"})
+        } else {
+            mysql.query(`SELECT * FROM user WHERE id = ${userId}`, (err, result, fields) => {
+                if(err){
+                    return res.status(404).json({err})
+                }
+                if(result.length === 0){
+                    return res.status(404).json({message: "Utilisateur introuvable !"});
+                }
+                if(id != userId){
+                    return res.status(403).json({message: "Requête non autorisée !"})
+                }
+                const filename = result[0].imageUrl.split('/images/')[1];
+                if(filename != "default_avatar.png"){
+                    fs.unlink(`images/${filename}`, () => {
+                        mysql.query(`UPDATE user SET username = ?, bio = ?, imageUrl = ? WHERE id = ${userId}`, [newUsername, newBio, newImageUrl], (err, result, fields) => {
+                            if(err){
+                                return res.status(500).json({err})
+                            }
+                            return res.status(201).json({message: "Profil mis à jour !"})
+                        })    
+                    })
+                } else {
+                    mysql.query(`UPDATE user SET username = ?, bio = ?, imageUrl = ? WHERE id = ${userId}`, [newUsername, newBio, newImageUrl],(err, result, fields) => {
                         if(err){
                             return res.status(500).json({err})
                         }
                         return res.status(201).json({message: "Profil mis à jour !"})
-                    })    
-                })
-            } else {
-                mysql.query(`UPDATE user SET username = ?, bio = ?, imageUrl = ? WHERE id = ${userId}`, [newUsername, newBio, newImageUrl],(err, result, fields) => {
+                    }) 
+                }
+            })
+        }
+    } else {
+        const newUsername = req.body.username;
+        const newBio = req.body.bio;
+        if(newUsername === '' || newBio === '' ){
+            return res.status(403).json({message: "Veuillez renseigner un nom d'utilisateur et une bio !"})
+        } else {
+            mysql.query(`SELECT * FROM user WHERE id = ${userId}`, (err, result, fields) => {
+                if(err){
+                    return res.status(404).json({err})
+                }
+                if(result.length === 0){
+                    return res.status(404).json({message: "Utilisateur introuvable !"});
+                }
+                if(id != userId){
+                    return res.status(403).json({message: "Requête non autorisée !"})
+                }
+                mysql.query(`UPDATE user SET username = ?, bio = ? WHERE id = ${userId}`, [newUsername, newBio], (err, result, fields) => {
                     if(err){
                         return res.status(500).json({err})
                     }
                     return res.status(201).json({message: "Profil mis à jour !"})
-                }) 
-            }
-        })
-    } else {
-        const newUsername = req.body.username;
-        const newBio = req.body.bio;
-        mysql.query(`SELECT * FROM user WHERE id = ${userId}`, (err, result, fields) => {
-            if(err){
-                return res.status(404).json({err})
-            }
-            if(result.length === 0){
-                return res.status(404).json({message: "Utilisateur introuvable !"});
-            }
-            if(id != userId){
-                return res.status(403).json({message: "Requête non autorisée !"})
-            }
-            mysql.query(`UPDATE user SET username = ?, bio = ? WHERE id = ${userId}`, [newUsername, newBio], (err, result, fields) => {
-                if(err){
-                    return res.status(500).json({err})
-                }
-                return res.status(201).json({message: "Profil mis à jour !"})
+                })
+      
             })
-  
-        })
+        }
     }
  };

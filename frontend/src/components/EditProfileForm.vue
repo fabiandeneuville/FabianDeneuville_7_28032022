@@ -23,6 +23,7 @@
                     </div>
                 </div>
                 <p class="fileMessage" v-if="this.file != ''">Fichier sélectionné : {{ this.file.name }} </p>
+                <p class="error__message">{{ apiResponseMessage }}</p>
             </form>
         </div>
     </div>
@@ -39,6 +40,7 @@ export default {
             newUsername:this.username,
             newBio:this.bio,
             file:'',
+            apiResponseMessage:''
         }
     },
     props: ['username', 'bio', 'imageUrl', 'userId', 'token'],
@@ -59,9 +61,11 @@ export default {
                 }
                 , config)
                 .then(response => {
+                    this.apiResponseMessage = ''
                     this.$emit('reloadProfile')
                 })
-                .catch(error =>{
+                .catch(error => {
+                    this.apiResponseMessage = error.response.data.message
                     console.log(error)
                 })
             } else {
@@ -76,9 +80,11 @@ export default {
                 axios
                 .put(`http://localhost:3000/api/user/${this.userId}`, postData, config)
                 .then(response => {
+                    this.apiResponseMessage = ''
                     this.$emit('reloadProfile')
                 })
                 .catch(error => {
+                    this.apiResponseMessage = error.response.data.message
                     console.log(error)
                 })
             }
