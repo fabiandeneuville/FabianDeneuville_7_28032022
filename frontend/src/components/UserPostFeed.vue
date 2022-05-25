@@ -68,17 +68,3 @@ export default {
 }
 
 </script>
-
-<style scoped>
-
-    .feed {
-        width: 95%;
-        max-width: 600px;
-        margin: 20px auto;
-    }
-
-    li {
-        list-style-type: none;
-    }
-
-</style>

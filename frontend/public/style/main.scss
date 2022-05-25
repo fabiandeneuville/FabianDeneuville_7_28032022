@@ -2,10 +2,16 @@
 @import"./Utils/mixins";
 
 @import"./Components/error_message";
+@import"./Components/validate_btn";
+@import"./Components/cancel_btn";
 
 @import"./Layouts/landing";
 @import"./Layouts/landing_forms";
 @import"./Layouts/header";
 @import"./Layouts/footer";
 @import"./Layouts/userPage";
-@import"./Layouts/page404"
+@import"./Layouts/usersList";
+@import"./Layouts/userCard";
+@import"./Layouts/userPostFeed";
+@import"./Layouts/userDeletionModale";
+@import"./Layouts/page404";
