@@ -11,6 +11,18 @@
     align-items: center;
 }
 
+.edit__form__container {
+    position:relative;
+    margin:20px auto 10px auto;
+    width:95%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius:5px;
+    box-shadow: 2px 5px 10px 0px #333;
+}
+
 .edit__form__modale {
     position:relative;
     background: white;
@@ -36,6 +48,10 @@
 .edit__form {
     width:90%;
     margin: 0 auto;
+
+    &__heading {
+        margin:15px auto;
+    }
 
     &__bloc {
         margin: 10px 0px;
