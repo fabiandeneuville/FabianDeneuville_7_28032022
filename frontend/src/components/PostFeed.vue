@@ -88,21 +88,3 @@ export default {
 }
 
 </script>
-
-<style scoped>
-
-    .feed {
-        width: 95%;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-
-    .feed__heading {
-        padding:15px;
-    }
-
-    li {
-        list-style-type: none;
-    }
-
-</style>
