@@ -1,16 +1,16 @@
 /********** COMMENT **********/
 
 <template>
-    <div class="comment">
-        <div class="comment__bloc">
-            <h4 class="comment__bloc__elt">{{ username }} - {{ date }}</h4>
-            <p class="comment__bloc__elt">{{ content }}</p>
+    <div class="comment__container">
+        <div class="comment">
+            <h4 class="comment__element">{{ username }} - {{ date }}</h4>
+            <p class="comment__element">{{ content }}</p>
         </div>
-        <div class="comment__btn__bloc">
-            <div class="comment__like__btn comment__btn">
+        <div class="comment__management">
+            <div class="comment__management__btn">
                 <i v-bind:class="{ orange : commentLiked }" v-on:click="likeComment" class="fa-solid fa-thumbs-up"></i><span class="count">{{ likesCount + likes }}</span>
             </div>
-            <div v-if="this.userId === this.loggedUserId || this.loggedUserRole === 'admin'" v-on:click="deleteComment" class="comment__delete__btn comment__btn">
+            <div v-if="this.userId === this.loggedUserId || this.loggedUserRole === 'admin'" v-on:click="deleteComment" class="comment__management__btn">
                 <i class="fa-solid fa-trash"></i>
             </div>
         </div>
@@ -90,52 +90,3 @@ export default {
 }
 
 </script>
-
-<style scoped>
-
-.comment {
-    margin:0 auto 20px auto;
-}
-
-.comment__bloc {
-    background: rgb(255, 213, 215);
-    padding:10px;
-    border-radius:15px;
-}
-
-.comment__bloc__elt {
-    text-align: left;
-}
-
-.comment__btn__bloc {
-    display:flex;
-    flex-direction: row;
-    justify-content: left;
-    align-items: center;
-    padding-top:5px;
-}
-
-.comment__btn {
-    display:inline-block;
-    width:15%;
-    cursor: pointer;
-}
-
-.comment__btn i {
-    transition:all 0.3s ease;
-}
-
-.comment__btn:hover i {
-    color: rgb(233, 68, 37);
-    transform: scale(1.2);
-}
-
-.count {
-    padding-left:5px;
-}
-
-.orange {
-        color: rgb(233, 68, 37);
-}
-
-</style>

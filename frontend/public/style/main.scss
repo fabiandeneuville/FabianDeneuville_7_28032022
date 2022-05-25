@@ -1,11 +1,14 @@
 @import"./Utils/variables";
 @import"./Utils/mixins";
+@import"./Utils/modifyers";
 
 @import"./Components/errorMessage";
 @import"./Components/validateBtn";
 @import"./Components/cancelBtn";
 @import"./Components/closeBtn";
 @import"./Components/bigSubmitBtn";
+@import"./Components/comment";
+@import"./Components/count";
 
 @import"./Layouts/landing";
 @import"./Layouts/landingForms";
