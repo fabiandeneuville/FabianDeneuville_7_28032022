@@ -66,29 +66,3 @@
     }
 
 </script>
-
-<style scoped>
-
-button {
-    position: absolute; 
-    top:50%;
-}
-p {
-    position: absolute; 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 50px;
-    background: white;
-    padding:30px;
-}
-
-img {
-    position: absolute;
-    top:60%;
-    width:50px;
-    height:50px;
-    object-fit: cover;
-}
-
-</style>

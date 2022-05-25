@@ -21,25 +21,5 @@ export default {
         'footerBottom': Footer
     }
 }
+
 </script>
-
-<style scoped>
-
-    .error__bloc {
-        margin:200px auto 0 auto;
-        padding: 25px;
-        width:95%;
-        max-width: 600px;
-    }
-
-    .error__bloc__item {
-        padding:10px;
-    }
-
-    .error__bloc__heading {
-        font-size: 48px;
-        color:rgb(233, 68, 37);
-    }
-
-
-</style>

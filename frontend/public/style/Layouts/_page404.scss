@@ -1,0 +1,13 @@
+.error__bloc {
+    margin:200px auto 0 auto;
+    padding: 25px;
+    width:95%;
+    max-width: 600px;
+    &__bloc__item {
+        padding:10px;
+    }
+    &__heading {
+        font-size: 48px;
+        color:$color-secondary;
+    }
+}
