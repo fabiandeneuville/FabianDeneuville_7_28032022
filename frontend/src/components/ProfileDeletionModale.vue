@@ -1,13 +1,13 @@
 /********** PROFILE DELETION MODALE **********/
 
 <template>
-    <div v-if="showDeletionModale" class="bloc-modale">
-        <div v-on:click="closeModale" class="overlay"></div>
-        <div class="modale">
-            <h3 class="modale-title">Êtes-vous sûr ?</h3>
+    <div v-if="showDeletionModale" class="deletion">
+        <div v-on:click="closeModale" class="deletion__overlay"></div>
+        <div class="deletion__modale">
+            <h3 class="deletion__modale__title">Êtes-vous sûr ?</h3>
             <p>La suppression du profil est irréversible !</p>
-            <div v-on:click="closeModale" class="modale-btn cancel-btn">ANNULER</div>
-            <div v-on:click="deletePost" class="modale-btn validate-btn">CONFIRMER</div>
+            <div v-on:click="closeModale" class="deletion__modale__btn cancel-btn">ANNULER</div>
+            <div v-on:click="deleteProfile" class="deletion__modale__btn validate-btn">CONFIRMER</div>
         </div>
     </div>
 </template>
@@ -20,7 +20,7 @@ export default {
     name: 'ProfileDeletion',
     props: ['showDeletionModale', 'token', 'userId'],
     methods: {
-        deletePost: function(){
+        deleteProfile: function(){
             const config = {
                 headers: { Authorization: `Bearer ${this.token}` }
             };
@@ -42,66 +42,3 @@ export default {
 }
 
 </script>
-
-<style scoped>
-
-    .bloc-modale {
-        position: fixed;
-        top:0;
-        bottom:0;
-        left:0;
-        right:0;
-        width:100%;
-        height:100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .modale {
-        position:relative;
-        background: white;
-        width:90%;
-        max-width: 300px;
-        padding:15px;
-        border-radius:5px;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .modale-title {
-        width:100%;
-    }
-
-    .modale-btn {
-        width:50%;
-        cursor: pointer;
-        font-size: 14px;
-        transition: all 0.3s ease;
-    }
-
-    .modale-btn:hover {
-        transform: scale(1.2);
-    }
-
-    .cancel-btn {
-        color: crimson;
-    }
-
-    .validate-btn {
-        color: green;
-    }
-
-    .overlay {
-        background: rgba(0,0,0,0.5);
-        position: fixed;
-        top:0;
-        bottom:0;
-        left:0;
-        right:0;
-    }
-
-</style>

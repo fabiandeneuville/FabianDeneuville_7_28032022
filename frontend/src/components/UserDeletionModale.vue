@@ -1,14 +1,13 @@
 /********** USER DELETION MODALE **********/
 
 <template>
-    <div v-if="showDeletionModale" class="user__deletion">
-        <div v-on:click="closeModale" class="user__deletion__overlay"></div>
-        
-        <div class="user__deletion__modale">
-            <h3 class="user__deletion__modale__title">Êtes-vous sûr ?</h3>
+    <div v-if="showDeletionModale" class="deletion">
+        <div v-on:click="closeModale" class="deletion__overlay"></div>
+        <div class="deletion__modale">
+            <h3 class="deletion__modale__title">Êtes-vous sûr ?</h3>
             <p>La suppression du profil est irréversible !</p>
-            <div v-on:click="closeModale" class="user__deletion__modale__btn cancel-btn">ANNULER</div>
-            <div v-on:click="deleteUser" class="user__deletion__modale__btn validate-btn">CONFIRMER</div>
+            <div v-on:click="closeModale" class="deletion__modale__btn cancel-btn">ANNULER</div>
+            <div v-on:click="deleteUser" class="deletion__modale__btn validate-btn">CONFIRMER</div>
         </div>
     </div>
 </template>

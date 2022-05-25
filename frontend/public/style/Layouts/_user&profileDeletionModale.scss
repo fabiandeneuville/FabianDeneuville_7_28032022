@@ -1,4 +1,4 @@
-.user__deletion {
+.deletion {
     position: fixed;
     top:0;
     bottom:0;
@@ -33,7 +33,7 @@
             font-size: 14px;
             transition: all 0.3s ease;
             padding-top: 10px;
-            
+
             &:hover {
                 transform: scale(1.2);
             }
