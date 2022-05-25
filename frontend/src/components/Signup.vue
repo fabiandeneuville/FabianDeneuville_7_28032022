@@ -25,7 +25,7 @@
             <input class="signup__form__input" v-model="passwordConfirm" type="text" id="passwordConfirm" contenteditable spellcheck="false" required>
             <p class="error__message">{{ passwordConfirmErrorMessage }}</p>
 
-            <button class="signup__form__submit-btn" v-on:click.prevent="signingUp">Inscription</button>
+            <button class="big-submit-btn" v-on:click.prevent="signingUp">Inscription</button>
 
             <p>{{ apiResponseMessage }}</p>
         </form>

@@ -14,7 +14,7 @@
             <label class="login__form__label" for="password">Mot de passe</label>
             <input class="login__form__input" v-model="password" type="password" id="password" contenteditable spellcheck="false" required>
 
-            <button class="login__form__submit-btn" v-on:click.prevent="logingIn">Connexion</button>
+            <button class="big-submit-btn" v-on:click.prevent="logingIn">Connexion</button>
             <p>{{ apiResponseMessage }}</p>
         </form>
     </div>

@@ -14,7 +14,7 @@
                 <input v-model="passwordConfirm" class="password__change__form__bloc__input" type="password" id="passwordConfirm" required>
             </div>
             <p>{{ apiResponseMessage }}</p>
-            <button v-on:click.prevent="changePassword" class="password__change__form__btn">Valider</button>
+            <button v-on:click.prevent="changePassword" class="big-submit-btn">Valider</button>
 
         </form>
     </div>
@@ -63,61 +63,6 @@ export default {
 
 <style scoped>
 
-    .form__container{
-        position:relative;
-        display: block;
-        width:95%;
-        max-width: 600px;
-        background: white;
-        margin: 20px auto;
-        padding:20px;
-        border-radius:5px;
-        box-shadow: 2px 5px 10px 0px #333;
-    }
-
-    .password__change__form {
-        display:flex;
-        flex-direction: column;
-        width:100%;
-        margin:0 auto;
-    }
-
-    .password__change__form__bloc {
-        margin: 10px 0px;
-    }
-
-    .password__change__form__heading{
-        margin:15px auto;
-    }
-
-    .password__change__form__bloc__label {
-        font-size: 15px;
-        display: block;
-        text-align: left;
-    }
-
-    .password__change__form__bloc__input {
-        width:100%;
-        margin: 5px auto;
-        padding: 10px;
-        height:30px;
-        border: 2px solid rgb(233, 68, 37);
-    }
-
-    .password__change__form__btn {
-        margin: 15px auto 25px;
-        width:120px;
-        font-size: 20px;
-        border-radius:50px;
-        border: 2px solid #333;
-        color: #333;
-        cursor: pointer;
-    }
-
-     .password__change__form-btn:hover {
-        color: green;
-        border: 2px solid green;
-        box-shadow: 2px 2px 5px lightgray;
-    }
+    
 
 </style>

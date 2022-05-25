@@ -1,0 +1,15 @@
+.big-submit-btn {
+    margin: 15px auto 25px;
+    width:120px;
+    font-size: 20px;
+    border-radius:50px;
+    border: 2px solid #333;
+    color: #333;
+    cursor: pointer;
+
+    &:hover {
+        color: $color-primary;
+        background-color: $color-tertiary;
+        box-shadow: 2px 2px 5px $color-tertiary;
+    }
+}
