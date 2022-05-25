@@ -32,10 +32,5 @@ export default {
         'profileDetails': ProfileDetails
     },
 }
+
 </script>
-
-<style scoped>
-
-
-
-</style>
