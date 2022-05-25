@@ -1,7 +1,7 @@
 /********** MODALE **********/
 
 <template>
-    <div v-if="showSuccessModale" class="bloc-modale">
+    <div v-if="showSuccessModale" class="close-btn">
         <div v-on:click="closeModale" class="overlay"></div>
         <div class="modale">
             <div v-on:click="closeModale" class="btn-modale"><i class="fa-solid fa-xmark"></i></div>
@@ -50,19 +50,6 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-    }
-
-    .btn-modale {
-        position: absolute;
-        top:10px;
-        right:15px;
-        color: red;
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-
-    .btn-modale:hover {
-        transform: scale(1.2);
     }
 
     .overlay {

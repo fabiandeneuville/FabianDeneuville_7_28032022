@@ -201,17 +201,4 @@ export default {
         padding: 10px;
     }
 
-    .close-btn {
-        position:absolute;
-        top:10px;
-        right:15px;
-        color: red;
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-
-    .close-btn:hover {
-        transform: scale(1.2);
-    }
-
 </style>

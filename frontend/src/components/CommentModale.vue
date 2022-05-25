@@ -4,9 +4,9 @@
     <div v-if="showCommentModale" class="comment__modale__container">
         <div v-on:click="closeCommentModale" class="comment__modale__overlay"></div>
         <div class="comment__modale">
-            <div v-on:click="closeCommentModale" class="btn-modale"><i class="fa-solid fa-xmark"></i></div>
-            <h3 class="comment__form__heading">{{ heading }}</h3>
-            <ul class="comment__list">
+            <div v-on:click="closeCommentModale" class="close-btn"><i class="fa-solid fa-xmark"></i></div>
+            <h3 class="comment__modale__form__heading">{{ heading }}</h3>
+            <ul class="comment__modale__list">
                 <li v-bind:key="index" v-for="(comment, index) in allComments">
                     <comment
                     v-on:commentDeleted="commentDeleted"
@@ -24,10 +24,10 @@
                 </li>
             </ul>
             <hr>
-            <form class="comment__form">
-                <label class="comment__form__label" for="comment"></label>
-                <input v-model="comment" class="comment__form__input" type="text" id="comment" placeholder="Écrivez un commentaire ..." required>
-                <button v-on:click.prevent="commentPost" class="comment__btn"><i class="fa-solid fa-paper-plane"></i></button>
+            <form class="comment__modale__form">
+                <label class="comment__modale__form__label" for="comment"></label>
+                <input v-model="comment" class="comment__modale__form__input" type="text" id="comment" placeholder="Écrivez un commentaire ..." required>
+                <button v-on:click.prevent="commentPost" class="comment__modale__btn"><i class="fa-solid fa-paper-plane"></i></button>
             </form>
             <p class="error__message">{{ apiResponseMessage }}</p>
         </div>
@@ -120,107 +120,3 @@ export default {
 }
 
 </script>
-
-<style scoped>
-
-    .comment__modale__container {
-        position: fixed;
-        top:0;
-        bottom:0;
-        left:0;
-        right:0;
-        width:100%;
-        height:100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .comment__modale {
-        position:relative;
-        background: white;
-        width:95%;
-        max-width: 600px;
-        padding:20px;
-        border-radius:5px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .comment__list {
-        width:100%;
-        max-height:300px;
-        overflow-y: scroll;
-        scrollbar-width: thin;
-        scrollbar-color: rgb(255, 213, 215);       
-    }
-
-    .comment__form {
-        width:100%;
-        display:flex;
-        flex-direction: row;
-    }
-
-    .comment__form__heading {
-        padding:10px;
-    }
-
-    .comment__form__label {
-        margin:5px auto;
-    }
-
-    .comment__form__input {
-        width:calc(100% - 30px);
-        margin: 5px auto;
-        padding: 10px;
-        height:30px;
-        border-radius:5px;
-        border: 2px solid rgb(233, 68, 37);
-    }
-
-    .btn-modale {
-        position: absolute;
-        top:10px;
-        right:15px;
-        color: red;
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-
-    .btn-modale:hover {
-        transform: scale(1.2);
-    }
-
-    .comment__modale__overlay {
-        background: rgba(0,0,0,0.5);
-        position: fixed;
-        top:0;
-        bottom:0;
-        left:0;
-        right:0;
-    }
-
-    .comment__btn {
-        width:30px;
-        font-size: 18px;
-        line-height: 40px;
-        border-radius:50px;
-        border:none;
-        color: #333;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        background: none;
-    }
-
-    .comment__btn:hover {
-        color: rgb(233, 68, 37);
-        transform: scale(1.2);
-    }
-
-    .error__message {
-        padding:10px;
-    }
-
-</style>

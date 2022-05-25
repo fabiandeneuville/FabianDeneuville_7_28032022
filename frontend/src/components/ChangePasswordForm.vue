@@ -6,15 +6,15 @@
         <form class="password__change__form">
             <h3 class="password__change__form__heading">Changement du mot de passe</h3>
             <div class="password__change__form__bloc">
-                <label class="password__change__form__label" for="password">Nouveau mot de passe</label>
-                <input v-model="password" class="password__change__form__input" type="password" id="password" required>
+                <label class="password__change__form__bloc__label" for="password">Nouveau mot de passe</label>
+                <input v-model="password" class="password__change__form__bloc__input" type="password" id="password" required>
             </div>
             <div class="password__change__form__bloc">
-                <label class="password__change__form__label" for="passwordConfirm">Confirmez le mot de passe</label>
-                <input v-model="passwordConfirm" class="password__change__form__input" type="password" id="passwordConfirm" required>
+                <label class="password__change__form__bloc__label" for="passwordConfirm">Confirmez le mot de passe</label>
+                <input v-model="passwordConfirm" class="password__change__form__bloc__input" type="password" id="passwordConfirm" required>
             </div>
             <p>{{ apiResponseMessage }}</p>
-            <button v-on:click.prevent="changePassword" class="password__change__form-btn">Valider</button>
+            <button v-on:click.prevent="changePassword" class="password__change__form__btn">Valider</button>
 
         </form>
     </div>
@@ -90,13 +90,13 @@ export default {
         margin:15px auto;
     }
 
-    .password__change__form__label {
+    .password__change__form__bloc__label {
         font-size: 15px;
         display: block;
         text-align: left;
     }
 
-    .password__change__form__input {
+    .password__change__form__bloc__input {
         width:100%;
         margin: 5px auto;
         padding: 10px;
@@ -104,7 +104,7 @@ export default {
         border: 2px solid rgb(233, 68, 37);
     }
 
-    .password__change__form-btn {
+    .password__change__form__btn {
         margin: 15px auto 25px;
         width:120px;
         font-size: 20px;
@@ -118,19 +118,6 @@ export default {
         color: green;
         border: 2px solid green;
         box-shadow: 2px 2px 5px lightgray;
-    }
-
-    .close-btn {
-        position:absolute;
-        top:10px;
-        right:15px;
-        color: red;
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-
-    .close-btn:hover {
-        transform: scale(1.2);
     }
 
 </style>

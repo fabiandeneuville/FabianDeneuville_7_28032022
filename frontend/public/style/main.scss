@@ -1,12 +1,13 @@
 @import"./Utils/variables";
 @import"./Utils/mixins";
 
-@import"./Components/error_message";
-@import"./Components/validate_btn";
-@import"./Components/cancel_btn";
+@import"./Components/errorMessage";
+@import"./Components/validateBtn";
+@import"./Components/cancelBtn";
+@import"./Components/closeBtn";
 
 @import"./Layouts/landing";
-@import"./Layouts/landing_forms";
+@import"./Layouts/landingForms";
 @import"./Layouts/header";
 @import"./Layouts/footer";
 @import"./Layouts/userPage";
@@ -14,4 +15,5 @@
 @import"./Layouts/userCard";
 @import"./Layouts/userPostFeed";
 @import"./Layouts/userDeletionModale";
+@import"./Layouts/commentModale";
 @import"./Layouts/page404";
