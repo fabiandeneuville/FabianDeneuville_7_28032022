@@ -38,6 +38,11 @@
             'postFeed' : PostFeed,
             'footerBottom' : Footer
         },
+        beforeCreate(){
+            if(this.$store.state.token === undefined){
+                this.$router.push('/login')
+            }
+        },
         mounted: function(){
             this.getOneUser()
         },

@@ -72,6 +72,11 @@ export default {
             })
         }
     },
+    beforeCreate(){
+        if(this.$store.state.token === undefined){
+            this.$router.push('/login')
+        }
+    },
     mounted(){
         this.getUser()
     }

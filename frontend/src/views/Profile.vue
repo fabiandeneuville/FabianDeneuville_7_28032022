@@ -31,6 +31,11 @@ export default {
         'footerBottom': Footer,
         'profileDetails': ProfileDetails
     },
+    beforeCreate(){
+        if(this.$store.state.token === undefined){
+            this.$router.push('/login')
+        }
+    },
 }
 
 </script>

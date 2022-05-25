@@ -19,7 +19,12 @@ export default {
     components: {
         'headerTop': Header,
         'footerBottom': Footer
-    }
+    },
+    beforeCreate(){
+        if(this.$store.state.token === undefined){
+            this.$router.push('/login')
+        }
+    },
 }
 
 </script>
