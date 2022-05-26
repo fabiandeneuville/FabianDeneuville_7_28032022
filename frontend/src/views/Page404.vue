@@ -21,7 +21,7 @@ export default {
         'footerBottom': Footer
     },
     beforeCreate(){
-        if(this.$store.state.token === undefined){
+        if(this.$store.state.token === null){
             this.$router.push('/login')
         }
     },

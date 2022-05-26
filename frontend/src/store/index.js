@@ -7,9 +7,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
-    role:undefined,
-    userId:undefined,
-    token:undefined
+    role:null,
+    userId:null,
+    token:null
   },
   getters: {
   },
@@ -27,10 +27,10 @@ export default new Vuex.Store({
       state.role = null
     }, 
     CLEAR_USER_ID(state){
-      state.id = null
+      state.userId = null
     }, 
     CLEAR_USER_TOKEN(state){
-      state.role = null
+      state.token = null
     }, 
     
   },

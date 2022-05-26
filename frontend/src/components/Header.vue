@@ -45,6 +45,9 @@
         methods: {
             logOut: function(){
                 this.$router.push('/login')
+                this.$store.commit('CLEAR_USER_ROLE')
+                this.$store.commit('CLEAR_USER_ID')
+                this.$store.commit('CLEAR_USER_TOKEN')
                 localStorage.clear()
             }
         },
