@@ -31,11 +31,6 @@ export default {
         'footerBottom': Footer,
         'profileDetails': ProfileDetails
     },
-    beforeCreate(){
-        if(this.$store.state.token === null){
-            this.$router.push('/login')
-        }
-    },
 }
 
 </script>

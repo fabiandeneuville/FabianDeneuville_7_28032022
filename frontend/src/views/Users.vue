@@ -21,11 +21,6 @@ export default {
         'usersList': UsersList,
         'footerBottom': Footer
     },
-    beforeCreate(){
-        if(this.$store.state.token === null){
-            this.$router.push('/login')
-        }
-    },
 }
 
 </script>
