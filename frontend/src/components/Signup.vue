@@ -77,20 +77,29 @@
                 }
             },
             signingUp: function(){
-                axios
-                .post('http://localhost:3000/api/user/signup', {
-                    username: this.username,
-                    email: this.email,
-                    password: this.password,
-                    passwordConfirm: this.passwordConfirm   
-                })
-                .then(response => {
-                    this.$router.push('/login')
-                })
-                .catch(error => {
-                    console.log(error)
-                    this.apiResponseMessage = error.response.data.message
-                })
+
+                if(this.username === '' || this.email === '' || this.password === '' || this.passwordConfirm === ''){
+                    this.apiResponseMessage = "Veuillez renseigner tous les champs !"
+                    this.usernameErrorMessage = "Obligatoire"
+                    this.mailErrorMessage = "Obligatoire"
+                    this.passwordErrorMessage = "Obligatoire"
+                    this.passwordConfirmErrorMessage = "Obligatoire"
+                } else {
+                    axios
+                    .post('http://localhost:3000/api/user/signup', {
+                        username: this.username,
+                        email: this.email,
+                        password: this.password,
+                        passwordConfirm: this.passwordConfirm   
+                    })
+                    .then(response => {
+                        this.$router.push('/login')
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.apiResponseMessage = error.response.data.message
+                    })              
+                }
             }
         }
     }
