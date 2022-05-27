@@ -3,6 +3,9 @@
 /* Importing express */
 const express = require('express');
 
+/* Importing helmet */
+const helmet = require('helmet');
+
 /* Importing node path package */
 const path = require('path');
 
@@ -34,6 +37,12 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
   });
+
+app.use(helmet({ 
+    crossOriginResourcePolicy: { 
+        policy: "same-site" 
+    } 
+}));
 
 /* Importing user router */
 const userRoutes = require('./routes/user')
