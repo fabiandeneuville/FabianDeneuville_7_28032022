@@ -10,7 +10,7 @@
             <div class="comment__management__btn">
                 <i v-bind:class="{ orange : commentLiked }" v-on:click="likeComment" class="fa-solid fa-thumbs-up"></i><span class="count">{{ likesCount + likes }}</span>
             </div>
-            <div v-if="this.userId === this.loggedUserId || this.loggedUserRole === 'admin'" v-on:click="deleteComment" class="comment__management__btn">
+            <div v-if="this.userId === this.loggedUserId || this.loggedUserRole === 'admin'|| this.loggedUserRole === 'modérateur' " v-on:click="deleteComment" class="comment__management__btn">
                 <i class="fa-solid fa-trash"></i>
             </div>
         </div>
