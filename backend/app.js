@@ -38,6 +38,7 @@ app.use((req, res, next) => {
     next();
   });
 
+/* Setting helmet with crossOriginResourcePolicy*/
 app.use(helmet({ 
     crossOriginResourcePolicy: { 
         policy: "same-site" 
