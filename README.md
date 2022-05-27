@@ -92,7 +92,19 @@ Depuis le dossier **frontend**, à l'aide de votre terminal, installez les dépe
 npm install
 ```
 
-Puis lancez l'application avec la commande :
+Vous pouvez ensuite vérifier que les différents packages sont **à jour** avec la commande :
+
+```
+npm outdated
+```
+
+Vous pouvez également vérifier les éventuelles **vulnérabilités** avec la commande :
+
+```
+npm audit
+```
+
+Enfin, lancez l'application avec la commande :
 
 ```
 npm run serve
