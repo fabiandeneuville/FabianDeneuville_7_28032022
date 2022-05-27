@@ -12,8 +12,8 @@
             <input class="login__form__input" v-model="email" type="email" id="email" contenteditable spellcheck="false" required>
             <p class="error__message">{{ mailErrorMessage }}</p>
 
-            <label class="login__form__label" for="password">Mot de passe</label>
-            <input class="login__form__input" v-model="password" type="password" id="password" contenteditable spellcheck="false" required>
+            <label class="login__form__label" for="password">Mot de passe <i v-on:click="showPassword" class="fa-solid fa-eye showPasswordIcon"></i></label>
+            <input class="login__form__input" v-model="password" v-bind:type="passwordFieldType" id="password" contenteditable spellcheck="false" required>
             <p class="error__message">{{ passwordErrorMessage }}</p>
 
             <button class="big-submit-btn" v-on:click.prevent="logingIn">Connexion</button>
@@ -37,10 +37,18 @@
                 token: '',
                 mailErrorMessage:'',
                 passwordErrorMessage:'',
-                apiResponseMessage: ''
+                apiResponseMessage: '',
+                passwordFieldType:'password'
             }
         },
         methods: {
+            showPassword: function(){
+                if(this.passwordFieldType === 'password'){
+                    this.passwordFieldType = 'text'
+                } else if (this.passwordFieldType === 'text'){
+                    this.passwordFieldType = 'password'
+                }
+            },
             logingIn: function(){
 
                 if(this.email === '' || this.password === ''){

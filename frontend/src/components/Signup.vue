@@ -17,12 +17,12 @@
             <input class="signup__form__input" v-model="email" v-on:input="checkEmail" type="email" id="email" contenteditable spellcheck="false" required>
             <p class="error__message">{{ mailErrorMessage }}</p>
 
-            <label class="signup__form__label" for="password">Mot de passe</label>
-            <input class="signup__form__input" v-model="password" v-on:input="checkPassword" type="text" id="password" contenteditable spellcheck="false" required>
+            <label class="signup__form__label" for="password">Mot de passe <i v-on:click="showPassword" class="fa-solid fa-eye showPasswordIcon"></i></label>
+            <input class="signup__form__input" v-model="password" v-on:input="checkPassword" v-bind:type="passwordFieldType" id="password" contenteditable spellcheck="false" required>
             <p class="error__message">{{ passwordErrorMessage }}</p>
 
-            <label class="signup__form__label" for="passwordConfirm">Confirmez le mot de passe</label>
-            <input class="signup__form__input" v-model="passwordConfirm" type="text" id="passwordConfirm" contenteditable spellcheck="false" required>
+            <label class="signup__form__label" for="passwordConfirm">Confirmez le mot de passe <i v-on:click="showPassword" class="fa-solid fa-eye showPasswordIcon"></i></label>
+            <input class="signup__form__input" v-model="passwordConfirm" v-bind:type="passwordFieldType" id="passwordConfirm" contenteditable spellcheck="false" required>
             <p class="error__message">{{ passwordConfirmErrorMessage }}</p>
 
             <button class="big-submit-btn" v-on:click.prevent="signingUp">Inscription</button>
@@ -48,10 +48,18 @@
                 usernameErrorMessage:'',
                 mailErrorMessage:'',
                 passwordErrorMessage:'',
-                passwordConfirmErrorMessage:''
+                passwordConfirmErrorMessage:'',
+                passwordFieldType:'password'
             }
         },
         methods: {
+            showPassword: function(){
+                if(this.passwordFieldType === 'password'){
+                    this.passwordFieldType = 'text'
+                } else if (this.passwordFieldType === 'text'){
+                    this.passwordFieldType = 'password'
+                }
+            },
             checkUsername: function(){
                 const usernameRegex = /^[a-zéèôöîïûùü' -]{1,50}$/gi
                 if(this.username.match(usernameRegex)){
