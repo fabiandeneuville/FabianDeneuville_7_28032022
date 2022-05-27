@@ -3,7 +3,8 @@
         <headerTop></headerTop>
         <div class="error__bloc">
             <h2 class="error__bloc__heading error__bloc__item">404</h2>
-            <p class="error__bloc__text error__bloc__item">La page demandée n'existe pas !</p>
+            <img src="../assets/404.png" alt="Introuvable !">
+            <p class="error__bloc__text error__bloc__item">En dépit d'une fouille méticuleuse nous n'avons pas trouvé la page que vous recherchez !</p>
         </div>
         <footerBottom></footerBottom>
     </div>

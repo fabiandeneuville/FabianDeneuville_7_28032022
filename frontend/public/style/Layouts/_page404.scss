@@ -10,4 +10,17 @@
         font-size: 48px;
         color:$color-secondary;
     }
+
+    &__text {
+        margin-top: 15px;
+        font-weight: 800;
+    }
+
+    img {
+        display: inline-block;
+        width: 90%;
+        max-width: 300px;
+        border: 1px solid $color-tertiary;
+        border-radius: 50%;
+    }
 }
