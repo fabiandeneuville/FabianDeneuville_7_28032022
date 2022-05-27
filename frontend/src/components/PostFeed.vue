@@ -63,7 +63,8 @@ export default {
             .then(response => {
                 if(response.data.message === 'Aucun posts !'){
                     this.apiResponseMessage = 'Soyez le premier à publier quelque chose !'
-                } else {
+                } else if (response.data.message !== 'Aucun posts !'){
+                    this.apiResponseMessage = ''
                     for (let post of response.data){
                         this.allPosts.push(post)
                     }
