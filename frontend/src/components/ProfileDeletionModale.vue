@@ -30,6 +30,10 @@ export default {
             config)
             .then(response => {
                 this.$router.push('/')
+                this.$store.commit('CLEAR_USER_ID')
+                this.$store.commit('CLEAR_USER_ROLE')
+                this.$store.commit('CLEAR_USER_TOKEN')
+                localStorage.clear()
             })
             .catch(error => {
                 console.log(error)
