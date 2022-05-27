@@ -78,7 +78,6 @@ export default {
                 })
                 .catch(error => {
                     this.apiResponseMessage = error.response.data.message
-                    console.log(error)
                 })
             } else {
                 let postData = new FormData();
@@ -98,7 +97,6 @@ export default {
                     this.$emit('updatePostList')
                 })
                 .catch(error => {
-                    console.log(error)
                     this.apiResponseMessage = error.response.data.message
                 })
             }

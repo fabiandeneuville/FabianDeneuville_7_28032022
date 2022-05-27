@@ -68,7 +68,6 @@
                         this.$router.push('/fil')
                     })
                     .catch(error => {
-                        console.log(error)
                         this.apiResponseMessage = error.response.data.message
                     })
                 }

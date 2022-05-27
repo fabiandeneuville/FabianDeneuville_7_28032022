@@ -67,7 +67,6 @@ export default {
                 })
                 .catch(error => {
                     this.apiResponseMessage = error.response.data.message
-                    console.log(error)
                 })
             } else {
                 let postData = new FormData();
@@ -86,7 +85,6 @@ export default {
                 })
                 .catch(error => {
                     this.apiResponseMessage = error.response.data.message
-                    console.log(error)
                 })
             }
         },

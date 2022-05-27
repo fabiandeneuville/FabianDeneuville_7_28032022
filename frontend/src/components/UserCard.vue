@@ -68,11 +68,10 @@ export default {
                         content: 'Merci de lui faciliter la tâche. Il peut désormais supprimer vos publications et commentaire.'
                     }, config)
                     .then(response => {
-                        console.log("Rôle de modérateur attribué. Information postée.")
-                        
+                        console.log("Rôle de modérateur attribué. Information postée.")              
                     })
                     .catch(error => {
-                        console.log(error.message)
+                        console.log(error)
                     })
                 } else if (this.role === 'modérateur'){
                     axios
@@ -85,12 +84,12 @@ export default {
                         
                     })
                     .catch(error => {
-                        console.log(error.message)
+                        console.log(error)
                     })
                 }
             })
             .catch(error => {
-                console.log(error.message)
+                console.log(error)
             })
         },
         deleteProfile: function(){

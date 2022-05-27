@@ -55,11 +55,7 @@ export default {
                 }
             })
             .catch(error => {
-                if(error.response.data.error.name === "TokenExpiredError"){
-                    this.$router.push('/login')
-                } else {
-                    console.log(error)
-                }
+                console.log(error)
             })
         },
         updateUsersList: function(){
