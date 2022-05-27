@@ -60,9 +60,37 @@ export default {
             .then(response => {
                 this.apiResponseMessage = response.data.message
                 this.$emit('updateUsersList')
+
+                if(this.role === 'utilisateur'){
+                    axios
+                    .post('http://localhost:3000/api/post', {
+                        title: `INFORMATION : ${this.username} est désormais modérateur !`,
+                        content: 'Merci de lui faciliter la tâche. Il peut désormais supprimer vos publications et commentaire.'
+                    }, config)
+                    .then(response => {
+                        console.log("Rôle de modérateur attribué. Information postée.")
+                        
+                    })
+                    .catch(error => {
+                        console.log(error.message)
+                    })
+                } else if (this.role === 'modérateur'){
+                    axios
+                    .post('http://localhost:3000/api/post', {
+                        title: `INFORMATION : ${this.username} n'est plus modérateur !`,
+                        content: 'Il ne peut désormais plus supprimer vos publications et commentaire.'
+                    }, config)
+                    .then(response => {
+                        console.log("Rôle de modérateur retiré. Information postée")
+                        
+                    })
+                    .catch(error => {
+                        console.log(error.message)
+                    })
+                }
             })
             .catch(error => {
-                console.log(error)
+                console.log(error.message)
             })
         },
         deleteProfile: function(){
