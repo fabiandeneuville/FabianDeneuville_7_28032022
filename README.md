@@ -54,7 +54,7 @@ Il a été décidé de créer trois rôles distincts pour gérer les autorisatio
 
 15 jours/homme pour la partie backend 
 
--- jours/homme pour la partie frontend - DÉVELOPPEMENT EN COURS
+15 jours/homme pour la partie frontend
 
 ***
 
@@ -86,7 +86,17 @@ Le dossier ainsi créé sur votre machine doit contenir les éléments suivants 
 
 ### Étape 2. Installation de l'application Frontend ###
 
-A VENIR !
+Depuis le dossier **frontend**, à l'aide de votre terminal, installez les dépendances avec la commande :
+
+```
+npm install
+```
+
+Puis lancez l'application avec la commande :
+
+```
+npm run serve
+```
 
 ### Étape 3. Installation de l'API ###
 
