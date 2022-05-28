@@ -37,16 +37,19 @@
         }
     }
 
-    &__username {
+    &__username__info {
         width:50%;
-        padding: 5px 0;
+        padding: 15px 0;
+    }
+
+    &__username {
         font-weight: 800;
         color: $color-secondary;
     }
 
     &__date {
         width:50%;
-        padding: 5px 0;
+        padding: 15px 0;
     }
 
     &__image__container {
@@ -72,31 +75,31 @@
         margin:0 auto;
         text-align: justify;
     }
-}
 
-.btn__bloc__container {
-    width:100%;
-    display:flex; 
-    flex-direction: row;
-    justify-content: space-between;
-    padding:10px 0;
-    @include silver;  
-}
+    &__btn__bloc__container {
+        width:100%;
+        display:flex; 
+        flex-direction: row;
+        justify-content: space-between;
+        padding:10px 0;
+        @include silver;
+    }
 
-.btn__bloc {
-    width:50%;
-    height:40px;
-    font-size: 25px;
-    margin:0 auto;
-
-    & i {
-        line-height: 40px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-
-        &:hover {
-            color: $color-secondary;
-            transform: scale(1.2);
+    &__btn__bloc {
+        width:50%;
+        height:40px;
+        font-size: 25px;
+        margin:0 auto;
+    
+        & i {
+            line-height: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+    
+            &:hover {
+                color: $color-secondary;
+                transform: scale(1.2);
+            }
         }
     }
 }

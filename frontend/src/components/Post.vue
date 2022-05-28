@@ -7,27 +7,27 @@
                 <i class="fa-solid fa-ellipsis"></i>
             </div>
             <div v-if="showPostManagment" class="post__management__container">
-                <div v-on:click="showEditModale = !showEditModale" v-if="user_Id === loggedUserId" class="btn__bloc">
+                <div v-on:click="showEditModale = !showEditModale" v-if="user_Id === loggedUserId" class="post__btn__bloc">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </div>
-                <div v-on:click="toPostDeletion" class="btn__bloc">
+                <div v-on:click="toPostDeletion" class="post__btn__bloc">
                     <i class="fa-solid fa-trash"></i>
                 </div>
             </div>
         </div>
-        <p v-if="user_Id != loggedUserId" class="post__username">Publication de {{ username }}</p>
-        <p v-else class="post__username">Publié par vous</p>
+        <p v-if="user_Id != loggedUserId" class="post__username__info">Publié par <span class="post__username">{{ username }}</span></p>
+        <p v-else class="post__username__info">Publié par <span class="post__username">vous</span></p>
         <p class="post__date">{{ date }}</p>
         <h3 class="post__title">{{ title }}</h3>
         <div class="post__image__container">
             <img v-if="imageUrl" v-bind:src="imageUrl" v-bind:alt="`Imgage de ${title}`">
         </div>
         <p class="post__content">{{ content }}</p>
-        <div class="btn__bloc__container">
-            <div class="btn__bloc">
+        <div class="post__btn__bloc__container">
+            <div class="post__btn__bloc">
                 <i v-bind:class="{ orange : postLiked }" v-on:click="likePost" class="fa-solid fa-thumbs-up"></i><span class="count">{{ likesCount + likes }}</span>
             </div>
-            <div class="btn__bloc">
+            <div class="post__btn__bloc">
                 <i v-on:click="showCommentModale = !showCommentModale" class="fa-solid fa-comment"></i><span class="count">{{ commentsCount }}</span>
             </div>
         </div>
