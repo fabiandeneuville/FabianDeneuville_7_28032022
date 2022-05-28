@@ -13,7 +13,7 @@
             <button class="userCard__change__role__btn" v-if="loggedUserRole === 'admin' && this.role != 'admin'" v-on:click="changeRole">{{ role }}</button>
             <p class="userCard__role" v-if="loggedUserRole !== 'admin'" disabled>{{ role }}</p>
         </div>
-        <div class="userCard__delete__bloc userCard__bloc" v-if="loggedUserRole === 'admin' || loggedUserId === this.id">
+        <div class="userCard__delete__bloc userCard__bloc" v-if="loggedUserRole === 'admin' && loggedUserId !== this.id">
             <i v-on:click="deleteProfile" class="fa-solid fa-trash userCard__icon"></i>
         </div>
         <div v-if="this.id != loggedUserId" class="userCard__contact__btn userCard__bloc">
