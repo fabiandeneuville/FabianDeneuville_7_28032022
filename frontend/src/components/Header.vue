@@ -24,7 +24,7 @@
             <i class="fa-solid fa-users"></i>
             <span class="tooltiptext">Utilisateurs</span>
         </router-link>
-        <div v-on:click="this.logOut" role="button" tabindex=0 class="header__link">
+        <div v-on:click="logOut" v-on:keydown.enter="logOut" role="button" tabindex=0 class="header__link">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
             <span class="tooltiptext">Déconnexion</span>
         </div>
