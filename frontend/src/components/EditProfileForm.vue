@@ -41,13 +41,15 @@ export default {
             newUsername:this.username,
             newBio:this.bio,
             file:'',
-            apiResponseMessage:''
+            apiResponseMessage:'',
+            fileExtension:''
         }
     },
     props: ['username', 'bio', 'imageUrl', 'userId', 'token'],
     methods: {
         previewFile(event){
             this.file = event.target.files[0]
+            this.fileExtension = event.target.files[0].name.split('.').pop()
         },
         editProfile: function(){
             const config = {
@@ -77,15 +79,20 @@ export default {
                 const image = this.file
                 postData.append('user', user)
                 postData.append('image', image)
-                axios
-                .put(`http://localhost:3000/api/user/${this.userId}`, postData, config)
-                .then(response => {
-                    this.apiResponseMessage = ''
-                    this.$emit('reloadProfile')
-                })
-                .catch(error => {
-                    this.apiResponseMessage = error.response.data.message
-                })
+
+                if(this.fileExtension === 'jpeg' || this.fileExtension === 'jpg' || this.fileExtension === 'png'){
+                    axios
+                    .put(`http://localhost:3000/api/user/${this.userId}`, postData, config)
+                    .then(response => {
+                        this.apiResponseMessage = ''
+                        this.$emit('reloadProfile')
+                    })
+                    .catch(error => {
+                        this.apiResponseMessage = error.response.data.message
+                    })
+                } else {
+                    this.apiResponseMessage = "Seuls les formats .jpg, .jpeg et .png sont autorisés !"
+                }
             }
         },
         closeForm: function(){

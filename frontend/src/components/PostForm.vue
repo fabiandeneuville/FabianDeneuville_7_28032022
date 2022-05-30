@@ -50,12 +50,14 @@ export default {
             content: '',
             file: '',
             apiResponseMessage: '',
+            fileExtension: ''
         }
     },
     props: ['username', 'imageUrl', 'token'],                           
     methods: {
         previewFile(event){
             this.file = event.target.files[0]
+            this.fileExtension = event.target.files[0].name.split('.').pop()
         },
         keydownTrigger(){
             let fileBtnLabel = document.querySelector(".post__form__bloc__file__label")
@@ -94,20 +96,24 @@ export default {
                 const image = this.file
                 postData.append('post', post)
                 postData.append('image', image)
-
-                axios
-                .post('http://localhost:3000/api/post', postData, config)
-                .then(response => {
-                    this.title = '';
-                    this.content = '';
-                    this.file = '';
-                    this.apiResponseMessage = ''
-                    this.isVisible = false;
-                    this.$emit('updatePostList')
-                })
-                .catch(error => {
-                    this.apiResponseMessage = error.response.data.message
-                })
+                if(this.fileExtension === 'jpeg' || this.fileExtension === 'jpg' || this.fileExtension === 'png'){
+                    axios
+                    .post('http://localhost:3000/api/post', postData, config)
+                    .then(response => {
+                        this.title = '';
+                        this.content = '';
+                        this.file = '';
+                        this.fileExtension = '';
+                        this.apiResponseMessage = ''
+                        this.isVisible = false;
+                        this.$emit('updatePostList')
+                    })
+                    .catch(error => {
+                        this.apiResponseMessage = error.response.data.message
+                    })
+                } else {
+                    this.apiResponseMessage = "Seuls les formats .jpg, .jpeg et .png sont autorisés !"
+                }
             }
         }
     }

@@ -48,6 +48,7 @@ export default {
             title:'',
             content:'',
             file:'',
+            fileExtension: ''
         }
     },
     props: ['showEditModale', 'id'],
@@ -81,6 +82,7 @@ export default {
         },
         previewFile(event){
             this.file = event.target.files[0]
+            this.fileExtension = event.target.files[0].name.split('.').pop()
         },
         editPublication: function(){
 
@@ -107,21 +109,22 @@ export default {
                 const image = this.file
                 postData.append('post', post)
                 postData.append('image', image)
-
-                axios
-                .put(`http://localhost:3000/api/post/${this.id}`, postData, config)
-                .then(response => {
-                    this.$emit('closeEditModale')
-                    this.$emit('updatePostList')
-                })
-                .catch(error => {
-                    this.apiResponseMessage = error.response.data.message
-                })
+                if(this.fileExtension === 'jpeg' || this.fileExtension === 'jpg' || this.fileExtension === 'png'){
+                    axios
+                    .put(`http://localhost:3000/api/post/${this.id}`, postData, config)
+                    .then(response => {
+                        this.$emit('closeEditModale')
+                        this.$emit('updatePostList')
+                        this.apiResponseMessage = "";
+                    })
+                    .catch(error => {
+                        this.apiResponseMessage = error.response.data.message
+                    })
+                } else {
+                    this.apiResponseMessage = "Seuls les formats .jpg, .jpeg et .png sont autorisés !"
+                }
             }
         },
-        closeSuccessModale: function(){
-            this.showSuccessModale = false;
-        }
     },
     mounted(){
         this.getPost()
