@@ -7,7 +7,7 @@
 Employé en tant que développeur au sein de l'agence web **CONNECT-E**, nous sommes sollicités pour développer un **réseau social interne** pour les employés de **Groupomania**, groupe spécialisé dans la grande distribution.
 Le but de cet outil est de **faciliter les interactions entre collègues**. 
 
-Une enquête réalisée par un ***comité de pilotage sur le bien-être au travail** a en effet mis l'accent sur le fait qu'une partie du personnel n'était **pas satisfaite de l'ambiance de travail**.
+Une enquête réalisée par un **comité de pilotage sur le bien-être au travail** a en effet mis l'accent sur le fait qu'une partie du personnel n'était **pas satisfaite de l'ambiance de travail**.
 
 ***
 
@@ -30,7 +30,7 @@ De manière à fournir dans un **délais raisonnable**, une **première version 
 
 ### Technologie ###
 
-L'utilisation d'un **framework Frontend** est **obligatoire**. Nous avons opté pour le framework **Vue.js**.
+L'utilisation d'un **framework Frontend** est **obligatoire**. Nous avons opté pour le framework **Vue.js** (version 2).
 
 Le client doit utiliser une **base de données relationnelle** qui se manipule avec le **langage SQL**. Nous avons opté pour une base de données **MySQL**, et un développement **sans ORM**.
 
@@ -65,7 +65,6 @@ Il a été décidé de créer trois rôles distincts pour gérer les autorisatio
 Pour lancer le projet, vous devez avoir les programmes suivants installés sur votre machine :
 
 - Node.js
-- Vue.js
 - MySQL
 
 ### Étape 1. Clonage du projet
