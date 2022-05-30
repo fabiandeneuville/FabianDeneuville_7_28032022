@@ -1,19 +1,36 @@
-# frontend
+# SPECIFICATIONS DE L'APPLICATION FRONTEND #
 
-## Project setup
-```
-npm install
-```
+## TECHNOLOGIE ##
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### Environnement de développement ###
 
-### Compiles and minifies for production
-```
-npm run build
-```
+- Vue.js (version 2)
+- Vue CLI
+- Vuex
+- Vue-router
+- Axios
+- SASS
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+***
+
+## PRINCIPALES FONCTIONNALITÉS ##
+
+### Utilisateurs ###
+
+### Publication ###
+
+### Interactions entre les utilisateurs ###
+
+***
+
+## SÉCURITÉ ##
+
+***
+
+## ACCESSIBILITÉS ##
+
+***
+
+## VISUELS ##
+
+
