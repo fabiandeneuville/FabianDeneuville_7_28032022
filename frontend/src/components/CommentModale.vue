@@ -4,7 +4,7 @@
     <div v-if="showCommentModale" class="comment__modale__container">
         <div v-on:click="closeCommentModale" class="comment__modale__overlay"></div>
         <div class="comment__modale">
-            <div v-on:click="closeCommentModale" class="close-btn"><i class="fa-solid fa-xmark"></i></div>
+            <div v-on:click="closeCommentModale" v-on:keydown.enter="closeCommentModale" class="close-btn" role="button" tabindex="0"><i class="fa-solid fa-xmark"></i></div>
             <h3 class="comment__modale__form__heading">{{ heading }}</h3>
             <ul class="comment__modale__list">
                 <li v-bind:key="index" v-for="(comment, index) in allComments">
