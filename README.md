@@ -109,6 +109,12 @@ Enfin, lancez l'application avec la commande :
 npm run serve
 ```
 
+Ultérieurement, la minification et la compilation pour la mise en production se fera à l'aide de la commande :
+
+```
+npm run build
+```
+
 ### Étape 3. Installation de l'API ###
 
 Depuis le dossier **backend**, à l'aide de votre terminal, installez les dépendances avec la commande :
