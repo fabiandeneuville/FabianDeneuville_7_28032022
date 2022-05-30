@@ -1,6 +1,32 @@
 # SPECIFICATIONS DE L'API #
 
+## TECHNOLOGIE ##
+
+### Environnement de développement ###
+
+- Node.js
+- Express
+- MySQL (sans ORM)
+
+### Packages utilisés ###
+
+- **bcrypt** : pour le cryptage des mots de passe
+- **dotenv** : pour l'utilisation des variables d'environnement
+- **email-validator** : pour la validation des adresses mail lors de l'inscription
+- **helmet** : pour sécuriser l'application contre une utilisation malveillante
+- **http** : package natif de node pour la création du serveur
+- **password-validator** : pour la vérification des mots de passe lors de l'inscription et lors de la modification ultérieure du mot de passe
+- **jsonwebtoken** : pour créer et vérifier les tokens d'authentification
+- **mysql2** : pour communiquer avec la base de données
+- **multer** : pour la gestion des fichiers envoyés dans les requêtes
+- **nodemon** : pour éviter de devoir relancer le serveur à chaque modification
+
+***
+
 ## RÔLES ##
+
+Il a été décidé de créer trois rôles distincts pour gérer les autorisations et assurer la modération de l'application.
+
 | ID | ROLE | PRÉROGATIVES |
 |:---:|:---:|:---:|
 | 1 | admin | Suppression d'un   utilisateur |
@@ -11,9 +37,12 @@
 |  |  | Suppression d'un commentaire |
 | 3 | utilisateur | Suppression et   modification de ses propres posts et commentaires |
 
+***
+
 ## ROUTES ##
 
 ### ROUTES USER ###
+
 | VERBE | OBJECTIF | POINT D'ACCÈS | CORPS DE LA   REQUÊTE | REPONSE | FONCTIONNALITÉS |
 |:---:|:---:|:---:|:---:|:---:|:---:|
 | POST | Inscription   d'un utilisateur | /api/user/signup | {username:   string, email: string, password: string, passwordconfirm: string} | {message:   string} | Hachage   du mot de passe de l'utilisateur et ajout de l'utilisateur à la base de   données. Confirmation du mot de passe choisi par l'utilisateur. |
@@ -25,8 +54,10 @@
 | PUT | Changement   du rôle | /api/user/:id/role | - | {message:   string} | Modifie   le role (id) de l'utilisateur avec l'id fourni. |
 | PUT | Changement   du mot de passe | /api/user/:id/password | {password:   string, passwordconfirm: string} | {message:   string} | Modifie   le mot de passe de l'utilisateur. Le nouveau mot de passe est haché avant   d'être enregistré dans la base de données |
 
-
 ### ROUTES POST ###
+
+La fonctionnalité permettant à un utilisateur d'éditer un commentaire n'a pas encore été implémentée. Cela sera fait à l'occasion d'une prochaine version de l'application.
+
 | VERBE | OBJECTIF | POINT D'ACCÈS | CORPS DE LA   REQUÊTE | REPONSE | FONCTIONNALITÉS |
 |:---:|:---:|:---:|:---:|:---:|:---:|
 | GET | Visualisation   de tous les posts | /api/post/ | - | Tableau   de posts | Renvoie   un tableau contenant tous les posts présents dans la base de donnée, triés du   plus récent au plus ancien. |
@@ -45,7 +76,11 @@
 | POST | Like   d'un commentaire (réversible) | /api/post/comment/:id/like | - | {message:   string} | Vérifie   que l'utilisateur n'a pas déjà liké le commentaire. Si   NON, ajout d'une entrée (user_id + comment_id) est   ajouté dans la table like,  comptage du   nombre de like correspondant au comment_id et mise à jour du nombre de likes   du commentaire. Si OUI,   suppression de la ligne (user_id + comment_id) de la table like,  comptage du nombre de like correspondant au   comment_id et mise à jour du nombre de likes du commentaire. |
 | GET | Vérification si un utilisateur a déjà liké le commentaire| /api/comment/:id/like | - | {message:   string} | Vérifie   que l'utilisateur n'a pas déjà liké le post. Si NON, l'API retourne le message NO, Si OUI, l'API retourne le message YES |
 
+***
+
 ## STRUCTURE DE LA BASE DE DONNÉES ##
+
+La base de données est structurée autour de 5 tables.
 
 ### TABLE USER ###
 | CHAMPS | TYPE | DESCRIPTION DU   CONTENU |
