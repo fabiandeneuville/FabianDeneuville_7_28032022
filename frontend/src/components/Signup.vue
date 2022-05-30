@@ -104,7 +104,6 @@
                         this.$router.push('/login')
                     })
                     .catch(error => {
-                        console.log(error)
                         this.apiResponseMessage = error.response.data.message
                     })              
                 }
