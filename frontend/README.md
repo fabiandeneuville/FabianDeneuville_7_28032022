@@ -2,32 +2,94 @@
 
 ## TECHNOLOGIE ##
 
-### Environnement de développement ###
+### Framework ###
 
-- Vue.js (version 2)
+Le projet a été développé avec **Vue.js** (version 2)
+
+### Pré-processeur CSS ###
+
+Le projet a été développé avec **SASS**
+
+### Packages utilisés ###
+
 - Vue CLI
 - Vuex
 - Vue-router
 - Axios
-- SASS
 
 ***
 
 ## PRINCIPALES FONCTIONNALITÉS ##
 
+### Liste des fonctionnalités implémentées pour le MVP présenté ce jour : ###
+
 ### Utilisateurs ###
 
-### Publication ###
+- **Inscription** de l'utilisateur avec un nom d'utilisateur (unique), une adresse email (unique), un mot de passe et la confirmation du mot du passe.
+
+- **Connexion** de l'utilisateur.
+
+- **Modification du profil** par l'utilisateur. Celui-ci peut modifier son nom utilisateur, ajouter une biographie et une photo de profil.
+
+- L'utilisateur peut **modifier son mot de passe**.
+
+- L'utilisateur peut **supprimer son profil**.
+
+### Publications ###
+
+- L'utilisateur peut **publier** une publication avec un titre et son contenu, avec ou sans image.
+
+- L'utilisateur peut **supprimer ou modifier** ses propres publications.
 
 ### Interactions entre les utilisateurs ###
+
+- L'utilisateur peut accéder à la **liste de tous les utilisateurs**.
+
+- L'utilisateur, depuis la liste des utilisateur, peut **accéder au profil*** de chaque utilisateur, le **contacter** et voir ses **dernières publications**.
+
+- L'utilisateur peut **liker les publications** des autres utilisateurs ainsi que ses propres publications.
+
+- L'utilisateur peut **commenter les publications*** des autres utilisateurs ainsi que ses propres publications.
+
+- L'utilisateur peut **liker les commentaires** des autres utilisateurs ainsi que ses propres commentaires.
+
+- L'utilisateur peut **supprimer ses propres commentaires**.
+
+### Administration et modération ###
+
+- L'admin peut **supprimer un utilisateur**.
+
+- L'admin peut **supprimer une publication ou un commentaire**.
+
+- L'admin peut **attribuer un rôle de modérateur** à un utilisateur ou lui **retirer**.
+
+- Le modérateur peut **supprimer une publication ou un commentaire**.
+
+### Liste des fonctionnalités déjà prévues pour une version ultérieure de l'application : ###
+
+- Edition des commentaires.
+
+- Moteur de recherche d'utilisateurs
+
+- Amélioration de l'accessibilité (capture de focus)
 
 ***
 
 ## SÉCURITÉ ##
 
+- Lors de la connexion, l'utilisateur est authentifié grâce à un token généré par l'API. Cette authentification permet d'assurer la navigation et le respect des différentes autorisations (publications, suppressions, modifications ....).
+
+- Des Expressions régulières permettent de garantir la bonne saisie dans les champs lors de l'inscription.
+
+- Les éventuelles erreurs sont retournées sous forme de message.
+
 ***
 
 ## ACCESSIBILITÉS ##
+
+- L'application a été testée avec WAVE, qui ne retourne aucune erreur d'accessibilité.
+
+- Un travail a été entammé pour permettre à un utilisateur de parcourir et d'interragir avec l'application sans utilisation de la souris. Ce travail va se poursuivre pour garantir une accessibilité optimale à l'avenir (capture du focus, info-bulles ...).
 
 ***
 
