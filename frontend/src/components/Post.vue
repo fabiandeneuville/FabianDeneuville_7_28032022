@@ -3,14 +3,14 @@
 <template>
     <div class="post">
         <div class="post__management" v-if="user_Id === loggedUserId || loggedUserRole === 'admin' || loggedUserRole === 'modérateur' ">
-            <div v-on:click="showPostManagment = !showPostManagment" class="post__management__btn">
+            <div v-on:click="showPostManagment = !showPostManagment" v-on:keydown.enter="showPostManagment = !showPostManagment" class="post__management__btn" role="button" tabindex="0">
                 <i class="fa-solid fa-ellipsis"></i>
             </div>
             <div v-if="showPostManagment" class="post__management__container">
-                <div v-on:click="showEditModale = !showEditModale" v-if="user_Id === loggedUserId" class="post__btn__bloc">
+                <div v-on:click="showEditModale = !showEditModale" v-on:keydown.enter="showEditModale = !showEditModale" v-if="user_Id === loggedUserId" class="post__btn__bloc" role="button" tabindex="0">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </div>
-                <div v-on:click="toPostDeletion" class="post__btn__bloc">
+                <div v-on:click="toPostDeletion" v-on:keydown.enter="toPostDeletion" class="post__btn__bloc" role="button" tabindex="0">
                     <i class="fa-solid fa-trash"></i>
                 </div>
             </div>
@@ -25,10 +25,10 @@
         <p class="post__content">{{ content }}</p>
         <div class="post__btn__bloc__container">
             <div class="post__btn__bloc">
-                <i v-bind:class="{ orange : postLiked }" v-on:click="likePost" class="fa-solid fa-thumbs-up"></i><span class="count">{{ likesCount + likes }}</span>
+                <i v-bind:class="{ orange : postLiked }" v-on:click="likePost" v-on:keydown.enter="likePost" class="fa-solid fa-thumbs-up" role="button" tabindex="0"></i><span class="count">{{ likesCount + likes }}</span>
             </div>
             <div class="post__btn__bloc">
-                <i v-on:click="showCommentModale = !showCommentModale" class="fa-solid fa-comment"></i><span class="count">{{ commentsCount }}</span>
+                <i v-on:click="showCommentModale = !showCommentModale" v-on:keydown.enter="showCommentModale = !showCommentModale" class="fa-solid fa-comment" role="button" tabindex="0"></i><span class="count">{{ commentsCount }}</span>
             </div>
         </div>
 

@@ -1,12 +1,14 @@
 /********** POST DELETION MODALE **********/
 
 <template>
-    <div v-if="showDeletionModale" class="deletion">
-        <div v-on:click="closeModale" class="deletion__overlay"></div>
-        <div class="deletion__modale">
-            <h3 class="deletion__modale__title">Êtes-vous sûr ?</h3>
-            <div v-on:click="closeModale" class="deletion__modale__btn cancel-btn">ANNULER</div>
-            <div v-on:click="deletePost" class="deletion__modale__btn validate-btn">CONFIRMER</div>
+    <div role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
+        <div v-if="showDeletionModale" class="deletion" role="document" >
+            <div v-on:click="closeModale" class="deletion__overlay"></div>
+            <div class="deletion__modale">
+                <h3 class="deletion__modale__title">Êtes-vous sûr ?</h3>
+                <div v-on:click="closeModale" v-on:keydown.enter="closeModale" tabindex="0" class="deletion__modale__btn cancel-btn">ANNULER</div>
+                <div v-on:click="deletePost" v-on:keydown.enter="deletePost" tabindex="0" class="deletion__modale__btn validate-btn">CONFIRMER</div>
+            </div>
         </div>
     </div>
 </template>
