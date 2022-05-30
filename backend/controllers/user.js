@@ -221,7 +221,7 @@ exports.changePassword = (req, res, nex) => {
                 return res.status(403).json({message: "Les mots ne passent ne sont pas identiques !"})
             }
             if(!schema.validate(password)){
-                return res.status(401).json({message: "Le mot de passe NON valide. Utilisez des majuscules, minuscules, chiffres et symboles, aucun espace, pour 8(min) à 16(max) caractères"})
+                return res.status(401).json({message: "Le mot de passe est NON valide. Utilisez des majuscules, minuscules, chiffres et symboles, aucun espace, pour 8(min) à 16(max) caractères"})
             } else {
                 bcrypt.hash(password, 10)
                 .then(hash => {
@@ -269,7 +269,7 @@ exports.modifyUser = (req, res, next) => {
                     fs.unlink(`images/${filename}`, () => {
                         mysql.query(`UPDATE user SET username = ?, bio = ?, imageUrl = ? WHERE id = ${userId}`, [newUsername, newBio, newImageUrl], (err, result, fields) => {
                             if(err){
-                                return res.status(500).json({err})
+                                return res.status(403).json({message: "Ce nom d'utilisateur est déjà utilisé !"})
                             }
                             return res.status(201).json({message: "Profil mis à jour !"})
                         })    
@@ -302,7 +302,7 @@ exports.modifyUser = (req, res, next) => {
                 }
                 mysql.query(`UPDATE user SET username = ?, bio = ? WHERE id = ${userId}`, [newUsername, newBio], (err, result, fields) => {
                     if(err){
-                        return res.status(500).json({err})
+                        return res.status(403).json({message: "Ce nom d'utilisateur est déjà utilisé !"})
                     }
                     return res.status(201).json({message: "Profil mis à jour !"})
                 })
