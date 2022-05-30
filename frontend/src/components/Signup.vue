@@ -81,7 +81,7 @@
                 if(this.password.match(passwordRegex)){
                     this.passwordErrorMessage = ''
                 } else {
-                    this.passwordErrorMessage = 'Utilisez des lettres majuscules, minuscules, des chiffres et au moins un symbole parmis *#&§!%+, pour 8 caractères minimum et 16 caractères maximum'
+                    this.passwordErrorMessage = 'Utilisez des lettres majuscules, minuscules, des chiffres et au moins un symbole parmi *#&§!%+, pour 8 caractères minimum et 16 caractères maximum'
                 }
             },
             signingUp: function(){
