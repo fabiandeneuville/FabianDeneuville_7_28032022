@@ -145,7 +145,7 @@ exports.modifyPost = (req, res, next) => {
                 if(newTitle === '' || newContent === ''){
                     return res.status(403).json({message: "Veuillez renseigner un titre et un message !"})
                 } else {
-                    mysql.query(`UPDATE post SET title = '${newTitle}', content = '${newContent}', imageUrl = '${imageUrl}' WHERE id = ${id}`, (err, result, fields) => {
+                    mysql.query(`UPDATE post SET title = ?, content = ?, imageUrl = ? WHERE id = ${id}`, [newTitle, newContent, imageUrl], (err, result, fields) => {
                         if(err){
                             return res.status(500).json({err});
                         }
@@ -158,7 +158,7 @@ exports.modifyPost = (req, res, next) => {
                 if(newTitle === '' || newContent === ''){
                     return res.status(403).json({message: "Veuillez renseigner un titre et un message !"})
                 } else {
-                    mysql.query(`UPDATE post SET title = '${newTitle}', content = '${newContent}' WHERE id = ${id}`, (err, result, fields) => {
+                    mysql.query(`UPDATE post SET title = ?, content = ? WHERE id = ${id}`, [newTitle, newContent], (err, result, fields) => {
                         if(err){
                             return res.status(500).json({err});
                         }
@@ -177,7 +177,7 @@ exports.modifyPost = (req, res, next) => {
                     return res.status(403).json({message: "Veuillez renseigner un titre et un message !"})
                 } else {
                     fs.unlink(`images/${filename}`, () => {
-                        mysql.query(`UPDATE post SET title = '${newTitle}', content = '${newContent}', imageUrl = '${imageUrl}' WHERE id = ${id}`, (err, result, fields) => {
+                        mysql.query(`UPDATE post SET title = ?, content = ?, imageUrl = ? WHERE id = ${id}`, [newTitle, newContent, imageUrl], (err, result, fields) => {
                             if(err){
                                 return res.status(500).json({err});
                             }
@@ -191,7 +191,7 @@ exports.modifyPost = (req, res, next) => {
                 if(newTitle === '' || newContent === ''){
                     return res.status(403).json({message: "Veuillez renseigner un titre et un message !"})
                 } else {
-                    mysql.query(`UPDATE post SET title = '${newTitle}', content = '${newContent}' WHERE id = ${id}`, (err, result, fields) => {
+                    mysql.query(`UPDATE post SET title = ?, content = ? WHERE id = ${id}`, [newTitle, newContent], (err, result, fields) => {
                         if(err){
                             return res.status(500).json({err});
                         }
