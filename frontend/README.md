@@ -2,15 +2,15 @@
 
 ## TECHNOLOGIE ##
 
-### Framework ###
+### Framework : ###
 
 Le projet a été développé avec **Vue.js** (version 2)
 
-### Pré-processeur CSS ###
+### Pré-processeur CSS : ###
 
 Le projet a été développé avec **SASS**
 
-### Packages utilisés ###
+### Packages utilisés : ###
 
 - Vue CLI
 - Vuex
@@ -19,9 +19,9 @@ Le projet a été développé avec **SASS**
 
 ***
 
-## PRINCIPALES FONCTIONNALITÉS ##
+## FONCTIONNALITÉS ##
 
-### Liste des fonctionnalités implémentées pour le MVP présenté ce jour : ###
+### 1.  Liste des fonctionnalités implémentées pour le MVP présenté ce jour : ###
 
 ### Utilisateurs ###
 
@@ -45,11 +45,11 @@ Le projet a été développé avec **SASS**
 
 - L'utilisateur peut accéder à la **liste de tous les utilisateurs**.
 
-- L'utilisateur, depuis la liste des utilisateur, peut **accéder au profil*** de chaque utilisateur, le **contacter** et voir ses **dernières publications**.
+- L'utilisateur, depuis la liste des utilisateurs, peut **accéder au profil** de chaque utilisateur, le **contacter** et voir ses **dernières publications**.
 
 - L'utilisateur peut **liker les publications** des autres utilisateurs ainsi que ses propres publications.
 
-- L'utilisateur peut **commenter les publications*** des autres utilisateurs ainsi que ses propres publications.
+- L'utilisateur peut **commenter les publications** des autres utilisateurs ainsi que ses propres publications.
 
 - L'utilisateur peut **liker les commentaires** des autres utilisateurs ainsi que ses propres commentaires.
 
@@ -65,7 +65,7 @@ Le projet a été développé avec **SASS**
 
 - Le modérateur peut **supprimer une publication ou un commentaire**.
 
-### Liste des fonctionnalités déjà prévues pour une version ultérieure de l'application : ###
+### 2.  Liste des fonctionnalités déjà prévues pour une version ultérieure de l'application : ###
 
 - Edition des commentaires.
 
@@ -89,7 +89,7 @@ Le projet a été développé avec **SASS**
 
 - L'application a été testée avec WAVE, qui ne retourne aucune erreur d'accessibilité.
 
-- Un travail a été entammé pour permettre à un utilisateur de parcourir et d'interragir avec l'application sans utilisation de la souris. Ce travail va se poursuivre pour garantir une accessibilité optimale à l'avenir (capture du focus, info-bulles ...).
+- Un travail a été entamé pour permettre à un utilisateur de parcourir et d'interragir avec l'application sans utilisation de la souris. Ce travail va se poursuivre pour garantir une accessibilité optimale à l'avenir (capture du focus, info-bulles ...).
 
 ***
 
