@@ -6,18 +6,18 @@
             <img class="userCard__avatar" v-bind:src="imageUrl" v-bind:alt="`photo de ${username}`">
         </div>
         <h3 class="userCard__username">{{ username }}</h3>
-        <router-link v-bind:to="`/utilisateur/${id}`" class="userCard__profile__link userCard__bloc">
-            <i class="fa-solid fa-user userCard__icon"></i>
-        </router-link>
         <div class="userCard__role__bloc userCard__bloc">
             <button class="userCard__change__role__btn" v-if="loggedUserRole === 'admin' && this.role != 'admin'" v-on:click="changeRole">{{ role }}</button>
             <p class="userCard__role" v-if="loggedUserRole !== 'admin'" disabled>{{ role }}</p>
         </div>
-        <div class="userCard__delete__bloc userCard__bloc" v-if="loggedUserRole === 'admin' && loggedUserId !== this.id">
-            <i v-on:click="deleteProfile" class="fa-solid fa-trash userCard__icon"></i>
-        </div>
+        <router-link v-bind:to="`/utilisateur/${id}`" class="userCard__profile__link userCard__bloc">
+            <i class="fa-solid fa-user userCard__icon"></i>
+        </router-link>
         <div v-if="this.id != loggedUserId" class="userCard__contact__btn userCard__bloc">
             <a v-bind:href="`mailto:${this.email}`"><i class="fa-solid fa-envelope userCard__icon"></i></a>
+        </div>
+        <div class="userCard__delete__bloc userCard__bloc" v-if="loggedUserRole === 'admin' && loggedUserId !== this.id">
+            <i v-on:click="deleteProfile" v-on:keydown.enter="deleteProfile" class="fa-solid fa-trash userCard__icon" role="button" tabindex="0"></i>
         </div>
 
         <userDeletionModale
