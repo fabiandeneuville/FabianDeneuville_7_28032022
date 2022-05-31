@@ -3,7 +3,7 @@
 <template>
     <div>
         <div class="edit__form__container">
-            <div v-on:click="closeForm" class="close-btn"><i class="fa-solid fa-xmark"></i></div>
+            <div v-on:click="closeForm" v-on:keydown.enter="closeForm" class="close-btn" role="button" tabindex="0"><i class="fa-solid fa-xmark"></i></div>
             <form class="edit__form">
                 <h3 class="edit__form__heading">Edition du profil</h3>
                 <div class="edit__form__bloc">
@@ -16,7 +16,7 @@
                 </div>
                 <div class="edit__form__bloc btn__bloc__container">
                     <div class="btn__bloc">
-                        <label tabindex=0 role="button" class="edit__form__bloc__file__label" for="file"><i class="fa-solid fa-image"></i></label>
+                        <label v-on:keydown.enter="keydownTrigger" tabindex=0 role="button" class="edit__form__bloc__file__label" for="file"><i class="fa-solid fa-image"></i></label>
                         <input v-on:change="previewFile" type="file" class="edit__form__bloc__file__input" id="file">
                     </div>
                     <div class="btn__bloc">
@@ -50,6 +50,15 @@ export default {
         previewFile(event){
             this.file = event.target.files[0]
             this.fileExtension = event.target.files[0].name.split('.').pop()
+        },
+        keydownTrigger(){
+            let fileBtnLabel = document.querySelector(".edit__form__bloc__file__label")
+            let fileBtnInput = document.querySelector(".edit__form__bloc__file__input")
+            fileBtnLabel.addEventListener("keypress", function(e){
+                if(e.key === "Enter"){
+                    fileBtnInput.click()
+                }
+            })
         },
         editProfile: function(){
             const config = {

@@ -9,15 +9,15 @@
             <h3 class="profile__username">{{ username }}</h3>
             <p class="profile__bio">{{ bio }}</p>
             <div class="profile__management">
-                <div v-on:click="editFormIsVisible = !editFormIsVisible, passwordFormIsVisible = false" class="profile__management__btn">
+                <div v-on:click="editFormIsVisible = !editFormIsVisible, passwordFormIsVisible = false" v-on:keydown.enter="editFormIsVisible = !editFormIsVisible, passwordFormIsVisible = false" class="profile__management__btn" role="button" tabindex="0">
                     <i class="fa-solid fa-pen-to-square"></i>
                     <span class="tooltiptext">Modifier le profil</span>
                 </div>
-                <div v-on:click="passwordFormIsVisible = !passwordFormIsVisible, editFormIsVisible = false" class="profile__management__btn">
+                <div v-on:click="passwordFormIsVisible = !passwordFormIsVisible, editFormIsVisible = false" v-on:keydown.enter="passwordFormIsVisible = !passwordFormIsVisible, editFormIsVisible = false" class="profile__management__btn" role="button" tabindex="0">
                     <i class="fa-solid fa-gear"></i>
                     <span class="tooltiptext">Changer le mot de passe</span>
                 </div>
-                <div v-on:click="deleteProfile" class="profile__management__btn">
+                <div v-on:click="deleteProfile" v-on:keydown.enter="deleteProfile" class="profile__management__btn" role="button" tabindex="0">
                     <i class="fa-solid fa-trash"></i>
                     <span class="tooltiptext">Supprimer le compte</span>
                 </div>

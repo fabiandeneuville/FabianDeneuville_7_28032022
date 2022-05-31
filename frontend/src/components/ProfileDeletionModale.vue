@@ -6,8 +6,8 @@
         <div class="deletion__modale">
             <h3 class="deletion__modale__title">Êtes-vous sûr ?</h3>
             <p>La suppression du profil est irréversible !</p>
-            <div v-on:click="closeModale" class="deletion__modale__btn cancel-btn">ANNULER</div>
-            <div v-on:click="deleteProfile" class="deletion__modale__btn validate-btn">CONFIRMER</div>
+            <div v-on:click="closeModale" v-on:keydown.enter="closeModale" class="deletion__modale__btn cancel-btn" role="button" tabindex="0">ANNULER</div>
+            <div v-on:click="deleteProfile" v-on:keydown.enter="deleteProfile" class="deletion__modale__btn validate-btn" role="button" tabindex="0">CONFIRMER</div>
         </div>
     </div>
 </template>

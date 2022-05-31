@@ -2,7 +2,7 @@
 
 <template>
     <div class="form__container">
-        <div v-on:click="closeForm" class="close-btn"><i class="fa-solid fa-xmark"></i></div>
+        <div v-on:click="closeForm" v-on:keydown.enter="closeForm" class="close-btn" role="button" tabindex="0"><i class="fa-solid fa-xmark"></i></div>
         <form class="password__change__form">
             <h3 class="password__change__form__heading">Changement du mot de passe</h3>
             <div class="password__change__form__bloc">
