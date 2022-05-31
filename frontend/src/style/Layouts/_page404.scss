@@ -20,7 +20,8 @@
         display: inline-block;
         width: 90%;
         max-width: 300px;
-        border: 1px solid $color-tertiary;
+        border: 3px solid $color-secondary;
         border-radius: 50%;
+        @include silver;
     }
 }
