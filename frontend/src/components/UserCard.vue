@@ -64,8 +64,8 @@ export default {
                 if(this.role === 'utilisateur'){
                     axios
                     .post('http://localhost:3000/api/post', {
-                        title: `INFORMATION : ${this.username} est désormais modérateur !`,
-                        content: 'Merci de lui faciliter la tâche. Il peut désormais supprimer vos publications et commentaire.'
+                        title: '⚠️ INFORMATION',
+                        content: `${this.username} est désormais modérateur. Merci de lui faciliter la tâche. Il peut désormais supprimer vos publications et commentaires.`
                     }, config)
                     .then(response => {
                         console.log("Rôle de modérateur attribué. Information postée.")              
@@ -76,8 +76,8 @@ export default {
                 } else if (this.role === 'modérateur'){
                     axios
                     .post('http://localhost:3000/api/post', {
-                        title: `INFORMATION : ${this.username} n'est plus modérateur !`,
-                        content: 'Il ne peut désormais plus supprimer vos publications et commentaire.'
+                        title: '⚠️ INFORMATION',
+                        content: `${this.username} n'est plus modérateur. Il ne peut désormais plus supprimer vos publications et commentaires.`
                     }, config)
                     .then(response => {
                         console.log("Rôle de modérateur retiré. Information postée")
