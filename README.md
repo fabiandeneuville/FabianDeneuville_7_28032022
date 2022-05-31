@@ -15,7 +15,7 @@ Une enquête réalisée par un **comité de pilotage sur le bien-être au travai
 
 ### Exigences émises par le comité de pilotage ###
 
-- la présentation des fonctionalités doit être simple
+- la présentation des fonctionnalités doit être simple
 - la création d'un compte doit être simple et possible depuis un téléphone mobile
 - le profil doit contenir très peu d'informations pour que sa complétion soit rapide
 - la suppression du compte doit être possible
