@@ -38,6 +38,14 @@
                 opacity: 1;
             }
         }
+
+        &:focus {
+            transform: scale(1.2);
+            & .tooltiptext {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
         & i {
             color: white;
             font-size: 25px;

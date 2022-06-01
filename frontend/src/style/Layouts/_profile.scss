@@ -72,6 +72,14 @@
                 color: $color-secondary;
                 transform: scale(1.2);
             }
+
+            &:focus .tooltiptext {
+                opacity: 1;
+            }
+
+            &:focus i {
+                color: $color-secondary;
+            }
         }
     }
 }
