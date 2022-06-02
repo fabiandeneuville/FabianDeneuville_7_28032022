@@ -40,9 +40,7 @@
         justify-self: center;
         align-self: center;
     }
-    &__change__role__btn {
-        cursor: pointer;
-    }
+    
     &__change__role__btn {
         color: $color-tertiary;
         background: $color-primary;
@@ -50,6 +48,16 @@
         padding: 2px 5px;
         box-shadow: 2px 2px 5px $color-tertiary;
         font-size: 12px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+
+        &:focus {
+            transform: scale(1.1);
+        }
     }
 
     &__role {
