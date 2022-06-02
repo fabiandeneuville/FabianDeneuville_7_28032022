@@ -2,7 +2,6 @@
     width:95%;
     max-width: 600px;
     padding:15px;
-    background: white;
     margin: 110px auto 0 auto;
     display: flex; 
     flex-direction: row;
@@ -11,6 +10,7 @@
     align-items: center;
     border-radius:5px;
     box-shadow: 2px 5px 10px 0px $color-tertiary;
+    @include silver;
 
     &__img__container {
         width:150px;

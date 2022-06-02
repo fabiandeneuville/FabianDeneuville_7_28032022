@@ -18,14 +18,13 @@
     max-width: 600px;
     display: flex;
     flex-direction: column;
-    background: white;
     border-radius:5px;
-    box-shadow: 2px 5px 10px 0px #333;
+    box-shadow: 2px 5px 10px 0px $color-tertiary;
+    @include silver;
 }
 
 .edit__form__modale {
     position:relative;
-    background: white;
     width:95%;
     max-width: 600px;
     padding:20px;
@@ -34,6 +33,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    @include silver;
 
     &__overlay {
         background: rgba(0,0,0,0.7);
@@ -67,7 +67,6 @@
             margin: 5px auto;
             padding: 10px;
             height:30px;
-            border: 2px solid $color-secondary;
         }
         
         &__textarea {
@@ -75,7 +74,6 @@
             margin: 5px auto;
             padding: 10px;
             height:80px;
-            border: 2px solid $color-secondary;
             font-family: 'Roboto', Helvetica, Arial, sans-serif;
         }
 
@@ -85,7 +83,7 @@
             line-height: 40px;
 
             &:hover {
-                color: rgb(233, 68, 37);
+                color: $color-secondary;
                 transform: scale(1.2);
             }
         }
@@ -109,7 +107,7 @@
             }
 
             &:hover {
-                color: rgb(233, 68, 37);
+                color: $color-secondary;
                 transform: scale(1.2);
             }
         }

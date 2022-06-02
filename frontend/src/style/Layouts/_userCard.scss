@@ -1,12 +1,12 @@
 .userCard {
     margin:10px auto 20px;
-    background: white;
     border-radius:5px;
     box-shadow: 2px 5px 10px 0px $color-tertiary;
     padding: 10px;
     display:grid;
     grid-template-columns: 100px auto 20% 10% 10% 10%;
     grid-template-rows:50% 50%;
+    @include silver;
 
     &__avatar__container {
         width:100px;
