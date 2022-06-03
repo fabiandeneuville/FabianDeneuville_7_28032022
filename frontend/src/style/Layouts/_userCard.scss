@@ -52,11 +52,11 @@
         cursor: pointer;
 
         &:hover {
-            transform: scale(1.1);
+            border: 2px solid $color-secondary;
         }
 
         &:focus {
-            transform: scale(1.1);
+            border: 2px solid $color-secondary;
         }
     }
 
